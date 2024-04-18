@@ -21,7 +21,22 @@ const LoginForm = () => {
           password: data.password,
           returnSecureToken: true,
         };
-        auth("signInWithPassword", req).then((res) => console.log(res));
+        auth("signInWithPassword", req)
+          .then((res) => {
+            //판매자, 구매자 구분에 따라 라우팅 다르게
+            if (res.status == 200) {
+              // navigate("/");
+            }
+          })
+          .catch((e) => {
+            const errorMsg = e.response.data.error.message;
+            if (errorMsg == "EMAIL_NOT_FOUND") {
+              alert("이메일이 틀렸습니다");
+            }
+            if (errorMsg == "INVALID_PASSWORD") {
+              alert("비밀번호가 틀렸습니다");
+            }
+          });
       }
     } catch (e: any) {
       alert(e.response.data);
