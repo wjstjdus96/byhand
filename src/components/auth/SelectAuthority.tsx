@@ -12,7 +12,7 @@ const SelectAuthority = ({ control }: ISelectAuthority) => {
       <span>어떤 권한으로 가입하시겠습니까?</span>
       <Controller
         control={control}
-        name="type"
+        name="authority"
         render={({ field: { onChange, value } }) => (
           <RadioGroup value={value} onValueChange={onChange} className="flex">
             <div className="flex items-center space-x-2">
