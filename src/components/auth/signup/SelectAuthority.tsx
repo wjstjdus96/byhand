@@ -4,12 +4,13 @@ import { RadioGroup, RadioGroupItem } from "../../ui/radio-group";
 
 interface ISelectAuthority {
   control: any;
+  errorMsg?: string;
 }
 
-const SelectAuthority = ({ control }: ISelectAuthority) => {
+const SelectAuthority = ({ control, errorMsg }: ISelectAuthority) => {
   return (
     <div className="flex flex-col items-center gap-2">
-      <span className="mb-1.5">어떤 권한으로 가입하시겠습니까?</span>
+      <span className=" text-sm mb-1.5">어떤 권한으로 가입하시겠습니까?</span>
       <Controller
         control={control}
         name="authority"
@@ -26,6 +27,7 @@ const SelectAuthority = ({ control }: ISelectAuthority) => {
           </RadioGroup>
         )}
       />
+      {errorMsg && <span className=" text-xs text-red-600">{errorMsg}</span>}
     </div>
   );
 };

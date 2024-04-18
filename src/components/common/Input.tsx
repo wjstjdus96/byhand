@@ -5,9 +5,10 @@ interface ICustomInput {
   name: string;
   type: string;
   register: any;
+  errorMsg?: string;
 }
 
-export function CustomInput({ name, type, register }: ICustomInput) {
+export function CustomInput({ name, type, register, errorMsg }: ICustomInput) {
   return (
     <div className="grid w-full items-center gap-1.5">
       <Label htmlFor="email">{name.toUpperCase()}</Label>
@@ -17,6 +18,7 @@ export function CustomInput({ name, type, register }: ICustomInput) {
         id="email"
         className="w-full"
       />
+      {errorMsg && <span className=" text-xs text-red-600">{errorMsg}</span>}
     </div>
   );
 }

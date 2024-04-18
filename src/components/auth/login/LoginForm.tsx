@@ -3,6 +3,8 @@ import { CustomInput } from "../../common/Input";
 import { Button } from "../../ui/button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { auth } from "../../../api/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "../../../utils/schema";
 
 interface ILoginData {
   email: string;
@@ -10,7 +12,11 @@ interface ILoginData {
 }
 
 const LoginForm = () => {
-  const { register, handleSubmit } = useForm<ILoginData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ILoginData>({ resolver: zodResolver(loginSchema) });
   const navigate = useNavigate();
 
   const onSubmitHandler: SubmitHandler<ILoginData> = (data) => {
@@ -48,8 +54,18 @@ const LoginForm = () => {
       onSubmit={handleSubmit(onSubmitHandler)}
       className="flex flex-col justify-center items-center w-1/4 gap-6"
     >
-      <CustomInput name="email" register={register} type="email" />
-      <CustomInput name="password" register={register} type="password" />
+      <CustomInput
+        name="email"
+        register={register}
+        type="email"
+        errorMsg={errors.email?.message}
+      />
+      <CustomInput
+        name="password"
+        register={register}
+        type="password"
+        errorMsg={errors.password?.message}
+      />
       <Button type="submit" className="w-full">
         로그인
       </Button>

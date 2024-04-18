@@ -4,16 +4,26 @@ import { CustomInput } from "../../common/Input";
 import { Button } from "../../ui/button";
 import SelectAuthority from "./SelectAuthority";
 import { useNavigate } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signupSchema } from "../../../utils/schema";
 
 interface ISignupData {
   email: string;
   password: string;
+  confirmPassword: string;
   nickname: string;
   authority: string;
 }
 
 const SignupForm = () => {
-  const { register, handleSubmit, control } = useForm<ISignupData>();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<ISignupData>({
+    resolver: zodResolver(signupSchema),
+  });
   const navigate = useNavigate();
 
   const onSubmitHandler: SubmitHandler<ISignupData> = (data) => {
@@ -36,7 +46,6 @@ const SignupForm = () => {
           }
         });
     } catch (e: any) {
-      console.log(e);
       alert(e.response.data);
     }
   };
@@ -46,10 +55,31 @@ const SignupForm = () => {
       onSubmit={handleSubmit(onSubmitHandler)}
       className="flex flex-col justify-center items-center w-1/4 gap-6"
     >
-      <CustomInput name="email" register={register} type="email" />
-      <CustomInput name="password" register={register} type="password" />
-      <CustomInput name="nickname" register={register} type="text" />
-      <SelectAuthority control={control} />
+      <CustomInput
+        name="email"
+        register={register}
+        type="email"
+        errorMsg={errors.email?.message}
+      />
+      <CustomInput
+        name="password"
+        register={register}
+        type="password"
+        errorMsg={errors.password?.message}
+      />
+      <CustomInput
+        name="confirmPassword"
+        register={register}
+        type="password"
+        errorMsg={errors.confirmPassword?.message}
+      />
+      <CustomInput
+        name="nickname"
+        register={register}
+        type="text"
+        errorMsg={errors.nickname?.message}
+      />
+      <SelectAuthority control={control} errorMsg={errors.authority?.message} />
       <Button type="submit" className="w-full">
         회원가입
       </Button>
