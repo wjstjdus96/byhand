@@ -44,7 +44,7 @@ const SignupForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmitHandler)}
-      className="flex flex-col justify-center items-center gap-4"
+      className="flex flex-col justify-center items-center w-1/4 gap-6"
     >
       <CustomInput name="email" register={register} type="email" />
       <CustomInput name="password" register={register} type="password" />

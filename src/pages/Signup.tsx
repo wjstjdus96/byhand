@@ -13,8 +13,8 @@ function Signup() {
   return (
     <div>
       <Header />
-      <div className="flex flex-col justify-center items-center">
-        <h2>회원가입</h2>
+      <div className="flex flex-col justify-center items-center h-[90vh] gap-6">
+        <h2 className="font-bold text-3xl">회원가입</h2>
         <SignupForm />
         <CheckOtherWay type="signup" onClick={onClickLogin} />
       </div>

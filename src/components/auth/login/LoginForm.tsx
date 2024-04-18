@@ -46,7 +46,7 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmitHandler)}
-      className="flex flex-col justify-center items-center"
+      className="flex flex-col justify-center items-center w-1/4 gap-6"
     >
       <CustomInput name="email" register={register} type="email" />
       <CustomInput name="password" register={register} type="password" />

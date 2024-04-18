@@ -8,8 +8,8 @@ interface ISelectAuthority {
 
 const SelectAuthority = ({ control }: ISelectAuthority) => {
   return (
-    <div>
-      <span>어떤 권한으로 가입하시겠습니까?</span>
+    <div className="flex flex-col items-center gap-2">
+      <span className="mb-1.5">어떤 권한으로 가입하시겠습니까?</span>
       <Controller
         control={control}
         name="authority"

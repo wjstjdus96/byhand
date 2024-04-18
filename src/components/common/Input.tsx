@@ -9,9 +9,14 @@ interface ICustomInput {
 
 export function CustomInput({ name, type, register }: ICustomInput) {
   return (
-    <div className="grid w-full max-w-sm items-center gap-1.5">
+    <div className="grid w-full items-center gap-1.5">
       <Label htmlFor="email">{name.toUpperCase()}</Label>
-      <Input {...register(name, { requeired: true })} type={type} id="email" />
+      <Input
+        {...register(name, { requeired: true })}
+        type={type}
+        id="email"
+        className="w-full"
+      />
     </div>
   );
 }

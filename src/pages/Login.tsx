@@ -11,8 +11,8 @@ function Login() {
   return (
     <div className="h-screen">
       <Header />
-      <div className="flex flex-col justify-center items-center bg-slate-400">
-        <h2>로그인</h2>
+      <div className="flex flex-col justify-center items-center h-[90vh] gap-6">
+        <h2 className="font-bold text-3xl">로그인</h2>
         <LoginForm />
         <CheckOtherWay type="login" onClick={onClickSignup} />
       </div>
