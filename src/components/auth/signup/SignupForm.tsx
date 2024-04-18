@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { auth } from "../../../api/auth";
-import { CustomInput } from "../../common/Input";
+import { TextInput } from "../../common/TextInput";
 import { Button } from "../../ui/button";
 import SelectAuthority from "./SelectAuthority";
 import { useNavigate } from "react-router-dom";
@@ -55,28 +55,31 @@ const SignupForm = () => {
       onSubmit={handleSubmit(onSubmitHandler)}
       className="flex flex-col justify-center items-center w-1/4 gap-6"
     >
-      <CustomInput
+      <TextInput
         name="email"
         register={register}
         type="email"
+        label="이메일"
         errorMsg={errors.email?.message}
       />
-      <CustomInput
+      <TextInput
         name="password"
         register={register}
         type="password"
+        label="비밀번호"
         errorMsg={errors.password?.message}
       />
-      <CustomInput
+      <TextInput
         name="confirmPassword"
         register={register}
         type="password"
+        label="비밀번호 확인"
         errorMsg={errors.confirmPassword?.message}
       />
-      <CustomInput
+      <TextInput
         name="nickname"
         register={register}
-        type="text"
+        label="닉네임"
         errorMsg={errors.nickname?.message}
       />
       <SelectAuthority control={control} errorMsg={errors.authority?.message} />

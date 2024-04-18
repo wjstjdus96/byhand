@@ -1,5 +1,5 @@
-import { Button } from "../ui/button";
-import { Checkbox } from "../ui/checkbox";
+import ProductBoardHead from "../productBoard/ProductBoardHead";
+import ProductBoardItem from "../productBoard/ProductBoardItem";
 import { Separator } from "../ui/separator";
 
 const temp_admin_data = [
@@ -80,31 +80,11 @@ const temp_admin_data = [
 const AdminBoard = () => {
   return (
     <div>
-      <div className="flex items-center justify-between mb-2">
-        <Checkbox />
-        <div className="text-sm self-start pl-5 mr-auto">전체선택</div>
-        <div className="text-sm self-start">선택삭제</div>
-      </div>
+      <ProductBoardHead />
       <Separator className="my-5" />
       <div className="flex flex-col gap-3">
         {temp_admin_data.map((item) => (
-          <div className="flex h-28 gap-5 py-2">
-            <Checkbox />
-            <img
-              src={item.productImage}
-              className="object-cover w-24 rounded-sm"
-            />
-            <div className="flex flex-col justify-between w-full py-1">
-              <span>{item.productName}</span>
-              <div className="flex items-center justify-between">
-                <p className="text-xs">남은수량: {item.productQunatity}개</p>
-                <div className="flex gap-1">
-                  <Button className="p-2 h-6 text-xs font-normal">수정</Button>
-                  <Button className="p-2 h-6 text-xs font-normal">삭제</Button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ProductBoardItem item={item} />
         ))}
       </div>
     </div>

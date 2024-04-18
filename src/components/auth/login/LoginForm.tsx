@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { CustomInput } from "../../common/Input";
+import { TextInput } from "../../common/TextInput";
 import { Button } from "../../ui/button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { auth } from "../../../api/auth";
@@ -54,16 +54,18 @@ const LoginForm = () => {
       onSubmit={handleSubmit(onSubmitHandler)}
       className="flex flex-col justify-center items-center w-1/4 gap-6"
     >
-      <CustomInput
+      <TextInput
         name="email"
         register={register}
         type="email"
+        label="이메일"
         errorMsg={errors.email?.message}
       />
-      <CustomInput
+      <TextInput
         name="password"
         register={register}
         type="password"
+        label="비밀번호"
         errorMsg={errors.password?.message}
       />
       <Button type="submit" className="w-full">
