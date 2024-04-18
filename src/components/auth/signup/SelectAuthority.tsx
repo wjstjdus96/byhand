@@ -1,6 +1,6 @@
 import { Controller } from "react-hook-form";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Label } from "../../ui/label";
+import { RadioGroup, RadioGroupItem } from "../../ui/radio-group";
 
 interface ISelectAuthority {
   control: any;

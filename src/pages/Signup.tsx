@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import CheckAlready from "../components/auth/CheckAlready";
-import SignupForm from "../components/auth/SignupForm";
+import SignupForm from "../components/auth/signup/SignupForm";
+import CheckOtherWay from "../components/auth/CheckOtherWay";
 
 function Signup() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ function Signup() {
       <div className="flex flex-col justify-center items-center">
         <h2>회원가입</h2>
         <SignupForm />
-        <CheckAlready type="signup" onClick={onClickLogin} />
+        <CheckOtherWay type="signup" onClick={onClickLogin} />
       </div>
     </div>
   );

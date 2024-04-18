@@ -1,9 +1,8 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { CustomInput } from "../common/Input";
-import { Button } from "../ui/button";
+import { auth } from "../../../api/auth";
+import { CustomInput } from "../../common/Input";
+import { Button } from "../../ui/button";
 import SelectAuthority from "./SelectAuthority";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 
 interface ISignupData {
   email: string;
@@ -18,19 +17,11 @@ const SignupForm = () => {
   const onSubmitHandler: SubmitHandler<ISignupData> = (data) => {
     try {
       const req = {
-        email: data!.email,
-        password: data!.password,
+        email: data.email,
+        password: data.password,
         returnSecureToken: true,
       };
-      if (data) {
-        axios.post(
-          `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCEwcvhiu_XgueDrEsAYtWdS07i1SNgzrA`,
-          req,
-          {
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-      }
+      auth("signUp", req).then((res) => console.log(res));
     } catch (e: any) {
       alert(e.response.data);
     }

@@ -1,11 +1,11 @@
 import { Button } from "../ui/button";
 
-interface ICheckAlready {
+interface ICheckOtherWay {
   type: string;
   onClick: () => void;
 }
 
-const CheckAlready = ({ onClick, type }: ICheckAlready) => {
+const CheckOtherWay = ({ onClick, type }: ICheckOtherWay) => {
   return (
     <div className="flex items-center">
       <p>
@@ -18,4 +18,4 @@ const CheckAlready = ({ onClick, type }: ICheckAlready) => {
   );
 };
 
-export default CheckAlready;
+export default CheckOtherWay;
