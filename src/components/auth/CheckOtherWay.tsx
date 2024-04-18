@@ -8,7 +8,7 @@ interface ICheckOtherWay {
 const CheckOtherWay = ({ onClick, type }: ICheckOtherWay) => {
   return (
     <div className="flex items-center">
-      <p>
+      <p className=" text-sm">
         {type == "login" ? "아직 회원이 아니신가요?" : "이미 회원이신가요?"}
       </p>
       <Button variant="link" onClick={onClick}>
