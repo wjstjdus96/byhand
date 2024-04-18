@@ -9,7 +9,7 @@ const Header = () => {
   };
 
   return (
-    <header className="h-12 w-screen py-2 px-10 flex items-center justify-between">
+    <header className="h-12 fixed w-full bg-white py-2 px-10 flex items-center justify-between">
       <img src={Logo} alt="logo" className="h-full" />
       <ul className="flex mr-auto pl-10 gap-6">
         <li className="menu-item" onClick={() => onClickMenu()}>
