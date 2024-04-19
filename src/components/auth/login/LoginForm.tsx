@@ -6,6 +6,7 @@ import { auth } from "../../../api/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../../utils/schema";
 import { getUser } from "../../../api/user";
+import { setSessionItem } from "../../../utils/handleSession";
 
 interface ILoginData {
   email: string;
@@ -31,8 +32,12 @@ const LoginForm = () => {
         .then(async (res) => {
           if (res.status == 200) {
             const data = await getUser({ uid: res.data.localId });
-            console.log(data);
-            // navigate("/");
+            if (data) {
+              setSessionItem("userId", res.data.localId);
+              setSessionItem("auth", data.isSeller);
+              if (data.isSeller) navigate(`/admin/${res.data.localId}`);
+              else navigate("/");
+            }
           }
         })
         .catch((e) => {
