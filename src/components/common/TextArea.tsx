@@ -4,13 +4,18 @@ import { Textarea } from "../ui/textarea";
 interface ITextArea {
   name: string;
   label: string;
+  register: any;
 }
 
-const TextArea = ({ name, label }: ITextArea) => {
+const TextArea = ({ name, label, register }: ITextArea) => {
   return (
     <div className="grid gap-1.5">
       <Label htmlFor={name}>{label}</Label>
-      <Textarea id={name} className="resize-none h-[30vh]" />
+      <Textarea
+        {...register(name, { requeired: true })}
+        id={name}
+        className="resize-none h-[30vh]"
+      />
     </div>
   );
 };

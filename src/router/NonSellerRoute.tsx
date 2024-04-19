@@ -7,7 +7,7 @@ const NonSellerRoute = () => {
   const auth = checkAuthority();
   const userId = getSessionItem("userId");
 
-  return auth != "seller" ? <Outlet /> : <Navigate to={`/admin/:${userId}`} />;
+  return auth != "seller" ? <Outlet /> : <Navigate to={`/admin/${userId}`} />;
 };
 
 export default NonSellerRoute;

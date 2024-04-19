@@ -1,41 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Label } from "../../ui/label";
+import { FaPlus } from "@react-icons/all-files/fa/FaPlus";
+import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
 
 interface IImageInput {
   label: string;
   name: string;
+  setValue: any;
 }
 
-const ImageInput = ({ label, name }: IImageInput) => {
+const ImageInput = ({ label, name, setValue }: IImageInput) => {
   const [showImages, setShowImages] = useState<string[]>([]);
-  const [originalImages, setOriginalImages] = useState([]);
+  const [originalImages, setOriginalImages] = useState<Blob[]>([]);
 
-  const handleAddImage = (e: any) => {
-    const imageBolbList: Blob[] = e.target.files;
-    let imageUrlList: string[] = [...showImages];
-
-    for (let i = 0; i < imageBolbList.length; i++) {
-      const current = URL.createObjectURL(imageBolbList[i]);
-      imageUrlList.push(current);
-    }
-
-    if (imageUrlList.length > 5) {
-      imageUrlList = imageUrlList.slice(0, 5);
-    }
-
-    setShowImages(imageUrlList);
+  const changeToUrl = (photo: Blob) => {
+    return URL.createObjectURL(photo);
   };
 
-  const handleRemoveImage = (e: any) => {};
+  const handleAddImage = (e: any) => {
+    const newImages: Blob[] = e.target.files;
+
+    if (originalImages.length + newImages.length > 5) {
+      alert("최대 개수를 초과하였습니다");
+      return;
+    }
+
+    setOriginalImages((prev) => [...prev, ...newImages]);
+  };
+
+  const handleRemoveImage = (idx: number) => {
+    setOriginalImages((prev) => prev.filter((_, i) => i != idx));
+  };
+
+  useEffect(() => {
+    setValue(name, originalImages);
+    setShowImages(originalImages.map((img) => changeToUrl(img)));
+  }, [originalImages]);
 
   return (
     <div className="grid gap-2">
       <Label>{label}</Label>
       <div className="grid grid-cols-3 gap-1">
         {showImages &&
-          showImages.map((img) => (
-            <div className="">
+          showImages.map((img, idx) => (
+            <div className="relative">
               <img className="w-full h-40 object-cover rounded-md" src={img} />
+              <FaTimes
+                className=" absolute right-2 top-2 cursor-pointer"
+                onClick={() => handleRemoveImage(idx)}
+              />
             </div>
           ))}
         <label
@@ -50,8 +63,8 @@ const ImageInput = ({ label, name }: IImageInput) => {
             accept="image/jpg, image/jpeg, image/png"
             className="hidden"
           />
-          <p>+</p>
-          <p className="text-xs">({showImages.length} / 5)</p>
+          <FaPlus />
+          <p className="text-xs pt-2">({showImages.length} / 5)</p>
         </label>
       </div>
     </div>

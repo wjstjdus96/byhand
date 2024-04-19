@@ -32,6 +32,7 @@ const LoginForm = () => {
         .then(async (res) => {
           if (res.status == 200) {
             const data = await getUser({ uid: res.data.localId });
+            console.log(res.data.localId);
             if (data) {
               setSessionItem("userId", res.data.localId);
               setSessionItem("auth", data.isSeller);
