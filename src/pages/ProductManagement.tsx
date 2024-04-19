@@ -1,5 +1,26 @@
+import { useNavigate } from "react-router-dom";
+import AdminBoard from "../components/admin/AdminBoard";
+import { Button } from "../components/ui/button";
+import Layout from "../layout/Layout";
+
 function ProductManagement() {
-  return <div>상품 관리</div>;
+  const navigate = useNavigate();
+
+  const onClickRegister = () => {
+    navigate("register");
+  };
+
+  return (
+    <Layout>
+      <div className="px-[10vw] py-20">
+        <div className="flex items-center justify-between mb-10">
+          <h2 className="text-xl font-bold">내가 판매 중인 상품</h2>
+          <Button onClick={onClickRegister}>상품 등록하기</Button>
+        </div>
+        <AdminBoard />
+      </div>
+    </Layout>
+  );
 }
 
 export default ProductManagement;
