@@ -9,9 +9,9 @@ function Login() {
     navigate("/signup");
   };
   return (
-    <div className="h-screen">
+    <div>
       <Header />
-      <div className="flex flex-col justify-center items-center h-[90vh] gap-6">
+      <div className="flex flex-col justify-center items-center h-[90vh] gap-6 pt-20">
         <h2 className="font-bold text-3xl">로그인</h2>
         <LoginForm />
         <CheckOtherWay type="login" onClick={onClickSignup} />

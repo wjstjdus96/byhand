@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 interface ILayout {
@@ -9,6 +10,7 @@ const Layout = ({ children }: ILayout) => {
     <div>
       <Header />
       {children}
+      <Footer />
     </div>
   );
 };

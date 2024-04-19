@@ -1,10 +1,10 @@
-import Header from "../components/Header";
+import Layout from "../layout/Layout";
 
 function Home() {
   return (
-    <div>
-      <Header />
-    </div>
+    <Layout>
+      <div>아</div>
+    </Layout>
   );
 }
 

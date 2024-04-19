@@ -6,6 +6,7 @@ import SelectAuthority from "./SelectAuthority";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema } from "../../../utils/schema";
+import { setUser } from "../../../api/user";
 
 interface ISignupData {
   email: string;
@@ -33,9 +34,14 @@ const SignupForm = () => {
         password: data.password,
         returnSecureToken: true,
       };
+      const nor = {
+        nickName: data.nickname,
+        isSeller: data.authority == "seller",
+      };
       auth("signUp", req)
-        .then((res) => {
+        .then(async (res) => {
           if (res.status == 200) {
+            setUser({ uid: res.data.localId, req: nor });
             navigate("/login");
           }
         })
