@@ -15,6 +15,7 @@ interface IAlertDialogBox {
   title: string;
   description: string;
   actionName: string;
+  onClickAction: () => void;
 }
 
 const AlertDialogBox = ({
@@ -22,6 +23,7 @@ const AlertDialogBox = ({
   title,
   description,
   actionName,
+  onClickAction,
 }: IAlertDialogBox) => {
   return (
     <AlertDialog>
@@ -33,7 +35,9 @@ const AlertDialogBox = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>취소</AlertDialogCancel>
-          <AlertDialogAction>{actionName}</AlertDialogAction>
+          <AlertDialogAction onClick={onClickAction}>
+            {actionName}
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
