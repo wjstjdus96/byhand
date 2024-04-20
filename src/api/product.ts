@@ -1,6 +1,8 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   getDocs,
   orderBy,
   query,
@@ -27,5 +29,10 @@ export const getProduct = async (uid: string | null) => {
   const querySnapShot = await getDocs(q);
   const res = querySnapShot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
+  return res;
+};
+
+export const deleteProduct = async (productId: string) => {
+  const res = await deleteDoc(doc(db, "product", productId));
   return res;
 };

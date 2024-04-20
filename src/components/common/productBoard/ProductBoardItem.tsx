@@ -1,11 +1,13 @@
-import { Button } from "../ui/button";
-import { Checkbox } from "../ui/checkbox";
+import AdminBoardDeleteBtn from "../../admin/board/AdminBoardDeleteBtn";
+import AdminBoardEditBtn from "../../admin/board/AdminBoardEditBtn";
+import { Checkbox } from "../../ui/checkbox";
 
 interface IProductBoardItem {
   item: any;
+  isSellerPage: boolean;
 }
 
-const ProductBoardItem = ({ item }: IProductBoardItem) => {
+const ProductBoardItem = ({ item, isSellerPage }: IProductBoardItem) => {
   return (
     <div className="flex h-28 gap-5 py-2">
       <Checkbox />
@@ -17,10 +19,12 @@ const ProductBoardItem = ({ item }: IProductBoardItem) => {
         <span>{item.productName}</span>
         <div className="flex items-center justify-between">
           <p className="text-xs">남은수량: {item.productQuantity}개</p>
-          <div className="flex gap-1">
-            <Button className="p-2 h-6 text-xs font-normal">수정</Button>
-            <Button className="p-2 h-6 text-xs font-normal">삭제</Button>
-          </div>
+          {isSellerPage && (
+            <div className="flex gap-1">
+              <AdminBoardEditBtn productId={item.id} />
+              <AdminBoardDeleteBtn productId={item.id} />
+            </div>
+          )}
         </div>
       </div>
     </div>

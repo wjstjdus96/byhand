@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
+import Header from "../components/common/Header";
 import SignupForm from "../components/auth/signup/SignupForm";
 import CheckOtherWay from "../components/auth/CheckOtherWay";
 
