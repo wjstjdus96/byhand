@@ -1,16 +1,19 @@
+import { useMutation } from "@tanstack/react-query";
+import { serverTimestamp } from "firebase/firestore";
 import { getDownloadURL } from "firebase/storage";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { uploadProductImage } from "../../../api/image";
 import { registerProduct } from "../../../api/product";
 import { getSessionItem } from "../../../utils/handleSession";
 import TextArea from "../../common/TextArea";
 import { TextInput } from "../../common/TextInput";
 import { Button } from "../../ui/button";
+import { useToast } from "../../ui/use-toast";
 import ImageInput from "./ImageInput";
-import { useNavigate } from "react-router-dom";
-import { serverTimestamp } from "firebase/firestore";
 
-interface IProductData {
+interface IRegisterFormData {
   productImage: File[];
   productName: string;
   productCategory: string;
@@ -19,12 +22,30 @@ interface IProductData {
   productDescription: string;
 }
 
-const RegisterForm = () => {
-  const { register, handleSubmit, setValue } = useForm<IProductData>();
-  const navigate = useNavigate();
+interface IProductData {
+  productImage: string[];
+  productName: string;
+  productCategory: string;
+  productPrice: number;
+  productQunatity: number;
+  productDescription: string;
+  sellerId: string;
+  createdAt: any;
+  updatedAt: any;
+}
 
-  const onSubmitHandler: SubmitHandler<IProductData> = async (data) => {
+const RegisterForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { register, handleSubmit, setValue } = useForm<IRegisterFormData>();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const registerMutation = useMutation({
+    mutationFn: (doc: IProductData) => registerProduct({ req: doc }),
+  });
+
+  const onSubmitHandler: SubmitHandler<IRegisterFormData> = async (data) => {
     const imageArray: string[] = [];
+    setIsLoading(true);
 
     for (const image of data.productImage) {
       const snapshot = await uploadProductImage(image, image.name);
@@ -32,8 +53,8 @@ const RegisterForm = () => {
       imageArray.push(downloadUrl);
     }
 
-    const doc = {
-      sellerId: getSessionItem("userId"),
+    const doc: IProductData = {
+      sellerId: getSessionItem("userId")!,
       productImage: imageArray,
       productName: data.productName,
       productCategory: data.productCategory,
@@ -44,10 +65,15 @@ const RegisterForm = () => {
       updatedAt: serverTimestamp(),
     };
 
-    try {
-      registerProduct({ req: doc });
-      navigate(`/admin/${getSessionItem("userId")}`);
-    } catch (e) {}
+    registerMutation.mutate(doc, {
+      onSuccess: () => {
+        setIsLoading(false);
+        toast({
+          description: "상품이 정상적으로 등록되었습니다",
+        });
+        navigate(`/admin/${getSessionItem("userId")}`);
+      },
+    });
   };
 
   return (
@@ -76,6 +102,7 @@ const RegisterForm = () => {
         register={register}
       />
       <Button type="submit">등록</Button>
+      {isLoading && <div>로딩중~~</div>}
     </form>
   );
 };

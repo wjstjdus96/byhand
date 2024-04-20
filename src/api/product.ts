@@ -22,7 +22,7 @@ export const getProduct = async (uid: string | null) => {
     collection(db, "product"),
     where("sellerId", "==", uid),
     orderBy("sellerId"),
-    orderBy("updatedAt", "desc")
+    orderBy("updatedAt")
   );
   const querySnapShot = await getDocs(q);
   const res = querySnapShot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
