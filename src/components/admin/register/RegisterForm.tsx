@@ -7,6 +7,8 @@ import TextArea from "../../common/TextArea";
 import { TextInput } from "../../common/TextInput";
 import { Button } from "../../ui/button";
 import ImageInput from "./ImageInput";
+import { useNavigate } from "react-router-dom";
+import { serverTimestamp } from "firebase/firestore";
 
 interface IProductData {
   productImage: File[];
@@ -19,6 +21,7 @@ interface IProductData {
 
 const RegisterForm = () => {
   const { register, handleSubmit, setValue } = useForm<IProductData>();
+  const navigate = useNavigate();
 
   const onSubmitHandler: SubmitHandler<IProductData> = async (data) => {
     const imageArray: string[] = [];
@@ -37,9 +40,14 @@ const RegisterForm = () => {
       productPrice: data.productPrice,
       productQunatity: data.productQunatity,
       productDescription: data.productDescription,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
     };
 
-    registerProduct({ req: doc });
+    try {
+      registerProduct({ req: doc });
+      navigate(`/admin/${getSessionItem("userId")}`);
+    } catch (e) {}
   };
 
   return (

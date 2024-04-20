@@ -9,7 +9,10 @@ const ProductBoardItem = ({ item }: IProductBoardItem) => {
   return (
     <div className="flex h-28 gap-5 py-2">
       <Checkbox />
-      <img src={item.productImage} className="object-cover w-24 rounded-sm" />
+      <img
+        src={item.productImage[0]}
+        className="object-cover w-24 rounded-sm"
+      />
       <div className="flex flex-col justify-between w-full py-1">
         <span>{item.productName}</span>
         <div className="flex items-center justify-between">
