@@ -32,4 +32,18 @@ export const signupSchema = z
     path: ["confirmPassword"],
   });
 
-export const productRegisterSchema = z.object({});
+export const productRegisterSchema = z.object({
+  productImage: z
+    .any()
+    .array()
+    .min(1, { message: "상품 이미지를 첨부해주세요" }),
+  productName: z.string().min(1, { message: "상품 이름을 입력해주세요" }),
+  productCategory: z
+    .string()
+    .min(1, { message: "상품 카테고리를 선택해주세요" }),
+  productPrice: z.string().min(1, { message: "상품 가격을 입력해주세요" }),
+  productQuantity: z.string().min(1, { message: "상품 수량을 입력해주세요" }),
+  productDescription: z
+    .string()
+    .min(1, { message: "상품 설명을 입력해주세요" }),
+});

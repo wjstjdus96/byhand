@@ -5,9 +5,10 @@ interface ITextArea {
   name: string;
   label: string;
   register: any;
+  errorMsg?: string;
 }
 
-const TextArea = ({ name, label, register }: ITextArea) => {
+const TextArea = ({ name, label, register, errorMsg }: ITextArea) => {
   return (
     <div className="grid gap-1.5">
       <Label htmlFor={name}>{label}</Label>
@@ -16,6 +17,7 @@ const TextArea = ({ name, label, register }: ITextArea) => {
         id={name}
         className="resize-none h-[30vh]"
       />
+      {errorMsg && <span className=" text-xs text-red-600">{errorMsg}</span>}
     </div>
   );
 };

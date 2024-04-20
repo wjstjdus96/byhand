@@ -7,9 +7,10 @@ interface IImageInput {
   label: string;
   name: string;
   setValue: any;
+  errorMsg?: string;
 }
 
-const ImageInput = ({ label, name, setValue }: IImageInput) => {
+const ImageInput = ({ label, name, setValue, errorMsg }: IImageInput) => {
   const [showImages, setShowImages] = useState<string[]>([]);
   const [originalImages, setOriginalImages] = useState<Blob[]>([]);
 
@@ -67,6 +68,7 @@ const ImageInput = ({ label, name, setValue }: IImageInput) => {
           <p className="text-xs pt-2">({showImages.length} / 5)</p>
         </label>
       </div>
+      {errorMsg && <span className=" text-xs text-red-600">{errorMsg}</span>}
     </div>
   );
 };

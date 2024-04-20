@@ -12,13 +12,15 @@ import { TextInput } from "../../common/TextInput";
 import { Button } from "../../ui/button";
 import { useToast } from "../../ui/use-toast";
 import ImageInput from "./ImageInput";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { productRegisterSchema } from "../../../utils/schema";
 
 interface IRegisterFormData {
   productImage: File[];
   productName: string;
   productCategory: string;
   productPrice: number;
-  productQunatity: number;
+  productQuantity: number;
   productDescription: string;
 }
 
@@ -27,7 +29,7 @@ interface IProductData {
   productName: string;
   productCategory: string;
   productPrice: number;
-  productQunatity: number;
+  productQuantity: number;
   productDescription: string;
   sellerId: string;
   createdAt: any;
@@ -36,7 +38,14 @@ interface IProductData {
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit, setValue } = useForm<IRegisterFormData>();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<IRegisterFormData>({
+    resolver: zodResolver(productRegisterSchema),
+  });
   const navigate = useNavigate();
   const { toast } = useToast();
   const registerMutation = useMutation({
@@ -59,7 +68,7 @@ const RegisterForm = () => {
       productName: data.productName,
       productCategory: data.productCategory,
       productPrice: data.productPrice,
-      productQunatity: data.productQunatity,
+      productQuantity: data.productQuantity,
       productDescription: data.productDescription,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
@@ -81,25 +90,47 @@ const RegisterForm = () => {
       onSubmit={handleSubmit(onSubmitHandler)}
       className="flex flex-col gap-6"
     >
-      <ImageInput name="productImage" label="상품이미지" setValue={setValue} />
-      <TextInput name="productName" label="상품 이름" register={register} />
+      <ImageInput
+        name="productImage"
+        label="상품이미지"
+        setValue={setValue}
+        errorMsg={errors.productImage?.message}
+      />
+      <TextInput
+        name="productName"
+        label="상품 이름"
+        register={register}
+        errorMsg={errors.productName?.message}
+      />
       <TextInput
         name="productCategory"
         label="상품 카테고리"
         register={register}
+        errorMsg={errors.productCategory?.message}
       />
       <div className="grid grid-cols-2 gap-3">
-        <TextInput name="productPrice" label="상품 가격" register={register} />
         <TextInput
-          name="productQunatity"
-          label="상품 수량"
+          name="productPrice"
+          label="상품 가격"
+          type="number"
+          placeholder="숫자만 입력가능합니다"
           register={register}
+          errorMsg={errors.productPrice?.message}
+        />
+        <TextInput
+          name="productQuantity"
+          label="상품 수량"
+          type="number"
+          placeholder="숫자만 입력가능합니다"
+          register={register}
+          errorMsg={errors.productQuantity?.message}
         />
       </div>
       <TextArea
         name="productDescription"
         label="상품 설명"
         register={register}
+        errorMsg={errors.productDescription?.message}
       />
       <Button type="submit">등록</Button>
       {isLoading && <div>로딩중~~</div>}
