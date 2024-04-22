@@ -1,9 +1,17 @@
 import { getSessionItem } from "./handleSession";
 
 export const checkAuthority = () => {
-  const info = getSessionItem("auth");
+  const sessionAuth = getSessionItem("auth");
+  const userId = getSessionItem("userId");
 
-  if (info == "true") return "seller";
-  if (info == "false") return "buyer";
-  return "nonMember";
+  let auth = "";
+  if (sessionAuth == "true") auth = "seller";
+  if (sessionAuth == "false") auth = "buyer";
+  if (sessionAuth == "undefined") auth = "nonMember";
+
+  const redirectedSeller = `/admin/${userId}`;
+  const redirectedNonSeller = "/";
+  const isSeller = sessionAuth == "seller";
+
+  return { auth, redirectedSeller, redirectedNonSeller, isSeller };
 };

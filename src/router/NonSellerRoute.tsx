@@ -4,10 +4,9 @@ import { getSessionItem } from "../utils/handleSession";
 
 // 비회원,구매자만 - 홈, 전체상품, 상품상세
 const NonSellerRoute = () => {
-  const auth = checkAuthority();
-  const userId = getSessionItem("userId");
+  const { auth, redirectedSeller } = checkAuthority();
 
-  return auth != "seller" ? <Outlet /> : <Navigate to={`/admin/${userId}`} />;
+  return auth != "seller" ? <Outlet /> : <Navigate to={redirectedSeller} />;
 };
 
 export default NonSellerRoute;
