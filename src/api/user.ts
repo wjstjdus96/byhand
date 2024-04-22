@@ -11,7 +11,7 @@ interface IUserData {
   isSeller: boolean;
 }
 
-export const setUser = async ({ uid, req }: ISetUser) => {
+export const setUser = async (uid: string, req: IUserData) => {
   try {
     const res = await setDoc(doc(db, "users", uid), req);
     return res;

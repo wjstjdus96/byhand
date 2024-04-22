@@ -7,7 +7,7 @@ export const checkAuthority = () => {
   let auth = "";
   if (sessionAuth == "true") auth = "seller";
   if (sessionAuth == "false") auth = "buyer";
-  if (sessionAuth == "undefined") auth = "nonMember";
+  if (!sessionAuth) auth = "nonMember";
 
   const redirectedSeller = `/admin/${userId}`;
   const redirectedNonSeller = "/";

@@ -1,9 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { serverTimestamp } from "firebase/firestore";
 import { getDownloadURL } from "firebase/storage";
 import { useEffect, useState } from "react";
-import { SubmitHandler, useForm, useWatch } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { uploadProductImage } from "../../../api/image";
 import {
@@ -11,15 +10,16 @@ import {
   registerProduct,
   updateProduct,
 } from "../../../api/product";
+import { editReq, registerReq } from "../../../utils/dataSchema";
 import { getSessionItem } from "../../../utils/handleSession";
-import { productRegisterSchema } from "../../../utils/schema";
+import { productRegisterSchema } from "../../../utils/validationSchema";
 import TextArea from "../../common/TextArea";
 import { TextInput } from "../../common/TextInput";
 import { Button } from "../../ui/button";
 import { useToast } from "../../ui/use-toast";
 import ImageInput from "./ImageInput";
 
-interface IRegisterFormData {
+export interface IRegisterFormData {
   productImage: any[];
   productName: string;
   productCategory: string;
@@ -51,13 +51,13 @@ const RegisterForm = ({ isEdit }: IRegisterForm) => {
     register,
     handleSubmit,
     setValue,
-    control,
     formState: { errors },
   } = useForm<IRegisterFormData>({
     resolver: zodResolver(productRegisterSchema),
   });
   const navigate = useNavigate();
   const { toast } = useToast();
+
   const registerMutation = useMutation({
     mutationFn: (doc: IProductData) => registerProduct({ req: doc }),
   });
@@ -75,17 +75,7 @@ const RegisterForm = ({ isEdit }: IRegisterForm) => {
       imageArray.push(downloadUrl);
     }
 
-    const doc: IProductData = {
-      sellerId: getSessionItem("userId")!,
-      productImage: imageArray,
-      productName: data.productName,
-      productCategory: data.productCategory,
-      productPrice: data.productPrice,
-      productQuantity: data.productQuantity,
-      productDescription: data.productDescription,
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
-    };
+    const doc = registerReq(data, imageArray);
 
     registerMutation.mutate(doc, {
       onSuccess: () => {
@@ -112,15 +102,7 @@ const RegisterForm = ({ isEdit }: IRegisterForm) => {
       }
     }
 
-    const doc: IProductData = {
-      productImage: imageArray,
-      productName: data.productName,
-      productCategory: data.productCategory,
-      productPrice: data.productPrice,
-      productQuantity: data.productQuantity,
-      productDescription: data.productDescription,
-      updatedAt: serverTimestamp(),
-    };
+    const doc = editReq(data, imageArray);
 
     editMutation.mutate(doc, {
       onSuccess: () => {

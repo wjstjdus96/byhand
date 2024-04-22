@@ -13,9 +13,11 @@ interface IAdminBoardDeleteBtn {
 const AdminBoardDeleteBtn = ({ productId }: IAdminBoardDeleteBtn) => {
   const uid = getSessionItem("userId");
   const { toast } = useToast();
+
   const deleteMutation = useMutation({
     mutationFn: (productId: string) => deleteProduct(productId),
   });
+
   const onClickDelete = () => {
     deleteMutation.mutate(productId, {
       onSuccess: () => {

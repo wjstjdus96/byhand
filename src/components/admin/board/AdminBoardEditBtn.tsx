@@ -7,6 +7,7 @@ interface IAdminBoardEditBtn {
 
 const AdminBoardEditBtn = ({ productId }: IAdminBoardEditBtn) => {
   const navigate = useNavigate();
+
   const onClickEdit = () => {
     navigate(`product/${productId}/edit`);
   };
