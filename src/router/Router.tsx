@@ -25,6 +25,10 @@ const Router = () => {
             path="/admin/:sellerId/register"
             element={<ProductRegister />}
           />
+          <Route
+            path="/admin/:sellerId/product/:productId/edit"
+            element={<ProductRegister />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

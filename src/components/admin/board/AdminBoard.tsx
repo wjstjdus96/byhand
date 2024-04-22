@@ -19,7 +19,7 @@ const AdminBoard = () => {
 
   return (
     <div>
-      <ProductBoardHead />
+      <ProductBoardHead totLength={data?.length} />
       <Separator className="my-5" />
       <div className="flex flex-col gap-3">
         {data &&

@@ -7,15 +7,27 @@ interface IImageInput {
   label: string;
   name: string;
   setValue: any;
+  originalImages: any[];
+  setOriginalImages: React.Dispatch<React.SetStateAction<any>>;
   errorMsg?: string;
 }
 
-const ImageInput = ({ label, name, setValue, errorMsg }: IImageInput) => {
+const ImageInput = ({
+  label,
+  name,
+  setValue,
+  errorMsg,
+  originalImages,
+  setOriginalImages,
+}: IImageInput) => {
   const [showImages, setShowImages] = useState<string[]>([]);
-  const [originalImages, setOriginalImages] = useState<Blob[]>([]);
+  //   const [originalImages, setOriginalImages] = useState<any[]>([]);
 
-  const changeToUrl = (photo: Blob) => {
-    return URL.createObjectURL(photo);
+  const changeToUrl = (photo: Blob | string) => {
+    if (typeof photo != "string") {
+      photo = URL.createObjectURL(photo);
+    }
+    return photo;
   };
 
   const handleAddImage = (e: any) => {
@@ -26,11 +38,13 @@ const ImageInput = ({ label, name, setValue, errorMsg }: IImageInput) => {
       return;
     }
 
-    setOriginalImages((prev) => [...prev, ...newImages]);
+    setOriginalImages((prev: any) => [...prev, ...newImages]);
   };
 
   const handleRemoveImage = (idx: number) => {
-    setOriginalImages((prev) => prev.filter((_, i) => i != idx));
+    setOriginalImages((prev: any) =>
+      prev.filter((_: any, i: number) => i != idx)
+    );
   };
 
   useEffect(() => {

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "../../ui/button";
 
 interface IAdminBoardEditBtn {
@@ -5,7 +6,10 @@ interface IAdminBoardEditBtn {
 }
 
 const AdminBoardEditBtn = ({ productId }: IAdminBoardEditBtn) => {
-  const onClickEdit = () => {};
+  const navigate = useNavigate();
+  const onClickEdit = () => {
+    navigate(`product/${productId}/edit`);
+  };
 
   return (
     <Button onClick={onClickEdit} className="p-2 h-6 text-xs font-normal">
