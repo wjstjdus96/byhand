@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { auth } from "../../../api/auth";
-import { TextInput } from "../../common/TextInput";
+import { TextInput } from "../../common/form/TextInput";
 import { Button } from "../../ui/button";
 import SelectAuthority from "./SelectAuthority";
 import { useNavigate } from "react-router-dom";

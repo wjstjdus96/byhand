@@ -13,11 +13,13 @@ import {
 import { editReq, registerReq } from "../../../utils/dataSchema";
 import { getSessionItem } from "../../../utils/handleSession";
 import { productRegisterSchema } from "../../../utils/validationSchema";
-import TextArea from "../../common/TextArea";
-import { TextInput } from "../../common/TextInput";
+import TextArea from "../../common/form/TextArea";
+import { TextInput } from "../../common/form/TextInput";
 import { Button } from "../../ui/button";
 import { useToast } from "../../ui/use-toast";
-import ImageInput from "./ImageInput";
+import ImageInput from "../../common/form/ImageInput";
+import SelectInput from "../../common/form/SelectInput";
+import { CATEGORY_TYPE } from "../../../consts/data";
 
 export interface IRegisterFormData {
   productImage: any[];
@@ -51,6 +53,7 @@ const RegisterForm = ({ isEdit }: IRegisterForm) => {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors },
   } = useForm<IRegisterFormData>({
     resolver: zodResolver(productRegisterSchema),
@@ -68,15 +71,12 @@ const RegisterForm = ({ isEdit }: IRegisterForm) => {
   const onRegisterHandler: SubmitHandler<IRegisterFormData> = async (data) => {
     const imageArray: string[] = [];
     setIsLoading(true);
-
     for (const image of data.productImage) {
       const snapshot = await uploadProductImage(image, image.name);
       const downloadUrl = await getDownloadURL(snapshot.ref);
       imageArray.push(downloadUrl);
     }
-
     const doc = registerReq(data, imageArray);
-
     registerMutation.mutate(doc, {
       onSuccess: () => {
         setIsLoading(false);
@@ -138,6 +138,20 @@ const RegisterForm = ({ isEdit }: IRegisterForm) => {
       }
       className="flex flex-col gap-6"
     >
+      <SelectInput
+        name="productCategory"
+        label="상품 카테고리"
+        control={control}
+        placeholder="선택"
+        items={CATEGORY_TYPE}
+        errorMsg={errors.productCategory?.message}
+      />
+      <TextInput
+        name="productName"
+        label="상품 이름"
+        register={register}
+        errorMsg={errors.productName?.message}
+      />
       <ImageInput
         name="productImage"
         label="상품이미지"
@@ -146,18 +160,7 @@ const RegisterForm = ({ isEdit }: IRegisterForm) => {
         setOriginalImages={setOriginalImages}
         errorMsg={errors.productImage?.message}
       />
-      <TextInput
-        name="productName"
-        label="상품 이름"
-        register={register}
-        errorMsg={errors.productName?.message}
-      />
-      <TextInput
-        name="productCategory"
-        label="상품 카테고리"
-        register={register}
-        errorMsg={errors.productCategory?.message}
-      />
+
       <div className="grid grid-cols-2 gap-3">
         <TextInput
           name="productPrice"

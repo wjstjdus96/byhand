@@ -30,7 +30,7 @@ export const useInfiniteScroll = ({ uid }: IUseInfiniteScroll) => {
   const products = useMemo(() => {
     if (querySnap) {
       return querySnap.pages.flatMap((page) =>
-        page.docs.map((doc) => doc.data())
+        page.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
       );
     }
   }, [querySnap]);
