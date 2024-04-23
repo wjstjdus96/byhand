@@ -1,11 +1,6 @@
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
-interface ISetUser {
-  uid: string;
-  req: IUserData;
-}
-
 interface IUserData {
   nickName: string;
   isSeller: boolean;

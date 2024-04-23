@@ -5,13 +5,14 @@ import {
   doc,
   getDoc,
   getDocs,
+  limit,
   orderBy,
   query,
+  startAfter,
   updateDoc,
   where,
 } from "firebase/firestore";
 import { db } from "./firebase";
-import { IProductData } from "../components/admin/register/RegisterForm";
 
 interface IRegisterProduct {
   req: any; //임시라도 any 사용 금지하자
@@ -27,7 +28,7 @@ export const getProduct = async (uid: string | null) => {
     collection(db, "product"),
     where("sellerId", "==", uid),
     orderBy("sellerId"),
-    orderBy("updatedAt")
+    orderBy("updatedAt", "desc")
   );
   const querySnapShot = await getDocs(q);
   const res = querySnapShot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -62,4 +63,30 @@ export const updateProduct = async (
   const docRef = doc(db, "product", productId);
   const res = await updateDoc(docRef, data);
   return res;
+};
+
+export const getSellerFirstDocs = async (uid: string) => {
+  const first = query(
+    collection(db, "product"),
+    where("sellerId", "==", uid),
+    orderBy("sellerId"),
+    orderBy("updatedAt", "desc"),
+    limit(10)
+  );
+
+  const docSnap = await getDocs(first);
+  return docSnap;
+};
+
+export const getSellerNextDocs = async (uid: string, pageParam: any) => {
+  const next = query(
+    collection(db, "product"),
+    where("sellerId", "==", uid),
+    orderBy("sellerId"),
+    orderBy("updatedAt", "desc"),
+    startAfter(pageParam),
+    limit(10)
+  );
+  const docSnap = await getDocs(next);
+  return docSnap;
 };
