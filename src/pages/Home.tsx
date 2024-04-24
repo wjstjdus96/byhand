@@ -1,9 +1,12 @@
+import Banner from "../components/home/Banner";
+import CategoryCollection from "../components/home/categoryCollection/CategoryCollection";
 import Layout from "../layout/Layout";
 
 function Home() {
   return (
     <Layout>
-      <div>홈</div>
+      <Banner />
+      <CategoryCollection />
     </Layout>
   );
 }
