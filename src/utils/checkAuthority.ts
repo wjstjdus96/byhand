@@ -13,5 +13,5 @@ export const checkAuthority = () => {
   const redirectedNonSeller = "/";
   const isSeller = sessionAuth == "seller";
 
-  return { auth, redirectedSeller, redirectedNonSeller, isSeller };
+  return { auth, redirectedSeller, redirectedNonSeller, isSeller, userId };
 };

@@ -1,8 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logoImage.png";
+import { MdShoppingCart } from "@react-icons/all-files/md/MdShoppingCart";
+import { checkAuthority } from "../../utils/checkAuthority";
+import { CgProfile } from "@react-icons/all-files/cg/CgProfile";
+import { useCartStore } from "../../store/cartStore";
 
 const Header = () => {
   const navigate = useNavigate();
+  const {isCartOpen, toggleCart} = useCartStore();
+  const { userId, auth } = checkAuthority();
 
   const onClickMenu = (endpoint?: string) => {
     navigate(`/${endpoint ? endpoint : ""}`);
@@ -19,9 +25,18 @@ const Header = () => {
           전체상품
         </li>
       </ul>
-      <ul>
+      <ul className="flex gap-6">
         <li className="menu-item" onClick={() => onClickMenu("login")}>
           로그인
+        </li>
+        <li className="menu-item" onClick={toggleCart}>
+          <MdShoppingCart size={24} />
+        </li>
+        <li
+          className="menu-item"
+          onClick={() => onClickMenu(`mypage/${userId}`)}
+        >
+          <CgProfile size={24} />
         </li>
       </ul>
     </header>

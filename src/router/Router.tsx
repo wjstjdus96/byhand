@@ -9,6 +9,8 @@ import NonSellerRoute from "./NonSellerRoute";
 import OnlySellerRoute from "./OnlySellerRoute";
 import Products from "../pages/Products";
 import ProductDetail from "../pages/ProductDetail";
+import OnlyBuyerRoute from "./OnlyBuyerRoute";
+import MyPage from "../pages/MyPage";
 
 const Router = () => {
   return (
@@ -34,7 +36,9 @@ const Router = () => {
             element={<ProductRegister />}
           />
         </Route>
-        <Route path="/mypage/:memberId" />
+        <Route element={<OnlyBuyerRoute />}>
+          <Route path="/mypage/:memberId" element={<MyPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

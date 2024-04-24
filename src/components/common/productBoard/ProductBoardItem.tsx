@@ -2,10 +2,11 @@ import { forwardRef } from "react";
 import AdminBoardDeleteBtn from "../../admin/board/AdminBoardDeleteBtn";
 import AdminBoardEditBtn from "../../admin/board/AdminBoardEditBtn";
 import { Checkbox } from "../../ui/checkbox";
+import { convertPriceUnit } from "../../../utils/convertPriceUnit";
 
 interface IProductBoardItem {
   item: any;
-  isSellerPage: boolean;
+  isSellerPage?: boolean;
 }
 
 const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
@@ -19,6 +20,9 @@ const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
         />
         <div className="flex flex-col justify-between w-full py-1">
           <span>{item.productName}</span>
+          <span className="text-sm">
+            {convertPriceUnit(item.productPrice)}원
+          </span>
           <div className="flex items-center justify-between">
             <p className="text-xs">남은수량: {item.productQuantity}개</p>
             {isSellerPage && (
