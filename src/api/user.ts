@@ -1,17 +1,12 @@
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
-interface ISetUser {
-  uid: string;
-  req: IUserData;
-}
-
 interface IUserData {
   nickName: string;
   isSeller: boolean;
 }
 
-export const setUser = async ({ uid, req }: ISetUser) => {
+export const setUser = async (uid: string, req: IUserData) => {
   try {
     const res = await setDoc(doc(db, "users", uid), req);
     return res;

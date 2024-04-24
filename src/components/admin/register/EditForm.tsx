@@ -3,31 +3,32 @@ import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { getImageUrl } from "../../../api/image";
-import { registerProduct } from "../../../api/product";
-import { registerReq } from "../../../utils/dataSchema";
+import { updateProduct } from "../../../api/product";
+import { editReq } from "../../../utils/dataSchema";
 import { getSessionItem } from "../../../utils/handleSession";
 import { toast } from "../../ui/use-toast";
-import ProductForm, { IProductData, IRegisterFormData } from "./ProductForm";
+import ProductForm, { IProductData } from "./ProductForm";
+import { IRegisterFormData } from "./ProductForm";
 
-const RegisterForm = () => {
+const EditForm = ({ isEdit }: { isEdit: string }) => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const registerMutation = useMutation({
-    mutationFn: (doc: IProductData) => registerProduct({ req: doc }),
+  const editMutation = useMutation({
+    mutationFn: (doc: IProductData) => updateProduct(isEdit!, doc),
   });
 
-  const onRegisterHandler: SubmitHandler<IRegisterFormData> = async (data) => {
+  const onEditHandler: SubmitHandler<IRegisterFormData> = async (data) => {
     setIsLoading(true);
 
     const imageUrl = await getImageUrl(data.productImage);
-    const doc = registerReq(data, imageUrl);
+    const doc = editReq(data, imageUrl);
 
-    registerMutation.mutate(doc, {
+    editMutation.mutate(doc, {
       onSuccess: () => {
         setIsLoading(false);
         toast({
-          description: "상품이 정상적으로 등록되었습니다",
+          description: "상품이 정상적으로 수정되었습니다",
         });
         navigate(`/admin/${getSessionItem("userId")}`);
       },
@@ -36,11 +37,12 @@ const RegisterForm = () => {
 
   return (
     <ProductForm
-      buttonName="등록"
-      onSubmitHandler={onRegisterHandler}
+      buttonName="수정"
+      onSubmitHandler={onEditHandler}
+      isEdit={isEdit}
       isSubmitLoading={isLoading}
     />
   );
 };
 
-export default RegisterForm;
+export default EditForm;

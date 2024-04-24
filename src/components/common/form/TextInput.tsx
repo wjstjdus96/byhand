@@ -1,5 +1,5 @@
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+import { Input } from "../../ui/input";
+import { Label } from "../../ui/label";
 
 interface ITextInput {
   name: string;
@@ -7,6 +7,7 @@ interface ITextInput {
   register: any;
   errorMsg?: string;
   label: string;
+  placeholder?: string;
 }
 
 export function TextInput({
@@ -15,6 +16,7 @@ export function TextInput({
   register,
   errorMsg,
   label,
+  placeholder,
 }: ITextInput) {
   return (
     <div className="grid w-full items-center gap-1.5">
@@ -23,6 +25,7 @@ export function TextInput({
         {...register(name, { requeired: true })}
         type={type}
         id={name}
+        placeholder={placeholder}
         className="w-full"
       />
       {errorMsg && <span className=" text-xs text-red-600">{errorMsg}</span>}

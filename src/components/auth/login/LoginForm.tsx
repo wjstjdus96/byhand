@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { TextInput } from "../../common/TextInput";
+import { TextInput } from "../../common/form/TextInput";
 import { Button } from "../../ui/button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { auth } from "../../../api/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema } from "../../../utils/schema";
+import { loginSchema } from "../../../utils/validationSchema";
 import { getUser } from "../../../api/user";
 import { setSessionItem } from "../../../utils/handleSession";
+import { authReq } from "../../../utils/dataSchema";
 
 interface ILoginData {
   email: string;
@@ -21,13 +22,15 @@ const LoginForm = () => {
   } = useForm<ILoginData>({ resolver: zodResolver(loginSchema) });
   const navigate = useNavigate();
 
+  const onHandleRedirct = (isSeller: boolean, userId?: string) => {
+    if (isSeller) navigate(`/admin/${userId}`);
+    else navigate("/");
+  };
+
   const onSubmitHandler: SubmitHandler<ILoginData> = (data) => {
     try {
-      const req = {
-        email: data.email,
-        password: data.password,
-        returnSecureToken: true,
-      };
+      const req = authReq(data);
+
       auth("signInWithPassword", req)
         .then(async (res) => {
           if (res.status == 200) {
@@ -35,8 +38,7 @@ const LoginForm = () => {
             if (data) {
               setSessionItem("userId", res.data.localId);
               setSessionItem("auth", data.isSeller);
-              if (data.isSeller) navigate(`/admin/${res.data.localId}`);
-              else navigate("/");
+              onHandleRedirct(data.isSeller, res.data.localId);
             }
           }
         })

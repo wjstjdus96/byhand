@@ -1,14 +1,15 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { auth } from "../../../api/auth";
-import { TextInput } from "../../common/TextInput";
+import { TextInput } from "../../common/form/TextInput";
 import { Button } from "../../ui/button";
 import SelectAuthority from "./SelectAuthority";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signupSchema } from "../../../utils/schema";
+import { signupSchema } from "../../../utils/validationSchema";
 import { setUser } from "../../../api/user";
+import { authReq, setUserReq } from "../../../utils/dataSchema";
 
-interface ISignupData {
+export interface ISignupData {
   email: string;
   password: string;
   confirmPassword: string;
@@ -29,19 +30,13 @@ const SignupForm = () => {
 
   const onSubmitHandler: SubmitHandler<ISignupData> = (data) => {
     try {
-      const req = {
-        email: data.email,
-        password: data.password,
-        returnSecureToken: true,
-      };
-      const nor = {
-        nickName: data.nickname,
-        isSeller: data.authority == "seller",
-      };
-      auth("signUp", req)
+      const sinupReq = authReq(data);
+      const userReq = setUserReq(data);
+
+      auth("signUp", sinupReq)
         .then(async (res) => {
           if (res.status == 200) {
-            setUser({ uid: res.data.localId, req: nor });
+            setUser(res.data.localId, userReq);
             navigate("/login");
           }
         })
