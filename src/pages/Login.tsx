@@ -5,9 +5,11 @@ import CheckOtherWay from "../components/auth/CheckOtherWay";
 
 function Login() {
   const navigate = useNavigate();
+
   const onClickSignup = () => {
     navigate("/signup");
   };
+
   return (
     <div>
       <Header />

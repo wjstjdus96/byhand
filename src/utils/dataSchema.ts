@@ -1,5 +1,5 @@
 import { serverTimestamp } from "firebase/firestore";
-import { IRegisterFormData } from "../components/admin/register/RegisterForm";
+import { IRegisterFormData } from "../components/admin/register/ProductForm";
 import { ISignupData } from "../components/auth/signup/SignupForm";
 import { getSessionItem } from "./handleSession";
 
