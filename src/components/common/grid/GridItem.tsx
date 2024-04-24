@@ -1,9 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import { convertPriceUnit } from "../../../utils/convertPriceUnit";
 import { IProductData } from "../../admin/register/ProductForm";
 
 const GridItem = ({ data }: { data: IProductData }) => {
+  const navigate = useNavigate();
+  const onClickItem = () => {
+    navigate(`pro123123`);
+  };
+
   return (
-    <div>
+    <div onClick={onClickItem}>
       <img
         src={data.productImage[0]}
         alt="상품이미지"

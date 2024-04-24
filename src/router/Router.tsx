@@ -8,6 +8,7 @@ import Home from "../pages/Home";
 import NonSellerRoute from "./NonSellerRoute";
 import OnlySellerRoute from "./OnlySellerRoute";
 import Products from "../pages/Products";
+import ProductDetail from "../pages/ProductDetail";
 
 const Router = () => {
   return (
@@ -20,6 +21,7 @@ const Router = () => {
         <Route element={<NonSellerRoute />}>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/products/:productId" element={<ProductDetail />} />
         </Route>
         <Route element={<OnlySellerRoute />}>
           <Route path="/admin/:sellerId" element={<ProductManagement />} />
