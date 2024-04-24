@@ -1,5 +1,5 @@
 import { Control, useController } from "react-hook-form";
-import { IRegisterFormData } from "../../admin/register/RegisterForm";
+import { IRegisterFormData } from "../../admin/register/ProductForm";
 import { Label } from "../../ui/label";
 import {
   Select,
