@@ -63,7 +63,6 @@ export const useFilteredResults = ({
   useEffect(() => {
     if (inView) {
       fetchNextPage();
-      console.log("으아");
     }
   }, [inView]);
 

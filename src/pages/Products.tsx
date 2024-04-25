@@ -5,10 +5,11 @@ import SearchBar from "../components/products/SearchBar";
 import SortSelector from "../components/products/SortSelector";
 import { useFilteredResults } from "../hooks/useFilteredResults";
 import Layout from "../layout/Layout";
+import { useCategoryType } from "../hooks/product/useCategoryType";
 
 function Products() {
   const [keyword, setKeyword] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("total");
+  const { selectedCategory, setCategoryParams } = useCategoryType();
   const [selectedSort, setSelectedSort] = useState("createdAt-desc");
 
   const { products, ref } = useFilteredResults({
@@ -25,7 +26,7 @@ function Products() {
           <SearchBar keyword={keyword} setKeyword={setKeyword} />
           <CategorySelector
             selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
+            setCategoryParams={setCategoryParams}
           />
           <SortSelector
             selectedSort={selectedSort}

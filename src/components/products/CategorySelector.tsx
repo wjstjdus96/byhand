@@ -3,17 +3,14 @@ import { CATEGORY_TYPE } from "../../consts/data";
 
 interface ICategorySelector {
   selectedCategory: string;
-  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+  setCategoryParams: (selected: string) => void;
 }
 
 const CategorySelector = ({
   selectedCategory,
-  setSelectedCategory,
+  setCategoryParams,
 }: ICategorySelector) => {
   const TOTAL_CATEGORY = [{ value: "total", name: "전체" }, ...CATEGORY_TYPE];
-  const onClickCategory = (category: string) => {
-    setSelectedCategory(category);
-  };
 
   useEffect(() => {});
 
@@ -26,7 +23,7 @@ const CategorySelector = ({
               ? "bg-[#312fd0] bg-opacity-10 text-[#312fd0]"
               : "bg-transparent"
           }`}
-          onClick={() => onClickCategory(item.value)}
+          onClick={() => setCategoryParams(item.value)}
         >
           {item.name}
         </span>
