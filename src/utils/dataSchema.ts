@@ -1,6 +1,6 @@
 import { serverTimestamp } from "firebase/firestore";
 import { ISignupData } from "../components/auth/signup/SignupForm";
-import { IProductFormData } from "../types/product";
+import { IProductEditReqData, IProductFormData } from "../types/product";
 import { getSessionItem } from "./handleSession";
 
 interface IAuthReq {
@@ -37,7 +37,10 @@ export const registerReq = (data: IProductFormData, imageData: string[]) => {
   };
 };
 
-export const editReq = (data: IProductFormData, imageData: string[]) => {
+export const editReq = (
+  data: IProductFormData,
+  imageData: string[]
+): IProductEditReqData => {
   return {
     productImage: imageData,
     productName: data.productName,

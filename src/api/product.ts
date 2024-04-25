@@ -13,28 +13,11 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { db } from "./firebase";
 import { IProductRegisterReqData } from "../types/product";
+import { db } from "./firebase";
 
-interface IRegisterProduct {
-  req: any; //임시라도 any 사용 금지하자
-}
-
-export const registerProduct = async ({ req }: IRegisterProduct) => {
+export const registerProduct = async (req: IProductRegisterReqData) => {
   const res = await addDoc(collection(db, "product"), req);
-  return res;
-};
-
-export const getProduct = async (uid: string | null) => {
-  const q = query(
-    collection(db, "product"),
-    where("sellerId", "==", uid),
-    orderBy("sellerId"),
-    orderBy("updatedAt", "desc")
-  );
-  const querySnapShot = await getDocs(q);
-  const res = querySnapShot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-
   return res;
 };
 
@@ -50,47 +33,29 @@ export const getOneProduct = async (productId: string) => {
   return docSnap.data();
 };
 
-export const updateProduct = async (
-  productId: string,
-  data: {
-    productImage: string[];
-    productName: string;
-    productCategory: string;
-    productPrice: number;
-    productQuantity: number;
-    productDescription: string;
-    updatedAt: any;
-  }
-) => {
+export const updateProduct = async (productId: string, data: any) => {
   const docRef = doc(db, "product", productId);
   const res = await updateDoc(docRef, data);
   return res;
 };
 
-export const getSellerFirstDocs = async (uid: string) => {
-  const first = query(
+export const getSellerProducts = async (uid: string, pageParam: any) => {
+  const SELLER_PAGE_LIMIT = 10;
+  let q = query(
     collection(db, "product"),
     where("sellerId", "==", uid),
-    orderBy("sellerId"),
-    orderBy("updatedAt", "desc"),
-    limit(10)
+    orderBy("updatedAt", "desc")
   );
 
-  const docSnap = await getDocs(first);
-  return docSnap;
-};
+  if (pageParam) {
+    q = query(q, startAfter(pageParam), limit(SELLER_PAGE_LIMIT));
+  } else {
+    q = query(q, limit(SELLER_PAGE_LIMIT));
+  }
 
-export const getSellerNextDocs = async (uid: string, pageParam: any) => {
-  const next = query(
-    collection(db, "product"),
-    where("sellerId", "==", uid),
-    orderBy("sellerId"),
-    orderBy("updatedAt", "desc"),
-    startAfter(pageParam),
-    limit(10)
-  );
-  const docSnap = await getDocs(next);
-  return docSnap;
+  const querySnapShot = await getDocs(q);
+
+  return querySnapShot;
 };
 
 //제한 있는 경우 없는 경우 합쳐서, 카테고리 분류도 나눠서
@@ -98,28 +63,10 @@ interface IGetProducts {
   keyword?: string;
   category?: string;
   limitNum?: number;
-  pageParam?: number;
+  pageParam?: any;
   sort: string;
+  isInfiniteScroll?: boolean;
 }
-
-export const temp_getProducts = async ({
-  category,
-  limitNum,
-}: IGetProducts) => {
-  let q = query(collection(db, "product"));
-
-  let q1 = query(q, where("productCategory", "==", category));
-  if (limitNum) {
-    q1 = query(q1, limit(limitNum));
-  }
-  const querySnapShot1 = await getDocs(q1);
-  const res1 = querySnapShot1.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
-  console.log(res1);
-  return res1;
-};
 
 export const getProducts = async ({
   category,
@@ -127,9 +74,9 @@ export const getProducts = async ({
   sort,
   pageParam,
   keyword,
+  isInfiniteScroll,
 }: IGetProducts) => {
   try {
-    console.log(category, sort, keyword);
     let q = query(collection(db, "product"));
 
     const sortType: [string, OrderByDirection] = sort.split("-") as [
@@ -139,6 +86,13 @@ export const getProducts = async ({
 
     if (sort) {
       q = query(q, orderBy(sortType[0], sortType[1]));
+    }
+    if (keyword) {
+      q = query(
+        q,
+        where("productName", ">=", keyword),
+        where("productName", "<=", keyword + "\uf8ff")
+      );
     }
     if (category && category != "total") {
       q = query(q, where("productCategory", "==", category));
@@ -152,6 +106,16 @@ export const getProducts = async ({
 
     const querySnapShot = await getDocs(q);
 
+    if (isInfiniteScroll) {
+      console.log(
+        querySnapShot.docs.map((doc) => ({
+          id: doc.id,
+          ...(doc.data() as IProductRegisterReqData),
+        }))
+      );
+      return querySnapShot;
+    }
+
     const res = querySnapShot.docs.map((doc) => ({
       id: doc.id,
       ...(doc.data() as IProductRegisterReqData),
@@ -159,6 +123,6 @@ export const getProducts = async ({
 
     return res;
   } catch (e) {
-    alert(e);
+    console.log(e);
   }
 };

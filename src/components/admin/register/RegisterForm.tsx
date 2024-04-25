@@ -18,7 +18,7 @@ const RegisterForm = () => {
   const navigate = useNavigate();
 
   const registerMutation = useMutation({
-    mutationFn: (doc: IProductRegisterReqData) => registerProduct({ req: doc }),
+    mutationFn: (doc: IProductRegisterReqData) => registerProduct(doc),
   });
 
   const onRegisterHandler: SubmitHandler<IProductFormData> = async (data) => {

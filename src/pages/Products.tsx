@@ -1,20 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CategorySelector from "../components/products/CategorySelector";
+import ProductsBoard from "../components/products/ProductsBoard";
 import SearchBar from "../components/products/SearchBar";
 import SortSelector from "../components/products/SortSelector";
 import { useFilteredResults } from "../hooks/useFilteredResults";
 import Layout from "../layout/Layout";
-import ProductsBoard from "../components/products/ProductsBoard";
 
 function Products() {
   const [keyword, setKeyword] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("total");
   const [selectedSort, setSelectedSort] = useState("createdAt-desc");
 
-  const { data } = useFilteredResults({
+  const { products, ref } = useFilteredResults({
     keyword,
     category: selectedCategory,
     sort: selectedSort,
+    limitNum: 12,
   });
 
   return (
@@ -31,7 +32,7 @@ function Products() {
             setSelectedSort={setSelectedSort}
           />
         </div>
-        {data && <ProductsBoard resultData={data} />}
+        {products && <ProductsBoard ref={ref} resultData={products} />}
       </div>
     </Layout>
   );

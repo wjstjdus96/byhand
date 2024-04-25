@@ -1,18 +1,18 @@
-import { useGetCollection } from "../../../hooks/useGetCollection";
+import { useCollection } from "../../../hooks/useCollection";
 import Collection from "../../common/collection/Collection";
 import GridItem from "../../common/grid/GridItem";
 
 const CategoryCollection = () => {
-  const { data: fashionCollection, isLoading } = useGetCollection({
+  const { data: fashionCollection, isLoading } = useCollection({
     category: "fashion",
   });
-  const { data: foodCollection } = useGetCollection({
+  const { data: foodCollection } = useCollection({
     category: "food",
   });
-  const { data: livingCollection } = useGetCollection({
+  const { data: livingCollection } = useCollection({
     category: "living",
   });
-  const { data: beautyCollection } = useGetCollection({
+  const { data: beautyCollection } = useCollection({
     category: "beauty",
   });
 

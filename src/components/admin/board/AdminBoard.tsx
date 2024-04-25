@@ -1,4 +1,4 @@
-import { useInfiniteScroll } from "../../../hooks/useInfiniteScroll";
+import { useSellerInfiniteScroll } from "../../../hooks/seller/useSellerInfiniteScroll";
 import { getSessionItem } from "../../../utils/handleSession";
 import ProductBoardHead from "../../common/productBoard/ProductBoardHead";
 import ProductBoardItem from "../../common/productBoard/ProductBoardItem";
@@ -6,7 +6,7 @@ import { Separator } from "../../ui/separator";
 
 const AdminBoard = () => {
   const uid = getSessionItem("userId");
-  const { ref: lastItemRef, products } = useInfiniteScroll({ uid: uid! });
+  const { ref: lastItemRef, products } = useSellerInfiniteScroll({ uid: uid! });
 
   return (
     <div>

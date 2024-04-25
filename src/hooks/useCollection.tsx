@@ -1,18 +1,20 @@
-import { queryOptions, useQueries, useQuery } from "@tanstack/react-query";
-import { getProducts, temp_getProducts } from "../api/product";
+import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "../api/product";
 
-interface IUseGetCollection {
+interface IUseCollection {
   category: string;
   limitNum?: number;
 }
 
-export const useGetCollection = ({
-  category,
-  limitNum = 6,
-}: IUseGetCollection) => {
+export const useCollection = ({ category, limitNum = 6 }: IUseCollection) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["collection", category],
-    queryFn: () => temp_getProducts({ category: category, limitNum: limitNum }),
+    queryFn: () =>
+      getProducts({
+        category: category,
+        limitNum: limitNum,
+        sort: "createdAt-desc",
+      }),
     refetchOnWindowFocus: false,
     staleTime: Infinity,
   });
