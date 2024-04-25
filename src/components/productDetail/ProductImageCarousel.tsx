@@ -11,7 +11,7 @@ const ProductImageCarousel = ({ images }: { images: string[] }) => {
     >
       {images.map((url) => (
         <div>
-          <img src={url} className="object-cover" />
+          <img src={url} className="object-cover aspect-square rounded-md" />
         </div>
       ))}
     </Carousel>

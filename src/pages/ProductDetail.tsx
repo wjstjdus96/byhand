@@ -1,22 +1,29 @@
-import { dummyData } from "../components/home/categoryCollection/dummyData";
+import { useParams } from "react-router-dom";
 import ProductDescription from "../components/productDetail/ProductDescription";
 import ProductImageCarousel from "../components/productDetail/ProductImageCarousel";
 import ProductInfoSection from "../components/productDetail/ProductInfoSection";
 import { Separator } from "../components/ui/separator";
+import { useGetProductDetail } from "../hooks/useGetProductDetail";
 import Layout from "../layout/Layout";
 
 function ProductDetail() {
-  const data = dummyData[0];
+  const { productId } = useParams();
+  const { data, isLoading, error } = useGetProductDetail({
+    productId: productId ? productId : "",
+  });
+
   return (
     <Layout>
-      <div className="py-20 px-28">
-        <div className="grid grid-cols-2 gap-10">
-          <ProductImageCarousel images={data.productImage} />
-          <ProductInfoSection data={data} />
+      {data && (
+        <div className="py-20 px-40">
+          <div className="grid grid-cols-2 gap-12">
+            <ProductImageCarousel images={data.productImage} />
+            <ProductInfoSection data={data} />
+          </div>
+          <Separator />
+          <ProductDescription description={data.productDescription} />
         </div>
-        <Separator />
-        <ProductDescription description={"아아"} />
-      </div>
+      )}
     </Layout>
   );
 }

@@ -13,7 +13,7 @@ const GridItem = ({ data }: { data: IProductResData }) => {
       <img
         src={data.productImage[0]}
         alt="상품이미지"
-        className=" rounded-sm aspect-square object-cover"
+        className=" rounded-sm aspect-square object-cover w-full"
       />
       <div className="flex flex-col gap-2 py-2 px-1">
         <p className="text-xs">{data.productCategory}</p>
