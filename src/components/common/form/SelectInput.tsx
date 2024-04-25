@@ -1,5 +1,4 @@
 import { Control, useController } from "react-hook-form";
-import { IRegisterFormData } from "../../admin/register/ProductForm";
 import { Label } from "../../ui/label";
 import {
   Select,
@@ -9,11 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../ui/select";
-
-interface ICategoryType {
-  value: string;
-  name: string;
-}
+import { ICategoryType, IRegisterFormData } from "../../../types/product";
 
 interface ISelectInput {
   name: any;

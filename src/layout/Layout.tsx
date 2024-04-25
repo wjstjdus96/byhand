@@ -12,10 +12,6 @@ interface ILayout {
 const Layout = ({ children }: ILayout) => {
   const { isCartOpen } = useCartStore();
 
-  useEffect(() => {
-    console.log(isCartOpen);
-  }, [isCartOpen]);
-
   return (
     <div>
       <Header />

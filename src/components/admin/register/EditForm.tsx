@@ -7,8 +7,8 @@ import { updateProduct } from "../../../api/product";
 import { editReq } from "../../../utils/dataSchema";
 import { getSessionItem } from "../../../utils/handleSession";
 import { toast } from "../../ui/use-toast";
-import ProductForm, { IProductData } from "./ProductForm";
-import { IRegisterFormData } from "./ProductForm";
+import ProductForm from "./ProductForm";
+import { IProductData, IRegisterFormData } from "../../../types/product";
 
 const EditForm = ({ isEdit }: { isEdit: string }) => {
   const [isLoading, setIsLoading] = useState(false);

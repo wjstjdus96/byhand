@@ -7,7 +7,8 @@ import { registerProduct } from "../../../api/product";
 import { registerReq } from "../../../utils/dataSchema";
 import { getSessionItem } from "../../../utils/handleSession";
 import { toast } from "../../ui/use-toast";
-import ProductForm, { IProductData, IRegisterFormData } from "./ProductForm";
+import ProductForm from "./ProductForm";
+import { IProductData, IRegisterFormData } from "../../../types/product";
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);

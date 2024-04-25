@@ -90,3 +90,74 @@ export const getSellerNextDocs = async (uid: string, pageParam: any) => {
   const docSnap = await getDocs(next);
   return docSnap;
 };
+
+//제한 있는 경우 없는 경우 합쳐서, 카테고리 분류도 나눠서
+interface IGetProducts {
+  category?: string;
+  limitNum?: number;
+  pageParam?: number;
+  sort?: string;
+}
+
+export const temp_getProducts = async ({
+  category,
+  limitNum,
+  sort = "updatedAt",
+  pageParam,
+}: IGetProducts) => {
+  let q = query(collection(db, "product"));
+
+  let q1 = query(q, where("productCategory", "==", category));
+  if (limitNum) {
+    q1 = query(q1, limit(limitNum));
+  }
+  const querySnapShot1 = await getDocs(q1);
+  const res1 = querySnapShot1.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+  console.log(res1);
+  return res1;
+};
+
+export const getProducts = async ({
+  category,
+  limitNum,
+  sort = "updatedAt",
+  pageParam,
+}: IGetProducts) => {
+  let q = query(collection(db, "product"));
+
+  const q1 = query(
+    q,
+    where("productCategory", "==", category),
+    orderBy("updatedAt", "desc"),
+    orderBy("updatedAt", "desc")
+  );
+  const querySnapShot1 = await getDocs(q1);
+  const res1 = querySnapShot1.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+  console.log(res1);
+
+  if (sort) {
+    q = query(q, orderBy(sort, "desc"));
+  }
+  if (category) {
+    q = query(q, where("productCategory", "==", category));
+  }
+  if (pageParam && limitNum) {
+    q = query(q, startAfter(pageParam), limit(limitNum));
+  }
+  if (limitNum) {
+    q = query(q, limit(limitNum));
+  }
+
+  console.log(q);
+  const querySnapShot = await getDocs(q);
+  console.log(querySnapShot);
+  const res = querySnapShot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+  return res;
+};

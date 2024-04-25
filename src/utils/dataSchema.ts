@@ -1,7 +1,7 @@
 import { serverTimestamp } from "firebase/firestore";
-import { IRegisterFormData } from "../components/admin/register/ProductForm";
 import { ISignupData } from "../components/auth/signup/SignupForm";
 import { getSessionItem } from "./handleSession";
+import { IRegisterFormData } from "../types/product";
 
 interface IAuthReq {
   email: string;
