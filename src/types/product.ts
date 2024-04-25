@@ -1,16 +1,26 @@
-export interface IProductData {
+export interface IProductRegisterReqData {
   productImage: string[];
   productName: string;
   productCategory: string;
   productPrice: number;
   productQuantity: number;
   productDescription: string;
-  sellerId?: string;
-  createdAt?: any;
+  sellerId: string;
+  createdAt: any;
   updatedAt: any;
 }
 
-export interface IRegisterFormData {
+export interface IProductEditReqData {
+  productImage: string[];
+  productName: string;
+  productCategory: string;
+  productPrice: number;
+  productQuantity: number;
+  productDescription: string;
+  updatedAt: any;
+}
+
+export interface IProductFormData {
   productImage: any[];
   productName: string;
   productCategory: string;

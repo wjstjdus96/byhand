@@ -8,12 +8,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../ui/select";
-import { ICategoryType, IRegisterFormData } from "../../../types/product";
+import { ICategoryType, IProductFormData } from "../../../types/product";
 
 interface ISelectInput {
   name: any;
   label: string;
-  control: Control<IRegisterFormData>;
+  control: Control<IProductFormData>;
   errorMsg?: string;
   placeholder: string;
   items: ICategoryType[];

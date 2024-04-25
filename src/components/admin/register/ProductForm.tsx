@@ -9,11 +9,11 @@ import SelectInput from "../../common/form/SelectInput";
 import TextArea from "../../common/form/TextArea";
 import { TextInput } from "../../common/form/TextInput";
 import { Button } from "../../ui/button";
-import { IRegisterFormData } from "../../../types/product";
+import { IProductFormData } from "../../../types/product";
 
 interface IProductForm {
   buttonName: string;
-  onSubmitHandler: SubmitHandler<IRegisterFormData>;
+  onSubmitHandler: SubmitHandler<IProductFormData>;
   isEdit?: string;
   isSubmitLoading: boolean;
 }
@@ -31,7 +31,7 @@ const ProductForm = ({
     setValue,
     control,
     formState: { errors },
-  } = useForm<IRegisterFormData>({
+  } = useForm<IProductFormData>({
     resolver: zodResolver(productRegisterSchema),
   });
 

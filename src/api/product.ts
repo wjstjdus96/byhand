@@ -1,4 +1,5 @@
 import {
+  OrderByDirection,
   addDoc,
   collection,
   deleteDoc,
@@ -13,6 +14,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "./firebase";
+import { IProductRegisterReqData } from "../types/product";
 
 interface IRegisterProduct {
   req: any; //임시라도 any 사용 금지하자
@@ -93,17 +95,16 @@ export const getSellerNextDocs = async (uid: string, pageParam: any) => {
 
 //제한 있는 경우 없는 경우 합쳐서, 카테고리 분류도 나눠서
 interface IGetProducts {
+  keyword?: string;
   category?: string;
   limitNum?: number;
   pageParam?: number;
-  sort?: string;
+  sort: string;
 }
 
 export const temp_getProducts = async ({
   category,
   limitNum,
-  sort = "updatedAt",
-  pageParam,
 }: IGetProducts) => {
   let q = query(collection(db, "product"));
 
@@ -123,41 +124,41 @@ export const temp_getProducts = async ({
 export const getProducts = async ({
   category,
   limitNum,
-  sort = "updatedAt",
+  sort,
   pageParam,
+  keyword,
 }: IGetProducts) => {
-  let q = query(collection(db, "product"));
+  try {
+    console.log(category, sort, keyword);
+    let q = query(collection(db, "product"));
 
-  const q1 = query(
-    q,
-    where("productCategory", "==", category),
-    orderBy("updatedAt", "desc"),
-    orderBy("updatedAt", "desc")
-  );
-  const querySnapShot1 = await getDocs(q1);
-  const res1 = querySnapShot1.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
-  console.log(res1);
+    const sortType: [string, OrderByDirection] = sort.split("-") as [
+      string,
+      OrderByDirection
+    ];
 
-  if (sort) {
-    q = query(q, orderBy(sort, "desc"));
-  }
-  if (category) {
-    q = query(q, where("productCategory", "==", category));
-  }
-  if (pageParam && limitNum) {
-    q = query(q, startAfter(pageParam), limit(limitNum));
-  }
-  if (limitNum) {
-    q = query(q, limit(limitNum));
-  }
+    if (sort) {
+      q = query(q, orderBy(sortType[0], sortType[1]));
+    }
+    if (category && category != "total") {
+      q = query(q, where("productCategory", "==", category));
+    }
+    if (pageParam && limitNum) {
+      q = query(q, startAfter(pageParam), limit(limitNum));
+    }
+    if (limitNum) {
+      q = query(q, limit(limitNum));
+    }
 
-  console.log(q);
-  const querySnapShot = await getDocs(q);
-  console.log(querySnapShot);
-  const res = querySnapShot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    const querySnapShot = await getDocs(q);
 
-  return res;
+    const res = querySnapShot.docs.map((doc) => ({
+      id: doc.id,
+      ...(doc.data() as IProductRegisterReqData),
+    }));
+
+    return res;
+  } catch (e) {
+    alert(e);
+  }
 };

@@ -35,7 +35,7 @@ const Selector = ({
   return (
     <div className={styles}>
       {label && <Label>{label}</Label>}
-      <Select value={value} onValueChange={onChange}>
+      <Select defaultValue="apples" value={value} onValueChange={onChange}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>

@@ -1,7 +1,7 @@
 import { serverTimestamp } from "firebase/firestore";
 import { ISignupData } from "../components/auth/signup/SignupForm";
+import { IProductFormData } from "../types/product";
 import { getSessionItem } from "./handleSession";
-import { IRegisterFormData } from "../types/product";
 
 interface IAuthReq {
   email: string;
@@ -23,7 +23,7 @@ export const setUserReq = (data: ISignupData) => {
   };
 };
 
-export const registerReq = (data: IRegisterFormData, imageData: string[]) => {
+export const registerReq = (data: IProductFormData, imageData: string[]) => {
   return {
     sellerId: getSessionItem("userId")!,
     productImage: imageData,
@@ -37,7 +37,7 @@ export const registerReq = (data: IRegisterFormData, imageData: string[]) => {
   };
 };
 
-export const editReq = (data: IRegisterFormData, imageData: string[]) => {
+export const editReq = (data: IProductFormData, imageData: string[]) => {
   return {
     productImage: imageData,
     productName: data.productName,
