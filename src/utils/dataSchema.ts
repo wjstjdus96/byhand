@@ -1,6 +1,6 @@
 import { serverTimestamp } from "firebase/firestore";
-import { IRegisterFormData } from "../components/admin/register/ProductForm";
 import { ISignupData } from "../components/auth/signup/SignupForm";
+import { IProductEditReqData, IProductFormData } from "../types/product";
 import { getSessionItem } from "./handleSession";
 
 interface IAuthReq {
@@ -23,27 +23,30 @@ export const setUserReq = (data: ISignupData) => {
   };
 };
 
-export const registerReq = (data: IRegisterFormData, imageData: string[]) => {
+export const registerReq = (data: IProductFormData, imageData: string[]) => {
   return {
     sellerId: getSessionItem("userId")!,
     productImage: imageData,
     productName: data.productName,
     productCategory: data.productCategory,
-    productPrice: data.productPrice,
-    productQuantity: data.productQuantity,
+    productPrice: Number(data.productPrice),
+    productQuantity: Number(data.productQuantity),
     productDescription: data.productDescription,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
   };
 };
 
-export const editReq = (data: IRegisterFormData, imageData: string[]) => {
+export const editReq = (
+  data: IProductFormData,
+  imageData: string[]
+): IProductEditReqData => {
   return {
     productImage: imageData,
     productName: data.productName,
     productCategory: data.productCategory,
-    productPrice: data.productPrice,
-    productQuantity: data.productQuantity,
+    productPrice: Number(data.productPrice),
+    productQuantity: Number(data.productQuantity),
     productDescription: data.productDescription,
     updatedAt: serverTimestamp(),
   };

@@ -1,15 +1,14 @@
 import { forwardRef } from "react";
-import AdminBoardDeleteBtn from "../../admin/board/AdminBoardDeleteBtn";
-import AdminBoardEditBtn from "../../admin/board/AdminBoardEditBtn";
+import { convertPriceUnit } from "../../../utils/convertPriceUnit";
 import { Checkbox } from "../../ui/checkbox";
 
 interface IProductBoardItem {
   item: any;
-  isSellerPage: boolean;
+  children: React.ReactNode;
 }
 
 const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
-  ({ item, isSellerPage }, ref) => {
+  ({ item, children }, ref) => {
     return (
       <div className="flex h-28 gap-5 py-2" ref={ref}>
         <Checkbox />
@@ -19,14 +18,12 @@ const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
         />
         <div className="flex flex-col justify-between w-full py-1">
           <span>{item.productName}</span>
+          <span className="text-sm">
+            {convertPriceUnit(item.productPrice)}원
+          </span>
           <div className="flex items-center justify-between">
             <p className="text-xs">남은수량: {item.productQuantity}개</p>
-            {isSellerPage && (
-              <div className="flex gap-1">
-                <AdminBoardEditBtn productId={item.id} />
-                <AdminBoardDeleteBtn productId={item.id} />
-              </div>
-            )}
+            {children}
           </div>
         </div>
       </div>

@@ -7,17 +7,21 @@ import { registerProduct } from "../../../api/product";
 import { registerReq } from "../../../utils/dataSchema";
 import { getSessionItem } from "../../../utils/handleSession";
 import { toast } from "../../ui/use-toast";
-import ProductForm, { IProductData, IRegisterFormData } from "./ProductForm";
+import ProductForm from "./ProductForm";
+import {
+  IProductFormData,
+  IProductRegisterReqData,
+} from "../../../types/product";
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const registerMutation = useMutation({
-    mutationFn: (doc: IProductData) => registerProduct({ req: doc }),
+    mutationFn: (doc: IProductRegisterReqData) => registerProduct(doc),
   });
 
-  const onRegisterHandler: SubmitHandler<IRegisterFormData> = async (data) => {
+  const onRegisterHandler: SubmitHandler<IProductFormData> = async (data) => {
     setIsLoading(true);
 
     const imageUrl = await getImageUrl(data.productImage);

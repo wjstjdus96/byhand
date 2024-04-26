@@ -7,18 +7,18 @@ import { updateProduct } from "../../../api/product";
 import { editReq } from "../../../utils/dataSchema";
 import { getSessionItem } from "../../../utils/handleSession";
 import { toast } from "../../ui/use-toast";
-import ProductForm, { IProductData } from "./ProductForm";
-import { IRegisterFormData } from "./ProductForm";
+import ProductForm from "./ProductForm";
+import { IProductEditReqData, IProductFormData } from "../../../types/product";
 
 const EditForm = ({ isEdit }: { isEdit: string }) => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const editMutation = useMutation({
-    mutationFn: (doc: IProductData) => updateProduct(isEdit!, doc),
+    mutationFn: (doc: IProductEditReqData) => updateProduct(isEdit!, doc),
   });
 
-  const onEditHandler: SubmitHandler<IRegisterFormData> = async (data) => {
+  const onEditHandler: SubmitHandler<IProductFormData> = async (data) => {
     setIsLoading(true);
 
     const imageUrl = await getImageUrl(data.productImage);

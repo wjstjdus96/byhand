@@ -1,4 +1,5 @@
 import {
+  OrderByDirection,
   addDoc,
   collection,
   deleteDoc,
@@ -12,27 +13,11 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
+import { IProductRegisterReqData } from "../types/product";
 import { db } from "./firebase";
 
-interface IRegisterProduct {
-  req: any; //임시라도 any 사용 금지하자
-}
-
-export const registerProduct = async ({ req }: IRegisterProduct) => {
+export const registerProduct = async (req: IProductRegisterReqData) => {
   const res = await addDoc(collection(db, "product"), req);
-  return res;
-};
-
-export const getProduct = async (uid: string | null) => {
-  const q = query(
-    collection(db, "product"),
-    where("sellerId", "==", uid),
-    orderBy("sellerId"),
-    orderBy("updatedAt", "desc")
-  );
-  const querySnapShot = await getDocs(q);
-  const res = querySnapShot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-
   return res;
 };
 
@@ -48,45 +33,108 @@ export const getOneProduct = async (productId: string) => {
   return docSnap.data();
 };
 
-export const updateProduct = async (
-  productId: string,
-  data: {
-    productImage: string[];
-    productName: string;
-    productCategory: string;
-    productPrice: number;
-    productQuantity: number;
-    productDescription: string;
-    updatedAt: any;
-  }
-) => {
+export const updateProduct = async (productId: string, data: any) => {
   const docRef = doc(db, "product", productId);
   const res = await updateDoc(docRef, data);
   return res;
 };
 
-export const getSellerFirstDocs = async (uid: string) => {
-  const first = query(
+export const getSellerProducts = async (uid: string, pageParam: any) => {
+  const SELLER_PAGE_LIMIT = 10;
+  let q = query(
     collection(db, "product"),
     where("sellerId", "==", uid),
-    orderBy("sellerId"),
-    orderBy("updatedAt", "desc"),
-    limit(10)
+    orderBy("updatedAt", "desc")
   );
 
-  const docSnap = await getDocs(first);
-  return docSnap;
+  if (pageParam) {
+    q = query(q, startAfter(pageParam), limit(SELLER_PAGE_LIMIT));
+  } else {
+    q = query(q, limit(SELLER_PAGE_LIMIT));
+  }
+
+  const querySnapShot = await getDocs(q);
+
+  return querySnapShot;
 };
 
-export const getSellerNextDocs = async (uid: string, pageParam: any) => {
-  const next = query(
-    collection(db, "product"),
-    where("sellerId", "==", uid),
-    orderBy("sellerId"),
-    orderBy("updatedAt", "desc"),
-    startAfter(pageParam),
-    limit(10)
-  );
-  const docSnap = await getDocs(next);
-  return docSnap;
+//제한 있는 경우 없는 경우 합쳐서, 카테고리 분류도 나눠서
+interface IGetProducts {
+  keyword?: string;
+  category?: string;
+  limitNum?: number;
+  pageParam?: any;
+  sort: string;
+  isInfiniteScroll?: boolean;
+}
+
+export const getProducts = async ({
+  category,
+  limitNum,
+  sort,
+  pageParam,
+  keyword,
+  isInfiniteScroll,
+}: IGetProducts) => {
+  try {
+    let q = query(collection(db, "product"));
+
+    const sortType: [string, OrderByDirection] = sort.split("-") as [
+      string,
+      OrderByDirection
+    ];
+
+    if (sort) {
+      q = query(q, orderBy(sortType[0], sortType[1]));
+    }
+    if (keyword) {
+      q = query(
+        q,
+        where("productName", ">=", keyword),
+        where("productName", "<=", keyword + "\uf8ff")
+      );
+    }
+    if (category && category != "total") {
+      q = query(q, where("productCategory", "==", category));
+    }
+    if (pageParam && limitNum) {
+      q = query(q, startAfter(pageParam), limit(limitNum));
+    }
+    if (limitNum) {
+      q = query(q, limit(limitNum));
+    }
+
+    const querySnapShot = await getDocs(q);
+
+    if (isInfiniteScroll) {
+      console.log(
+        querySnapShot.docs.map((doc) => ({
+          id: doc.id,
+          ...(doc.data() as IProductRegisterReqData),
+        }))
+      );
+      return querySnapShot;
+    }
+
+    const res = querySnapShot.docs.map((doc) => ({
+      id: doc.id,
+      ...(doc.data() as IProductRegisterReqData),
+    }));
+
+    return res;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getProductsByProductsId = async (productIds: string[]) => {
+  const productsPromise = productIds.map(async (productId) => {
+    const docRef = doc(db, "product", productId);
+    const docSnap = await getDoc(docRef);
+    return docSnap.data();
+  });
+
+  const productsArr = await Promise.all(productsPromise);
+  const products = productsArr.flat();
+  return products;
 };
