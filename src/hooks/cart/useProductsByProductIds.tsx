@@ -12,7 +12,5 @@ export const useProductsByProductIds = ({
     refetchOnWindowFocus: false,
   });
 
-  console.log(products);
-
   return { products };
 };

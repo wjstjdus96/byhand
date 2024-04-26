@@ -28,10 +28,13 @@ const CartList = () => {
         <>
           <ProductBoardHead totLength={products.length} />
           <Separator />
-          <div className="h-full overflow-y-scroll pb-6">
-            {/* {products.map((item) => (
-              <CartListItem />
-            ))} */}
+          <div className="h-full overflow-y-scroll pb-6 pt-2 px-2">
+            {products.map((product, idx) => (
+              <CartListItem
+                product={product}
+                selectedCnt={temp_data[idx].selectedCnt}
+              />
+            ))}
           </div>
         </>
       )}

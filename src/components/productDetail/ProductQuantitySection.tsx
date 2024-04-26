@@ -39,6 +39,7 @@ const ProductQuantitySection = ({
         onClickPlus={onClickPlus}
         isMinusDisabled={isMinusDisabled}
         isPlusDisabled={isPlusDisabled}
+        size="medium"
       />
       <Separator />
       <div className="flex justify-between items-center w-full">

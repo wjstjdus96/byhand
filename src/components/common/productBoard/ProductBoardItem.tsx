@@ -21,7 +21,7 @@ const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
           <span className="text-sm">
             {convertPriceUnit(item.productPrice)}원
           </span>
-          <div className="flex items-center justify-between">
+          <div className="flex items-end justify-between">
             <p className="text-xs">남은수량: {item.productQuantity}개</p>
             {children}
           </div>

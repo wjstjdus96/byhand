@@ -1,7 +1,17 @@
 import { useState } from "react";
 
-export const useChangeQuantity = ({ maxQuantity }: { maxQuantity: number }) => {
-  const [selectedQuantity, setSelectedQuantity] = useState<number>(0);
+interface IUserChangeQuantity {
+  maxQuantity: number;
+  initialCnt?: number;
+}
+
+export const useChangeQuantity = ({
+  maxQuantity,
+  initialCnt,
+}: IUserChangeQuantity) => {
+  const [selectedQuantity, setSelectedQuantity] = useState<number>(
+    initialCnt ? initialCnt : 0
+  );
 
   const onClickMinus = () => {
     setSelectedQuantity((prev) => prev - 1);

@@ -7,6 +7,7 @@ interface IQuantityInput {
   onClickPlus: () => void;
   isMinusDisabled: boolean;
   isPlusDisabled: boolean;
+  size: "small" | "medium";
 }
 
 const QuantityInput = ({
@@ -15,21 +16,34 @@ const QuantityInput = ({
   onClickPlus,
   isMinusDisabled,
   isPlusDisabled,
+  size,
 }: IQuantityInput) => {
+  const buttonSize = {
+    small: "p-1 text-xs",
+    medium: "p-2",
+  }[size];
+
+  const numberSize = {
+    small: "w-6 text-xs",
+    medium: "w-10",
+  }[size];
+
   return (
-    <div className="flex border-solid border-2 border-gray-400 rounded-sm">
+    <div className="flex">
       <button
-        className="p-2 text-gray-400 disabled:bg-gray-400 disabled:text-white"
+        className={`${buttonSize} rounded-l-sm border-solid border border-gray-300 text-gray-300 disabled:bg-gray-300 disabled:text-white`}
         onClick={onClickMinus}
         disabled={isMinusDisabled}
       >
-        <FaMinus className="" />
+        <FaMinus />
       </button>
-      <div className="w-10 border-x-2 border-gray-400 flex items-center justify-center">
+      <div
+        className={`${numberSize} border-y border-gray-300 flex items-center justify-center`}
+      >
         {selectedQuantity}
       </div>
       <button
-        className="p-2 text-gray-400  disabled:bg-gray-400 disabled:text-white"
+        className={`${buttonSize} rounded-r-sm border-solid border border-gray-300 text-gray-300 disabled:bg-gray-300 disabled:text-white`}
         onClick={onClickPlus}
         disabled={isPlusDisabled}
       >
