@@ -126,3 +126,15 @@ export const getProducts = async ({
     console.log(e);
   }
 };
+
+export const getProductsByProductsId = async (productIds: string[]) => {
+  const productsPromise = productIds.map(async (productId) => {
+    const docRef = doc(db, "product", productId);
+    const docSnap = await getDoc(docRef);
+    return docSnap.data();
+  });
+
+  const productsArr = await Promise.all(productsPromise);
+  const products = productsArr.flat();
+  return products;
+};

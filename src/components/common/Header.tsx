@@ -1,17 +1,15 @@
+import { CgProfile } from "@react-icons/all-files/cg/CgProfile";
+import { MdShoppingCart } from "@react-icons/all-files/md/MdShoppingCart";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logoImage.png";
-import { MdShoppingCart } from "@react-icons/all-files/md/MdShoppingCart";
-import { checkAuthority } from "../../utils/checkAuthority";
-import { CgProfile } from "@react-icons/all-files/cg/CgProfile";
 import { useCartStore } from "../../store/cartStore";
-import { useInView } from "react-intersection-observer";
-import { useEffect, useRef, useState } from "react";
+import { checkAuthority } from "../../utils/checkAuthority";
 
 const Header = () => {
   const navigate = useNavigate();
   const { toggleCart } = useCartStore();
   const { userId, auth } = checkAuthority();
-
   const headerRef = useRef(null);
 
   const onClickMenu = (endpoint?: string) => {
