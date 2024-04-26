@@ -4,13 +4,23 @@ import AlertDialogBox from "../AlertDialogBox";
 interface IProductBoardHead {
   totLength?: number;
   selectedLength?: number;
+  size: "small" | "medium";
 }
 
-const ProductBoardHead = ({ totLength, selectedLength }: IProductBoardHead) => {
+const ProductBoardHead = ({
+  totLength,
+  selectedLength,
+  size = "medium",
+}: IProductBoardHead) => {
+  const paddingSize = {
+    small: "p-2",
+    medium: "p-0",
+  }[size];
+
   const onClickDelete = () => {};
 
   return (
-    <div className="flex items-center justify-between mb-2">
+    <div className={`flex items-center justify-between mb-2 ${paddingSize}`}>
       <Checkbox />
       {totLength && (
         <div className="text-sm self-start pl-5 mr-auto">

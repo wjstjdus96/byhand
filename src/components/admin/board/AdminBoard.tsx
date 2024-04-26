@@ -12,7 +12,7 @@ const AdminBoard = () => {
 
   return (
     <div>
-      <ProductBoardHead totLength={products?.length} />
+      <ProductBoardHead totLength={products?.length} size="medium" />
       <Separator className="my-5" />
       <div className="flex flex-col gap-3">
         {products &&

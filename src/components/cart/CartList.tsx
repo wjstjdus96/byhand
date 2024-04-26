@@ -26,7 +26,7 @@ const CartList = () => {
     <div className="h-full overflow-y-hidden">
       {products && (
         <>
-          <ProductBoardHead totLength={products.length} />
+          <ProductBoardHead totLength={products.length} size="small" />
           <Separator />
           <div className="h-full overflow-y-scroll pb-6 pt-2 px-2">
             {products.map((product, idx) => (
