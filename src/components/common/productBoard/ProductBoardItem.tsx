@@ -1,17 +1,31 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { convertPriceUnit } from "../../../utils/convertPriceUnit";
 import { Checkbox } from "../../ui/checkbox";
+import { ICheckedCartItem } from "../../../hooks/useCheckboxSelection";
 
 interface IProductBoardItem {
   item: any;
   children: React.ReactNode;
+  checkHandler: (isCheck: boolean, currentItem: ICheckedCartItem) => void;
+  checkedItems: ICheckedCartItem[];
+  selectedCnt?: number;
 }
 
 const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
-  ({ item, children }, ref) => {
+  ({ item, children, checkHandler, checkedItems, selectedCnt }, ref) => {
     return (
       <div className="flex h-28 gap-5 py-2" ref={ref}>
-        <Checkbox />
+        <Checkbox
+          onCheckedChange={(checked) => {
+            checkHandler(
+              checked,
+              selectedCnt
+                ? { itemId: item.id, itemCount: selectedCnt }
+                : { itemId: item.id }
+            );
+          }}
+          checked={checkedItems.map((el) => el.itemId).includes(item.id)}
+        />
         <img
           src={item.productImage[0]}
           className="object-cover w-24 rounded-sm"

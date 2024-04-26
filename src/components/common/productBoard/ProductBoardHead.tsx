@@ -5,12 +5,15 @@ interface IProductBoardHead {
   totLength?: number;
   selectedLength?: number;
   size: "small" | "medium";
+  allCheckHandler: (isCheck: boolean) => void;
+  checkedLength: number;
 }
 
 const ProductBoardHead = ({
   totLength,
-  selectedLength,
   size = "medium",
+  allCheckHandler,
+  checkedLength,
 }: IProductBoardHead) => {
   const paddingSize = {
     small: "p-2",
@@ -21,10 +24,13 @@ const ProductBoardHead = ({
 
   return (
     <div className={`flex items-center justify-between mb-2 ${paddingSize}`}>
-      <Checkbox />
+      <Checkbox
+        onCheckedChange={allCheckHandler}
+        checked={checkedLength == totLength}
+      />
       {totLength && (
         <div className="text-sm self-start pl-5 mr-auto">
-          전체선택 ({selectedLength}/{totLength})
+          전체선택 ({checkedLength}/{totLength})
         </div>
       )}
       <AlertDialogBox

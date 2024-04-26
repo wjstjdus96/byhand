@@ -9,7 +9,7 @@ interface ICartState {
 interface ICartProductState {
   cartItems: ICartProductData;
   addCartItem: (cartItemId: string, cartItemCount: number) => void;
-  findCartItem: (cartItemId: string) => number | undefined;
+  findCartItem: any;
 }
 
 export const useCartStore = create<ICartState>((set) => ({
@@ -17,7 +17,7 @@ export const useCartStore = create<ICartState>((set) => ({
   toggleCart: () => set((state) => ({ isCartOpen: !state.isCartOpen })),
 }));
 
-export const useCartProductStore: any = create<ICartProductState>((set) => ({
+export const useCartProductStore = create<ICartProductState>((set) => ({
   cartItems: {},
   addCartItem: (cartItemId: string, cartItemCount: number) =>
     set((state) => ({
@@ -27,6 +27,6 @@ export const useCartProductStore: any = create<ICartProductState>((set) => ({
       },
     })),
   findCartItem: (cartItemId: string) => {
-    return useCartProductStore.getState().cart[cartItemId];
+    return useCartProductStore.getState().cartItems[cartItemId];
   },
 }));

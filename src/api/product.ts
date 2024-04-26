@@ -133,7 +133,10 @@ export const getProductsByProductsId = async (
   const productsPromise = productIds.map(async (productId) => {
     const docRef = doc(db, "product", productId);
     const docSnap = await getDoc(docRef);
-    return docSnap.data() as IProductResData;
+    return {
+      id: docSnap.id,
+      ...(docSnap.data() as IProductRegisterReqData),
+    };
   });
 
   const productsArr = await Promise.all(productsPromise);
