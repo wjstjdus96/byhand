@@ -33,12 +33,18 @@ const CartList = ({
 
   useEffect(() => {
     let totPrice = 0;
-    productIds.forEach((id) => {
-      if (checkedItems.map((el) => el.itemId).includes(id)) {
-        const currentPrice = getItemCurrentPrice(id);
-        totPrice += cartItems[id] * currentPrice;
-      }
+    checkedItems.forEach(({ itemId }) => {
+      const currentPrice = getItemCurrentPrice(itemId);
+      const itemCount = cartItems[itemId];
+      totPrice += itemCount * currentPrice;
     });
+
+    // productIds.forEach((id) => {
+    //   if (checkedItems.map((el) => el.itemId).includes(id)) {
+    //     const currentPrice = getItemCurrentPrice(id);
+    //     totPrice += cartItems[id] * currentPrice;
+    //   }
+    // });
     totalPriceHandler(totPrice);
   }, [checkedItems, cartItems]);
 

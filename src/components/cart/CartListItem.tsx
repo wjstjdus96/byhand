@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useChangeQuantity } from "../../hooks/useChangeQuantity";
 import { ICheckedCartItem } from "../../hooks/useCheckboxSelection";
 import { IProductResData } from "../../types/product";
