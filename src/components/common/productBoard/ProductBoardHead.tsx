@@ -3,7 +3,6 @@ import AlertDialogBox from "../AlertDialogBox";
 
 interface IProductBoardHead {
   totLength?: number;
-  selectedLength?: number;
   size: "small" | "medium";
   allCheckHandler: (isCheck: boolean) => void;
   checkedLength: number;

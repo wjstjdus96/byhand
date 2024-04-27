@@ -2,6 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import { getSellerProducts } from "../../api/product";
+import { IProductRegisterReqData } from "../../types/product";
 
 interface IUseSellerInfiniteScroll {
   uid: string;
@@ -29,7 +30,10 @@ export const useSellerInfiniteScroll = ({ uid }: IUseSellerInfiniteScroll) => {
   const products = useMemo(() => {
     if (querySnap) {
       return querySnap.pages.flatMap((page) =>
-        page.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+        page.docs.map((doc) => ({
+          id: doc.id,
+          ...(doc.data() as IProductRegisterReqData),
+        }))
       );
     }
   }, [querySnap]);
