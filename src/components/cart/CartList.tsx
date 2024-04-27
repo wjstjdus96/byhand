@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useProductsByProductIds } from "../../hooks/cart/useProductsByProductIds";
 import { ICheckedCartItem } from "../../hooks/useCheckboxSelection";
 import { useCartProductStore } from "../../store/cartStore";
@@ -9,16 +10,37 @@ interface ICartList {
   checkedItems: ICheckedCartItem[];
   singleCheckHandler: (isCheck: boolean, currentItem: ICheckedCartItem) => void;
   allCheckHandler: (isCheck: boolean) => void;
+  totalPriceHandler: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const CartList = ({
   singleCheckHandler,
   allCheckHandler,
   checkedItems,
+  totalPriceHandler,
 }: ICartList) => {
   const { cartItems } = useCartProductStore();
   const productIds = Object.keys(cartItems);
   const { products } = useProductsByProductIds({ productIds });
+
+  const getItemCurrentPrice = (itemId: string) => {
+    const product = products?.find((product) => product.id === itemId);
+    if (product) {
+      return product.productPrice;
+    }
+    return 0;
+  };
+
+  useEffect(() => {
+    let totPrice = 0;
+    productIds.forEach((id) => {
+      if (checkedItems.map((el) => el.itemId).includes(id)) {
+        const currentPrice = getItemCurrentPrice(id);
+        totPrice += cartItems[id] * currentPrice;
+      }
+    });
+    totalPriceHandler(totPrice);
+  }, [checkedItems, cartItems]);
 
   return (
     <div className="h-full overflow-y-hidden">

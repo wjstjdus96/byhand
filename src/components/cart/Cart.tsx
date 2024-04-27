@@ -45,6 +45,7 @@ const Cart = () => {
         checkedItems={checkedItems}
         singleCheckHandler={handleSingleCheck}
         allCheckHandler={handleAllCheck}
+        totalPriceHandler={setCheckedItemsTotalPrice}
       />
     </div>
   );

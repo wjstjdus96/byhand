@@ -32,10 +32,6 @@ const CartListItem = ({
   });
   let itemTotalPrice = selectedQuantity * product.productPrice;
 
-  useEffect(() => {
-    //전체 총액 구하기
-  }, [checkedItems, selectedCnt]);
-
   return (
     <ProductBoardItem
       item={product}
