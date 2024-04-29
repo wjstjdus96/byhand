@@ -4,6 +4,8 @@ import QuantityInput from "../common/form/QuantityInput";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { convertPriceUnit } from "../../utils/convertPriceUnit";
+import { useParams } from "react-router-dom";
+import { useCartAddProduct } from "../../hooks/cart/useCartAddProduct";
 
 interface IProductQuantitySection {
   quantity: number;
@@ -23,6 +25,12 @@ const ProductQuantitySection = ({
   } = useChangeQuantity({
     maxQuantity: quantity,
   });
+  const { productId } = useParams();
+  const { onClickAddItem } = useCartAddProduct({
+    cartItemId: productId!,
+    cartItemCount: selectedQuantity,
+    maxQuantity: quantity,
+  });
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
   useEffect(() => {
@@ -39,6 +47,7 @@ const ProductQuantitySection = ({
         onClickPlus={onClickPlus}
         isMinusDisabled={isMinusDisabled}
         isPlusDisabled={isPlusDisabled}
+        size="medium"
       />
       <Separator />
       <div className="flex justify-between items-center w-full">
@@ -50,7 +59,7 @@ const ProductQuantitySection = ({
         </div>
       </div>
       <div className="flex gap-4">
-        <Button>장바구니에 담기</Button>
+        <Button onClick={onClickAddItem}>장바구니에 담기</Button>
         <Button>구매하기</Button>
       </div>
     </div>

@@ -13,7 +13,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { IProductRegisterReqData } from "../types/product";
+import { IProductRegisterReqData, IProductResData } from "../types/product";
 import { db } from "./firebase";
 
 export const registerProduct = async (req: IProductRegisterReqData) => {
@@ -107,12 +107,6 @@ export const getProducts = async ({
     const querySnapShot = await getDocs(q);
 
     if (isInfiniteScroll) {
-      console.log(
-        querySnapShot.docs.map((doc) => ({
-          id: doc.id,
-          ...(doc.data() as IProductRegisterReqData),
-        }))
-      );
       return querySnapShot;
     }
 
@@ -120,18 +114,22 @@ export const getProducts = async ({
       id: doc.id,
       ...(doc.data() as IProductRegisterReqData),
     }));
-
     return res;
   } catch (e) {
     console.log(e);
   }
 };
 
-export const getProductsByProductsId = async (productIds: string[]) => {
+export const getProductsByProductsId = async (
+  productIds: string[]
+): Promise<IProductResData[]> => {
   const productsPromise = productIds.map(async (productId) => {
     const docRef = doc(db, "product", productId);
     const docSnap = await getDoc(docRef);
-    return docSnap.data();
+    return {
+      id: docSnap.id,
+      ...(docSnap.data() as IProductRegisterReqData),
+    };
   });
 
   const productsArr = await Promise.all(productsPromise);

@@ -1,7 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCartProductStore } from "../store/cartStore";
 
-export const useChangeQuantity = ({ maxQuantity }: { maxQuantity: number }) => {
-  const [selectedQuantity, setSelectedQuantity] = useState<number>(0);
+interface IUserChangeQuantity {
+  maxQuantity: number;
+  initialCnt?: number;
+  isCartItem?: boolean;
+  cartItemId?: string;
+}
+
+export const useChangeQuantity = ({
+  maxQuantity,
+  initialCnt,
+  cartItemId,
+}: IUserChangeQuantity) => {
+  const { addCartItem } = useCartProductStore();
+  const [selectedQuantity, setSelectedQuantity] = useState<number>(
+    initialCnt ? initialCnt : 0
+  );
 
   const onClickMinus = () => {
     setSelectedQuantity((prev) => prev - 1);
@@ -13,6 +28,12 @@ export const useChangeQuantity = ({ maxQuantity }: { maxQuantity: number }) => {
 
   const isMinusDisabled = selectedQuantity == 0;
   const isPlusDisabled = selectedQuantity == maxQuantity;
+
+  useEffect(() => {
+    if (cartItemId) {
+      addCartItem(cartItemId, selectedQuantity);
+    }
+  }, [selectedQuantity]);
 
   return {
     selectedQuantity,

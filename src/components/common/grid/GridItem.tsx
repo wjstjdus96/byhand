@@ -4,7 +4,7 @@ import { IProductResData } from "../../../types/product";
 
 interface IGridItem {
   data: IProductResData;
-  lastItemRef: React.ForwardedRef<HTMLDivElement>;
+  lastItemRef?: React.ForwardedRef<HTMLDivElement>;
 }
 
 const GridItem = ({ data, lastItemRef }: IGridItem) => {

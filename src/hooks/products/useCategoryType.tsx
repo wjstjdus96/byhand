@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export const useCategoryType = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [searchParams, setSearchParams] = useSearchParams();
   const currentCategory = searchParams.get("category");
+  const initialCategory = currentCategory ? currentCategory : "total";
+  const [selectedCategory, setSelectedCategory] =
+    useState<string>(initialCategory);
 
   const setCategoryParams = (selected: string) => {
     if (selected == "total") {

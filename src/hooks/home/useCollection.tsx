@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProducts } from "../api/product";
+import { getProducts } from "../../api/product";
 
 interface IUseCollection {
   category: string;
@@ -16,22 +16,7 @@ export const useCollection = ({ category, limitNum = 6 }: IUseCollection) => {
         sort: "createdAt-desc",
       }),
     refetchOnWindowFocus: false,
-    staleTime: Infinity,
   });
-  return { data, isLoading };
 
-  // const quries = useQueries(
-  //   categories.map((category) => ({
-  //     queries: [
-  //       {
-  //         queryKey: ["collection", category],
-  //         queryFn: () =>
-  //           temp_getProducts({ category: category, limitNum: limitNum }),
-  //         staleTime: Infinity,
-  //       },
-  //     ],
-  //   }))
-  // );
-
-  // return { quries };
+  return { data, isLoading, error };
 };
