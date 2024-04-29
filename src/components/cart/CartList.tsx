@@ -11,6 +11,7 @@ interface ICartList {
   singleCheckHandler: (isCheck: boolean, currentItem: ICheckedCartItem) => void;
   allCheckHandler: (isCheck: boolean) => void;
   totalPriceHandler: React.Dispatch<React.SetStateAction<number>>;
+  initCheckHandler: () => void;
 }
 
 const CartList = ({
@@ -18,10 +19,17 @@ const CartList = ({
   allCheckHandler,
   checkedItems,
   totalPriceHandler,
+  initCheckHandler,
 }: ICartList) => {
-  const { cartItems } = useCartProductStore();
-  const productIds = Object.keys(cartItems);
-  const { products } = useProductsByProductIds({ productIds });
+  const { cartItems, deleteCartItem } = useCartProductStore();
+  const { products } = useProductsByProductIds();
+
+  const onClickDelete = () => {
+    checkedItems.forEach((item) => {
+      deleteCartItem(item.itemId);
+      initCheckHandler();
+    });
+  };
 
   const getItemCurrentPrice = (itemId: string) => {
     const product = products?.find((product) => product.id === itemId);
@@ -32,6 +40,7 @@ const CartList = ({
   };
 
   useEffect(() => {
+    console.log(checkedItems, cartItems);
     let totPrice = 0;
     checkedItems.forEach(({ itemId }) => {
       const currentPrice = getItemCurrentPrice(itemId);
@@ -39,12 +48,6 @@ const CartList = ({
       totPrice += itemCount * currentPrice;
     });
 
-    // productIds.forEach((id) => {
-    //   if (checkedItems.map((el) => el.itemId).includes(id)) {
-    //     const currentPrice = getItemCurrentPrice(id);
-    //     totPrice += cartItems[id] * currentPrice;
-    //   }
-    // });
     totalPriceHandler(totPrice);
   }, [checkedItems, cartItems]);
 
@@ -56,7 +59,8 @@ const CartList = ({
             totLength={products.length}
             size="small"
             allCheckHandler={allCheckHandler}
-            checkedLength={checkedItems.length}
+            checkedItems={checkedItems}
+            deleteCheckedItemsHandler={onClickDelete}
           />
           <Separator />
           <div className="h-full overflow-y-scroll pb-6 pt-2 px-2">

@@ -33,9 +33,14 @@ export const useCheckboxSelection = ({ allItems }: IUseCheckboxSelection) => {
     }
   };
 
+  const handleInitItems = () => {
+    setCheckedItems([]);
+  };
+
   return {
     checkedItems,
     handleSingleCheck,
     handleAllCheck,
+    handleInitItems,
   };
 };

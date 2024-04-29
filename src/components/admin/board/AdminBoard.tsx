@@ -25,7 +25,7 @@ const AdminBoard = () => {
         totLength={products?.length}
         size="medium"
         allCheckHandler={handleAllCheck}
-        checkedLength={checkedItems.length}
+        checkedItems={checkedItems}
       />
       <Separator className="my-5" />
       <div className="flex flex-col gap-3">

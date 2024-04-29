@@ -10,6 +10,7 @@ interface ICartProductState {
   cartItems: ICartProductData;
   addCartItem: (cartItemId: string, cartItemCount: number) => void;
   findCartItem: any;
+  deleteCartItem: (cartItemId: string) => void;
 }
 
 export const useCartStore = create<ICartState>((set) => ({
@@ -28,5 +29,13 @@ export const useCartProductStore = create<ICartProductState>((set) => ({
     })),
   findCartItem: (cartItemId: string) => {
     return useCartProductStore.getState().cartItems[cartItemId];
+  },
+  deleteCartItem: (cartItemId: string) => {
+    set((state) => {
+      const newCartItems = { ...state.cartItems };
+      delete newCartItems[cartItemId];
+      console;
+      return { ...state, cartItems: newCartItems };
+    });
   },
 }));

@@ -1,3 +1,5 @@
+import { ICheckedCartItem } from "../../../hooks/useCheckboxSelection";
+import { useCartProductStore } from "../../../store/cartStore";
 import { Checkbox } from "../../ui/checkbox";
 import AlertDialogBox from "../AlertDialogBox";
 
@@ -5,38 +7,38 @@ interface IProductBoardHead {
   totLength?: number;
   size: "small" | "medium";
   allCheckHandler: (isCheck: boolean) => void;
-  checkedLength: number;
+  checkedItems: ICheckedCartItem[];
+  deleteCheckedItemsHandler: () => void;
 }
 
 const ProductBoardHead = ({
   totLength,
   size = "medium",
   allCheckHandler,
-  checkedLength,
+  checkedItems,
+  deleteCheckedItemsHandler,
 }: IProductBoardHead) => {
   const paddingSize = {
     small: "p-2",
     medium: "p-0",
   }[size];
 
-  const onClickDelete = () => {};
-
   return (
     <div className={`flex items-center justify-between mb-2 ${paddingSize}`}>
       <Checkbox
         onCheckedChange={allCheckHandler}
-        checked={checkedLength == totLength}
+        checked={checkedItems.length == totLength}
       />
       {totLength && (
         <div className="text-sm self-start pl-5 mr-auto">
-          전체선택 ({checkedLength}/{totLength})
+          전체선택 ({checkedItems.length}/{totLength})
         </div>
       )}
       <AlertDialogBox
         title="선택하신 상품을 모두 삭제하시겠습니까?"
         description="한번 삭제하면 복구할 수 없습니다"
         actionName="삭제"
-        onClickAction={onClickDelete}
+        onClickAction={deleteCheckedItemsHandler}
       >
         <div className="text-sm self-start cursor-pointer">선택삭제</div>
       </AlertDialogBox>

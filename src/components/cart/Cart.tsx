@@ -1,5 +1,5 @@
 import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCheckboxSelection } from "../../hooks/useCheckboxSelection";
 import { useCartProductStore, useCartStore } from "../../store/cartStore";
 import { convertPriceUnit } from "../../utils/convertPriceUnit";
@@ -10,7 +10,7 @@ import CartList from "./CartList";
 const Cart = () => {
   const { toggleCart } = useCartStore();
   const { cartItems } = useCartProductStore();
-  const { checkedItems, handleSingleCheck, handleAllCheck } =
+  const { checkedItems, handleSingleCheck, handleAllCheck, handleInitItems } =
     useCheckboxSelection({
       allItems: Object.entries(cartItems).map(([itemId, itemCount]) => ({
         itemId,
@@ -46,6 +46,7 @@ const Cart = () => {
         singleCheckHandler={handleSingleCheck}
         allCheckHandler={handleAllCheck}
         totalPriceHandler={setCheckedItemsTotalPrice}
+        initCheckHandler={handleInitItems}
       />
     </div>
   );
