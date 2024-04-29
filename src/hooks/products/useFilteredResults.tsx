@@ -1,7 +1,7 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useMemo } from "react";
-import { getProducts } from "../api/product";
 import { useInView } from "react-intersection-observer";
+import { getProducts } from "../../api/product";
 
 interface IUseFilteredResults {
   keyword: string;
@@ -16,13 +16,6 @@ export const useFilteredResults = ({
   sort,
   limitNum,
 }: IUseFilteredResults) => {
-  //   const { data, isLoading, error, refetch } = useQuery({
-  //     queryKey: ["products", category],
-  //     queryFn: () => getProducts({ keyword, category, sort }),
-  //     refetchOnWindowFocus: false,
-  //     staleTime: Infinity,
-  //   });
-
   const { ref, inView } = useInView();
   const {
     data: querySnap,
@@ -42,8 +35,8 @@ export const useFilteredResults = ({
       }),
     initialPageParam: null,
     getNextPageParam: (querySnapShot) => {
-      if (querySnapShot.size < limitNum) return null;
-      else return querySnapShot.docs[querySnapShot.docs.length - 1];
+      if (querySnapShot?.size < limitNum) return null;
+      else return querySnapShot?.docs[querySnapShot.docs.length - 1];
     },
     refetchOnWindowFocus: false,
   });
@@ -51,20 +44,22 @@ export const useFilteredResults = ({
   const products = useMemo(() => {
     if (querySnap) {
       return querySnap.pages.flatMap((page) =>
-        page.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+        page!.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
       );
     }
+    console.log("밍");
   }, [querySnap]);
 
   useEffect(() => {
+    console.log(category, keyword, sort);
     refetch();
   }, [keyword, category, sort]);
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, [inView]);
+  }, [inView, isFetchingNextPage]);
 
-  return { products, ref };
+  return { products, ref, isFetchingNextPage };
 };

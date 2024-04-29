@@ -1,5 +1,5 @@
 import { IoCloseCircleOutline } from "@react-icons/all-files/io5/IoCloseCircleOutline";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCheckboxSelection } from "../../hooks/useCheckboxSelection";
 import { useCartProductStore, useCartStore } from "../../store/cartStore";
 import { convertPriceUnit } from "../../utils/convertPriceUnit";

@@ -18,6 +18,7 @@ const AdminBoard = () => {
           }))
         : [],
     });
+  const onClickDelete = () => {};
 
   return (
     <div>
@@ -26,6 +27,7 @@ const AdminBoard = () => {
         size="medium"
         allCheckHandler={handleAllCheck}
         checkedItems={checkedItems}
+        deleteCheckedItemsHandler={onClickDelete}
       />
       <Separator className="my-5" />
       <div className="flex flex-col gap-3">

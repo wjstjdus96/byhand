@@ -1,5 +1,4 @@
 import { ICheckedCartItem } from "../../../hooks/useCheckboxSelection";
-import { useCartProductStore } from "../../../store/cartStore";
 import { Checkbox } from "../../ui/checkbox";
 import AlertDialogBox from "../AlertDialogBox";
 

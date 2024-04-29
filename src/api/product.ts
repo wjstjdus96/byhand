@@ -107,12 +107,6 @@ export const getProducts = async ({
     const querySnapShot = await getDocs(q);
 
     if (isInfiniteScroll) {
-      console.log(
-        querySnapShot.docs.map((doc) => ({
-          id: doc.id,
-          ...(doc.data() as IProductRegisterReqData),
-        }))
-      );
       return querySnapShot;
     }
 
@@ -120,7 +114,6 @@ export const getProducts = async ({
       id: doc.id,
       ...(doc.data() as IProductRegisterReqData),
     }));
-
     return res;
   } catch (e) {
     console.log(e);
