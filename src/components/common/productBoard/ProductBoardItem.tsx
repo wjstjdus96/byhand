@@ -1,13 +1,13 @@
 import { forwardRef } from "react";
-import { ICheckedCartItem } from "../../../hooks/useCheckboxSelection";
+import { ICheckedItem } from "../../../hooks/useCheckboxSelection";
 import { convertPriceUnit } from "../../../utils/convertPriceUnit";
 import { Checkbox } from "../../ui/checkbox";
 
 interface IProductBoardItem {
   item: any;
   children: React.ReactNode;
-  checkHandler: (isCheck: boolean, currentItem: ICheckedCartItem) => void;
-  checkedItems: ICheckedCartItem[];
+  checkHandler: (isCheck: boolean, currentItem: ICheckedItem) => void;
+  checkedItems: ICheckedItem[];
   selectedCnt?: number;
 }
 

@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
-import { useChangeQuantity } from "../../hooks/useChangeQuantity";
-import QuantityInput from "../common/form/QuantityInput";
-import { Button } from "../ui/button";
-import { Separator } from "../ui/separator";
-import { convertPriceUnit } from "../../utils/convertPriceUnit";
 import { useParams } from "react-router-dom";
 import { useCartAddProduct } from "../../hooks/productDetails.tsx/useCartAddProduct";
 import { useProductPrice } from "../../hooks/productDetails.tsx/useProductPrice";
+import { useQuantitySelection } from "../../hooks/useQuantitySelection";
+import { convertPriceUnit } from "../../utils/convertPriceUnit";
+import QuantityInput from "../common/form/QuantityInput";
+import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
 
 interface IProductQuantitySection {
   quantity: number;
@@ -23,7 +22,7 @@ const ProductQuantitySection = ({
     onClickPlus,
     isMinusDisabled,
     isPlusDisabled,
-  } = useChangeQuantity({
+  } = useQuantitySelection({
     maxQuantity: quantity,
   });
   const { productId } = useParams();

@@ -5,7 +5,6 @@ import Layout from "../layout/Layout";
 
 function ProductManagement() {
   const navigate = useNavigate();
-
   const onClickRegister = () => {
     navigate("register");
   };

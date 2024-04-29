@@ -3,12 +3,12 @@ import ProductDescription from "../components/productDetail/ProductDescription";
 import ProductImageCarousel from "../components/productDetail/ProductImageCarousel";
 import ProductInfoSection from "../components/productDetail/ProductInfoSection";
 import { Separator } from "../components/ui/separator";
-import { useGetProductDetail } from "../hooks/useGetProductDetail";
+import { useProductDetail } from "../hooks/useProductDetail";
 import Layout from "../layout/Layout";
 
 function ProductDetail() {
   const { productId } = useParams();
-  const { data, isLoading } = useGetProductDetail({
+  const { data, isLoading } = useProductDetail({
     productId: productId ? productId : "",
   });
 

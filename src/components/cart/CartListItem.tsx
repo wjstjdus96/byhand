@@ -1,5 +1,5 @@
-import { useChangeQuantity } from "../../hooks/useChangeQuantity";
-import { ICheckedCartItem } from "../../hooks/useCheckboxSelection";
+import { useQuantitySelection } from "../../hooks/useQuantitySelection";
+import { ICheckedItem } from "../../hooks/useCheckboxSelection";
 import { IProductResData } from "../../types/product";
 import { convertPriceUnit } from "../../utils/convertPriceUnit";
 import QuantityInput from "../common/form/QuantityInput";
@@ -8,8 +8,8 @@ import ProductBoardItem from "../common/productBoard/ProductBoardItem";
 interface ICartListItem {
   product: IProductResData;
   selectedCnt: number;
-  singleCheckHandler: (isCheck: boolean, currentItem: ICheckedCartItem) => void;
-  checkedItems: ICheckedCartItem[];
+  singleCheckHandler: (isCheck: boolean, currentItem: ICheckedItem) => void;
+  checkedItems: ICheckedItem[];
 }
 
 const CartListItem = ({
@@ -24,7 +24,7 @@ const CartListItem = ({
     onClickPlus,
     isMinusDisabled,
     isPlusDisabled,
-  } = useChangeQuantity({
+  } = useQuantitySelection({
     maxQuantity: product.productQuantity,
     initialCnt: selectedCnt,
     cartItemId: product.id,

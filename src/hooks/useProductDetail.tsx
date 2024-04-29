@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getOneProduct } from "../api/product";
 
-export const useGetProductDetail = ({ productId }: { productId: string }) => {
+export const useProductDetail = ({ productId }: { productId: string }) => {
   const { data, isLoading } = useQuery({
     queryKey: ["product", productId],
     queryFn: () => getOneProduct(productId),

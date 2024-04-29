@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { useProductsByProductIds } from "../../hooks/cart/useProductsByProductIds";
-import { ICheckedCartItem } from "../../hooks/useCheckboxSelection";
+import { ICheckedItem } from "../../hooks/useCheckboxSelection";
 import { useCartProductStore } from "../../store/cartStore";
 import ProductBoardHead from "../common/productBoard/ProductBoardHead";
 import { Separator } from "../ui/separator";
 import CartListItem from "./CartListItem";
 
 interface ICartList {
-  checkedItems: ICheckedCartItem[];
-  singleCheckHandler: (isCheck: boolean, currentItem: ICheckedCartItem) => void;
+  checkedItems: ICheckedItem[];
+  singleCheckHandler: (isCheck: boolean, currentItem: ICheckedItem) => void;
   allCheckHandler: (isCheck: boolean) => void;
   totalPriceHandler: React.Dispatch<React.SetStateAction<number>>;
   initCheckHandler: () => void;

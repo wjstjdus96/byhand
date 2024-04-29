@@ -1,21 +1,18 @@
 import { useState } from "react";
 
-export interface ICheckedCartItem {
+export interface ICheckedItem {
   itemId: string;
   itemCount?: number;
 }
 
 interface IUseCheckboxSelection {
-  allItems: ICheckedCartItem[];
+  allItems: ICheckedItem[];
 }
 
 export const useCheckboxSelection = ({ allItems }: IUseCheckboxSelection) => {
-  const [checkedItems, setCheckedItems] = useState<ICheckedCartItem[]>([]);
+  const [checkedItems, setCheckedItems] = useState<ICheckedItem[]>([]);
 
-  const handleSingleCheck = (
-    isCheck: boolean,
-    currentItem: ICheckedCartItem
-  ) => {
+  const handleSingleCheck = (isCheck: boolean, currentItem: ICheckedItem) => {
     if (isCheck) {
       setCheckedItems((prev) => [...prev, currentItem]);
     } else {

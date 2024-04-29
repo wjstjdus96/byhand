@@ -1,6 +1,6 @@
-import { useSellerInfiniteScroll } from "../../../hooks/seller/useSellerInfiniteScroll";
+import { useProductDeletion } from "../../../hooks/seller/useProductDeletion";
+import { useSellerProducts } from "../../../hooks/seller/useSellerProducts";
 import { useCheckboxSelection } from "../../../hooks/useCheckboxSelection";
-import { getSessionItem } from "../../../utils/handleSession";
 import ProductBoardHead from "../../common/productBoard/ProductBoardHead";
 import ProductBoardItem from "../../common/productBoard/ProductBoardItem";
 import { Separator } from "../../ui/separator";
@@ -8,9 +8,8 @@ import AdminBoardDeleteBtn from "./AdminBoardDeleteBtn";
 import AdminBoardEditBtn from "./AdminBoardEditBtn";
 
 const AdminBoard = () => {
-  const uid = getSessionItem("userId");
-  const { ref: lastItemRef, products } = useSellerInfiniteScroll({ uid: uid! });
-  const { checkedItems, handleSingleCheck, handleAllCheck } =
+  const { ref: lastItemRef, products } = useSellerProducts();
+  const { checkedItems, handleSingleCheck, handleAllCheck, handleInitItems } =
     useCheckboxSelection({
       allItems: products
         ? products.map((item) => ({
@@ -18,7 +17,9 @@ const AdminBoard = () => {
           }))
         : [],
     });
-  const onClickDelete = () => {};
+  const { onClickItemDelete, onClickCheckedItemsDelte } = useProductDeletion({
+    handleInitItems,
+  });
 
   return (
     <div>
@@ -27,7 +28,7 @@ const AdminBoard = () => {
         size="medium"
         allCheckHandler={handleAllCheck}
         checkedItems={checkedItems}
-        deleteCheckedItemsHandler={onClickDelete}
+        deleteCheckedItemsHandler={() => onClickCheckedItemsDelte(checkedItems)}
       />
       <Separator className="my-5" />
       <div className="flex flex-col gap-3">
@@ -41,7 +42,9 @@ const AdminBoard = () => {
             >
               <div className="flex gap-1">
                 <AdminBoardEditBtn productId={item.id} />
-                <AdminBoardDeleteBtn productId={item.id} />
+                <AdminBoardDeleteBtn
+                  deleteHandler={() => onClickItemDelete(item.id)}
+                />
               </div>
             </ProductBoardItem>
           ))}
