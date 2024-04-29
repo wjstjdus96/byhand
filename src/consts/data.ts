@@ -29,3 +29,19 @@ export const CATEGORY_TYPE_INCLUDING_TOTAL = [
   { value: "total", name: "전체" },
   ...CATEGORY_TYPE,
 ];
+
+export const SORT_TYPE = [
+  {
+    value: "createdAt-desc",
+    name: "최신순",
+  },
+
+  {
+    value: "productPrice-asc",
+    name: "가격낮은순",
+  },
+  {
+    value: "productPrice-desc",
+    name: "가격높은순",
+  },
+];

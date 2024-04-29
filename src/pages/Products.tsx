@@ -33,7 +33,7 @@ function Products() {
           />
         </div>
         {products && <ProductsBoard ref={ref} resultData={products} />}
-        {isFetchingNextPage && <div>로딩중~~~~~!!</div>}
+        {isFetchingNextPage && <div>로딩중~~~~~!! 추후 스켈레톤 추가</div>}
       </div>
     </Layout>
   );

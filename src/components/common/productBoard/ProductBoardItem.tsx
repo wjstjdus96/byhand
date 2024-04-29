@@ -1,7 +1,7 @@
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef } from "react";
+import { ICheckedCartItem } from "../../../hooks/useCheckboxSelection";
 import { convertPriceUnit } from "../../../utils/convertPriceUnit";
 import { Checkbox } from "../../ui/checkbox";
-import { ICheckedCartItem } from "../../../hooks/useCheckboxSelection";
 
 interface IProductBoardItem {
   item: any;

@@ -1,19 +1,5 @@
+import { SORT_TYPE } from "../../consts/data";
 import Selector from "../common/form/Selector";
-
-const SORT_TYPE = [
-  {
-    value: "createdAt-desc",
-    name: "최신순",
-  },
-  {
-    value: "productPrice-desc",
-    name: "가격낮은순",
-  },
-  {
-    value: "productPrice-asc",
-    name: "가격높은순",
-  },
-];
 
 interface ISortSelector {
   selectedSort: string;

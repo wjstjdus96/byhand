@@ -29,8 +29,7 @@ export const deleteProduct = async (productId: string) => {
 export const getOneProduct = async (productId: string) => {
   const docRef = doc(db, "product", productId);
   const docSnap = await getDoc(docRef);
-
-  return docSnap.data();
+  return docSnap.data() as IProductResData;
 };
 
 export const updateProduct = async (productId: string, data: any) => {

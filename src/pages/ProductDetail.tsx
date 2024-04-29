@@ -8,22 +8,25 @@ import Layout from "../layout/Layout";
 
 function ProductDetail() {
   const { productId } = useParams();
-  const { data, isLoading, error } = useGetProductDetail({
+  const { data, isLoading } = useGetProductDetail({
     productId: productId ? productId : "",
   });
 
   return (
     <Layout>
-      {data && (
-        <div className="py-20 px-40">
-          <div className="grid grid-cols-2 gap-12">
-            <ProductImageCarousel images={data.productImage} />
-            <ProductInfoSection data={data} />
-          </div>
-          <Separator />
-          <ProductDescription description={data.productDescription} />
-        </div>
-      )}
+      <div className="py-24 px-52 min-h-[75vh]">
+        {isLoading && <div>로딩중!!</div>}
+        {data && (
+          <>
+            <div className="grid grid-cols-2 gap-12">
+              <ProductImageCarousel images={data.productImage} />
+              <ProductInfoSection data={data} />
+            </div>
+            <Separator />
+            <ProductDescription description={data.productDescription} />
+          </>
+        )}
+      </div>
     </Layout>
   );
 }
