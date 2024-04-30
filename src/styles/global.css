@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+body,
+div {
+  &::-webkit-scrollbar {
+    width: 5px; /* 스크롤바의 너비 */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 20%; /* 스크롤바의 길이 */
+    background: #2c208c; /* 스크롤바의 색상 */
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, 0.1); /*스크롤바 뒷 배경 색상*/
+  }
+}
+
 .menu-item:hover {
   @apply font-bold cursor-pointer;
 }

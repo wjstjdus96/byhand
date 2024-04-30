@@ -10,6 +10,7 @@ import TextArea from "../../common/form/TextArea";
 import { TextInput } from "../../common/form/TextInput";
 import { Button } from "../../ui/button";
 import { IProductFormData } from "../../../types/product";
+import Loading from "../../common/Loading";
 
 interface IProductForm {
   buttonName: string;
@@ -104,7 +105,7 @@ const ProductForm = ({
         errorMsg={errors.productDescription?.message}
       />
       <Button type="submit">{buttonName}</Button>
-      {isSubmitLoading && <div>로딩중~~</div>}
+      {isSubmitLoading && <Loading />}
     </form>
   );
 };
