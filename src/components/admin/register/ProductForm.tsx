@@ -1,31 +1,31 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { getOneProduct } from "../../../api/product";
 import { CATEGORY_TYPE } from "../../../consts/data";
+import { useInitialFormValues } from "../../../hooks/form/useInitialFormValues";
+import { IProductFormData } from "../../../types/product";
 import { productRegisterSchema } from "../../../utils/validationSchema";
+import Loading from "../../common/Loading";
 import ImageInput from "../../common/form/ImageInput";
 import SelectInput from "../../common/form/SelectInput";
 import TextArea from "../../common/form/TextArea";
 import { TextInput } from "../../common/form/TextInput";
 import { Button } from "../../ui/button";
-import { IProductFormData } from "../../../types/product";
-import Loading from "../../common/Loading";
 
 interface IProductForm {
   buttonName: string;
   onSubmitHandler: SubmitHandler<IProductFormData>;
-  isEdit?: string;
+  editedProductId?: string;
   isSubmitLoading: boolean;
 }
 
 const ProductForm = ({
   buttonName,
   onSubmitHandler,
-  isEdit,
+  editedProductId,
   isSubmitLoading,
 }: IProductForm) => {
-  const [originalImages, setOriginalImages] = useState<any[]>([]);
+  const [originalImages, setOriginalImages] = useState<(Blob | string)[]>([]);
   const {
     register,
     handleSubmit,
@@ -36,21 +36,7 @@ const ProductForm = ({
     resolver: zodResolver(productRegisterSchema),
   });
 
-  useEffect(() => {
-    if (isEdit) {
-      const setForm = async () => {
-        const existingData = await getOneProduct(isEdit);
-
-        setValue("productName", existingData!.productName);
-        setValue("productCategory", existingData!.productCategory);
-        setValue("productPrice", existingData!.productPrice);
-        setValue("productQuantity", existingData!.productQuantity);
-        setValue("productDescription", existingData!.productDescription);
-        setOriginalImages(existingData!.productImage);
-      };
-      setForm();
-    }
-  }, [isEdit]);
+  useInitialFormValues({ setValue, setOriginalImages, editedProductId });
 
   return (
     <form

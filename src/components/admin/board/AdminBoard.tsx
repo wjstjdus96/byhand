@@ -1,6 +1,7 @@
 import { useProductDeletion } from "../../../hooks/seller/useProductDeletion";
 import { useSellerProducts } from "../../../hooks/seller/useSellerProducts";
 import { useCheckboxSelection } from "../../../hooks/useCheckboxSelection";
+import Spinner from "../../common/Spinner";
 import ProductBoardHead from "../../common/productBoard/ProductBoardHead";
 import ProductBoardItem from "../../common/productBoard/ProductBoardItem";
 import { Separator } from "../../ui/separator";
@@ -8,7 +9,11 @@ import AdminBoardDeleteBtn from "./AdminBoardDeleteBtn";
 import AdminBoardEditBtn from "./AdminBoardEditBtn";
 
 const AdminBoard = () => {
-  const { ref: lastItemRef, products } = useSellerProducts();
+  const {
+    ref: lastItemRef,
+    products,
+    isFetchingNextPage,
+  } = useSellerProducts();
   const { checkedItems, handleSingleCheck, handleAllCheck, handleInitItems } =
     useCheckboxSelection({
       allItems: products
@@ -48,6 +53,7 @@ const AdminBoard = () => {
               </div>
             </ProductBoardItem>
           ))}
+        {isFetchingNextPage && <Spinner />}
       </div>
     </div>
   );
