@@ -23,7 +23,7 @@ const Cart = () => {
   });
 
   return (
-    <div className="fixed top-0 right-0 w-[80vh] h-screen  py-6 px-8 bg-white shadow flex flex-col gap-6 ">
+    <div className="fixed top-0 right-0 w-[80vh] h-screen  py-6 px-8 bg-white shadow flex flex-col gap-6 z-20">
       <CartHead />
       <CartPayment
         checkedNum={checkedItems.length}

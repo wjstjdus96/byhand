@@ -30,7 +30,6 @@ export const useInfiniteScroll = ({
       else return querySnapshot.docs[querySnapshot.docs.length - 1];
     },
     refetchOnWindowFocus: false,
-    staleTime: Infinity,
   });
 
   const products = useMemo(() => {

@@ -1,18 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useThrottle } from "./useThrottle";
 
 export const useHeaderVisibility = () => {
-  const [prevPosition, setPrevPosition] = useState(0);
-  const [visible, setVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
+  const prevScrollY = useRef(0);
+  const throttle = useThrottle();
+
+  const handleScroll = useMemo(
+    () =>
+      throttle(() => {
+        const curScrollY = window.scrollY;
+        if (prevScrollY.current < curScrollY) {
+          setIsVisible(false);
+        } else {
+          setIsVisible(true);
+        }
+        prevScrollY.current = curScrollY;
+      }, 100),
+    [prevScrollY]
+  );
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentPosition = window.scrollY;
-      setVisible(prevPosition > currentPosition || currentPosition < 10);
-      setPrevPosition(currentPosition);
-    };
-
     window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevPosition, visible]);
+  return { isVisible };
 };
