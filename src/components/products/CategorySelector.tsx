@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { CATEGORY_TYPE_INCLUDING_TOTAL } from "../../consts/data";
 
 interface ICategorySelector {
@@ -10,8 +9,6 @@ const CategorySelector = ({
   selectedCategory,
   setCategoryParams,
 }: ICategorySelector) => {
-  useEffect(() => {});
-
   return (
     <div className="flex gap-6 my-5">
       {CATEGORY_TYPE_INCLUDING_TOTAL.map((item) => (

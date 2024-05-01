@@ -21,7 +21,6 @@ const ImageInput = ({
   setOriginalImages,
 }: IImageInput) => {
   const [showImages, setShowImages] = useState<string[]>([]);
-  //   const [originalImages, setOriginalImages] = useState<any[]>([]);
 
   const changeToUrl = (photo: Blob | string) => {
     if (typeof photo != "string") {
@@ -59,7 +58,10 @@ const ImageInput = ({
         {showImages &&
           showImages.map((img, idx) => (
             <div className="relative">
-              <img className="w-full h-40 object-cover rounded-md" src={img} />
+              <img
+                className="w-full aspect-square object-cover rounded-md"
+                src={img}
+              />
               <FaTimes
                 className=" absolute right-2 top-2 cursor-pointer"
                 onClick={() => handleRemoveImage(idx)}
@@ -69,7 +71,7 @@ const ImageInput = ({
         <label
           htmlFor="input-file"
           onChange={handleAddImage}
-          className="h-40 w-full flex flex-col items-center justify-center border-input border-2 border-dotted rounded-md cursor-pointer"
+          className="aspect-square w-full flex flex-col items-center justify-center border-input border-2 border-dotted rounded-md cursor-pointer"
         >
           <input
             type="file"

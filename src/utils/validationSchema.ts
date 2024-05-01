@@ -39,8 +39,16 @@ export const productRegisterSchema = z.object({
     .min(1, { message: "상품 이미지를 첨부해주세요" }),
   productName: z.string().min(1, { message: "상품 이름을 입력해주세요" }),
   productCategory: z.string({ required_error: "카테고리를 선택해주세요" }),
-  productPrice: z.string().min(1, { message: "상품 가격을 입력해주세요" }),
-  productQuantity: z.string().min(1, { message: "상품 수량을 입력해주세요" }),
+  productPrice: z
+    .union([z.string(), z.number()])
+    .refine((value) => value !== null && value !== undefined && value !== "", {
+      message: "상품 가격을 입력해주세요",
+    }),
+  productQuantity: z
+    .union([z.string(), z.number()])
+    .refine((value) => value !== null && value !== undefined && value !== "", {
+      message: "상품 수량을 입력해주세요",
+    }),
   productDescription: z
     .string()
     .min(1, { message: "상품 설명을 입력해주세요" }),

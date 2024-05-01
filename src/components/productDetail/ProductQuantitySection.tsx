@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { useChangeQuantity } from "../../hooks/useChangeQuantity";
+import { useParams } from "react-router-dom";
+import { useCartAddProduct } from "../../hooks/productDetails.tsx/useCartAddProduct";
+import { useProductPrice } from "../../hooks/productDetails.tsx/useProductPrice";
+import { useQuantitySelection } from "../../hooks/useQuantitySelection";
+import { convertPriceUnit } from "../../utils/convertPriceUnit";
 import QuantityInput from "../common/form/QuantityInput";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
-import { convertPriceUnit } from "../../utils/convertPriceUnit";
-import { useParams } from "react-router-dom";
-import { useCartAddProduct } from "../../hooks/cart/useCartAddProduct";
 
 interface IProductQuantitySection {
   quantity: number;
@@ -22,7 +22,7 @@ const ProductQuantitySection = ({
     onClickPlus,
     isMinusDisabled,
     isPlusDisabled,
-  } = useChangeQuantity({
+  } = useQuantitySelection({
     maxQuantity: quantity,
   });
   const { productId } = useParams();
@@ -31,12 +31,7 @@ const ProductQuantitySection = ({
     cartItemCount: selectedQuantity,
     maxQuantity: quantity,
   });
-  const [totalPrice, setTotalPrice] = useState<number>(0);
-
-  useEffect(() => {
-    const tot = selectedQuantity * price;
-    setTotalPrice(tot);
-  }, [selectedQuantity]);
+  const { totalPrice } = useProductPrice({ selectedQuantity, price });
 
   return (
     <div className="flex flex-col items-end gap-7">

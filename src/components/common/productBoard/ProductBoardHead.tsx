@@ -1,4 +1,4 @@
-import { ICheckedCartItem } from "../../../hooks/useCheckboxSelection";
+import { ICheckedItem } from "../../../hooks/useCheckboxSelection";
 import { Checkbox } from "../../ui/checkbox";
 import AlertDialogBox from "../AlertDialogBox";
 
@@ -6,7 +6,7 @@ interface IProductBoardHead {
   totLength?: number;
   size: "small" | "medium";
   allCheckHandler: (isCheck: boolean) => void;
-  checkedItems: ICheckedCartItem[];
+  checkedItems: ICheckedItem[];
   deleteCheckedItemsHandler: () => void;
 }
 

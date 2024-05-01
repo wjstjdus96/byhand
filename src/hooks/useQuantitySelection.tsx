@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { useCartProductStore } from "../store/cartStore";
 
-interface IUserChangeQuantity {
+interface IUseQuantitySelection {
   maxQuantity: number;
   initialCnt?: number;
   isCartItem?: boolean;
   cartItemId?: string;
 }
 
-export const useChangeQuantity = ({
+export const useQuantitySelection = ({
   maxQuantity,
   initialCnt,
   cartItemId,
-}: IUserChangeQuantity) => {
+}: IUseQuantitySelection) => {
   const { addCartItem } = useCartProductStore();
   const [selectedQuantity, setSelectedQuantity] = useState<number>(
     initialCnt ? initialCnt : 0

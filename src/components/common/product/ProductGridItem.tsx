@@ -2,12 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { convertPriceUnit } from "../../../utils/convertPriceUnit";
 import { IProductResData } from "../../../types/product";
 
-interface IGridItem {
+interface IProductGridItem {
   data: IProductResData;
   lastItemRef?: React.ForwardedRef<HTMLDivElement>;
 }
 
-const GridItem = ({ data, lastItemRef }: IGridItem) => {
+const ProductGridItem = ({ data, lastItemRef }: IProductGridItem) => {
   const navigate = useNavigate();
   const onClickItem = () => {
     navigate(`/products/${data.id}`);
@@ -32,4 +32,4 @@ const GridItem = ({ data, lastItemRef }: IGridItem) => {
   );
 };
 
-export default GridItem;
+export default ProductGridItem;

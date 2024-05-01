@@ -29,8 +29,7 @@ export const deleteProduct = async (productId: string) => {
 export const getOneProduct = async (productId: string) => {
   const docRef = doc(db, "product", productId);
   const docSnap = await getDoc(docRef);
-
-  return docSnap.data();
+  return docSnap.data() as IProductResData;
 };
 
 export const updateProduct = async (productId: string, data: any) => {
@@ -39,22 +38,24 @@ export const updateProduct = async (productId: string, data: any) => {
   return res;
 };
 
-export const getSellerProducts = async (uid: string, pageParam: any) => {
-  const SELLER_PAGE_LIMIT = 10;
+export const getSellerProducts = async (
+  uid: string,
+  limitNum?: number,
+  pageParam?: any
+) => {
   let q = query(
     collection(db, "product"),
     where("sellerId", "==", uid),
     orderBy("updatedAt", "desc")
   );
 
-  if (pageParam) {
-    q = query(q, startAfter(pageParam), limit(SELLER_PAGE_LIMIT));
-  } else {
-    q = query(q, limit(SELLER_PAGE_LIMIT));
+  if (pageParam && limitNum) {
+    q = query(q, startAfter(pageParam), limit(limitNum));
+  } else if (limitNum) {
+    q = query(q, limit(limitNum));
   }
 
   const querySnapShot = await getDocs(q);
-
   return querySnapShot;
 };
 

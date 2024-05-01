@@ -3,28 +3,26 @@ import { useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import { getSellerProducts } from "../../api/product";
 import { IProductRegisterReqData } from "../../types/product";
+import { getSessionItem } from "../../utils/handleSession";
 
-interface IUseSellerInfiniteScroll {
-  uid: string;
-}
-
-export const useSellerInfiniteScroll = ({ uid }: IUseSellerInfiniteScroll) => {
+export const useSellerProducts = () => {
+  const uid = getSessionItem("userId");
   const { ref, inView } = useInView();
   const {
     data: querySnap,
     fetchNextPage,
     isFetchingNextPage,
+    isLoading,
   } = useInfiniteQuery({
     queryKey: ["sellProduct", uid],
     queryFn: ({ pageParam }: { pageParam: any }) =>
-      getSellerProducts(uid, pageParam),
+      getSellerProducts(uid!, 20, pageParam),
     initialPageParam: null,
     getNextPageParam: (querySnapshot) => {
       if (querySnapshot.size < 10) return null;
       else return querySnapshot.docs[querySnapshot.docs.length - 1];
     },
     refetchOnWindowFocus: false,
-    staleTime: Infinity,
   });
 
   const products = useMemo(() => {
@@ -44,5 +42,5 @@ export const useSellerInfiniteScroll = ({ uid }: IUseSellerInfiniteScroll) => {
     }
   }, [inView]);
 
-  return { ref, products, isFetchingNextPage };
+  return { ref, products, isFetchingNextPage, isLoading };
 };

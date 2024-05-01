@@ -6,6 +6,7 @@ import SortSelector from "../components/products/SortSelector";
 import { useFilteredResults } from "../hooks/products/useFilteredResults";
 import Layout from "../layout/Layout";
 import { useCategoryType } from "../hooks/products/useCategoryType";
+import Spinner from "../components/common/Spinner";
 
 function Products() {
   const [keyword, setKeyword] = useState("");
@@ -18,9 +19,11 @@ function Products() {
     limitNum: 12,
   });
 
+  console.log(products);
+
   return (
     <Layout>
-      <div className="px-10 py-20 min-h-[75vh]">
+      <div className="px-10 py-24 min-h-[75vh]">
         <div className="flex flex-col items-center mb-6">
           <SearchBar keyword={keyword} setKeyword={setKeyword} />
           <CategorySelector
@@ -32,8 +35,14 @@ function Products() {
             setSelectedSort={setSelectedSort}
           />
         </div>
-        {products && <ProductsBoard ref={ref} resultData={products} />}
-        {isFetchingNextPage && <div>로딩중~~~~~!!</div>}
+        {products && products?.length != 0 ? (
+          <ProductsBoard ref={ref} resultData={products} />
+        ) : (
+          <div className="flex items-center justify-center">
+            상품이 없습니다
+          </div>
+        )}
+        {isFetchingNextPage && <Spinner size="sm" />}
       </div>
     </Layout>
   );

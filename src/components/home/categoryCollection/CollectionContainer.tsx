@@ -1,6 +1,6 @@
 import { useCollection } from "../../../hooks/home/useCollection";
 import { IProductResData } from "../../../types/product";
-import GridItem from "../../common/grid/GridItem";
+import ProductGridItem from "../../common/product/ProductGridItem";
 import Collection from "./Collection";
 
 interface ICollectionContainer {
@@ -21,7 +21,7 @@ const CollectionContainer = ({
       ) : (
         Array.isArray(data) &&
         data.map((item: IProductResData) => (
-          <GridItem key={item.id} data={item} />
+          <ProductGridItem key={item.id} data={item} />
         ))
       )}
     </Collection>
