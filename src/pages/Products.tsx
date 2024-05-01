@@ -19,9 +19,11 @@ function Products() {
     limitNum: 12,
   });
 
+  console.log(products);
+
   return (
     <Layout>
-      <div className="px-10 py-20 min-h-[75vh]">
+      <div className="px-10 py-24 min-h-[75vh]">
         <div className="flex flex-col items-center mb-6">
           <SearchBar keyword={keyword} setKeyword={setKeyword} />
           <CategorySelector
@@ -40,7 +42,7 @@ function Products() {
             상품이 없습니다
           </div>
         )}
-        {isFetchingNextPage && <Spinner />}
+        {isFetchingNextPage && <Spinner size="sm" />}
       </div>
     </Layout>
   );

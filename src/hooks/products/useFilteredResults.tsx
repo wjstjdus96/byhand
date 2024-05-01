@@ -23,7 +23,7 @@ export const useFilteredResults = ({
     isFetchingNextPage,
     refetch,
   } = useInfiniteQuery({
-    queryKey: ["products"],
+    queryKey: ["products", category, keyword, sort],
     queryFn: ({ pageParam }: { pageParam: any }) =>
       getProducts({
         keyword,
@@ -47,11 +47,9 @@ export const useFilteredResults = ({
         page!.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
       );
     }
-    console.log("밍");
   }, [querySnap]);
 
   useEffect(() => {
-    console.log(category, keyword, sort);
     refetch();
   }, [keyword, category, sort]);
 

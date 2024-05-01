@@ -12,6 +12,7 @@ export const useSellerProducts = () => {
     data: querySnap,
     fetchNextPage,
     isFetchingNextPage,
+    isLoading,
   } = useInfiniteQuery({
     queryKey: ["sellProduct", uid],
     queryFn: ({ pageParam }: { pageParam: any }) =>
@@ -41,5 +42,5 @@ export const useSellerProducts = () => {
     }
   }, [inView]);
 
-  return { ref, products, isFetchingNextPage };
+  return { ref, products, isFetchingNextPage, isLoading };
 };
