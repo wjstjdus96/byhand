@@ -4,6 +4,7 @@ import { ICartProductData } from "../types/cart";
 interface ICartState {
   isCartOpen: boolean;
   toggleCart: () => void;
+  closeCart: () => void;
 }
 
 interface ICartProductState {
@@ -16,6 +17,7 @@ interface ICartProductState {
 export const useCartStore = create<ICartState>((set) => ({
   isCartOpen: false,
   toggleCart: () => set((state) => ({ isCartOpen: !state.isCartOpen })),
+  closeCart: () => set(() => ({ isCartOpen: false })),
 }));
 
 export const useCartProductStore = create<ICartProductState>((set) => ({

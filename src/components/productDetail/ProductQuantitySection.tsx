@@ -6,6 +6,7 @@ import { convertPriceUnit } from "../../utils/convertPriceUnit";
 import QuantityInput from "../common/form/QuantityInput";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
+import { usePaymentRedirect } from "../../hooks/payment/usePaymentRedirect";
 
 interface IProductQuantitySection {
   quantity: number;
@@ -32,6 +33,9 @@ const ProductQuantitySection = ({
     maxQuantity: quantity,
   });
   const { totalPrice } = useProductPrice({ selectedQuantity, price });
+  const { onClickPurchase } = usePaymentRedirect({
+    itemsToBuy: [{ itemId: productId!, itemCount: selectedQuantity }],
+  });
 
   return (
     <div className="flex flex-col items-end gap-7">
@@ -55,7 +59,7 @@ const ProductQuantitySection = ({
       </div>
       <div className="flex gap-4">
         <Button onClick={onClickAddItem}>장바구니에 담기</Button>
-        <Button>구매하기</Button>
+        <Button onClick={onClickPurchase}>구매하기</Button>
       </div>
     </div>
   );
