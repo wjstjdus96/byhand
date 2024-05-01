@@ -35,6 +35,7 @@ const ProductQuantitySection = ({
   const { totalPrice } = useProductPrice({ selectedQuantity, price });
   const { onClickPurchase } = usePaymentRedirect({
     itemsToBuy: [{ itemId: productId!, itemCount: selectedQuantity }],
+    totalPrice,
   });
 
   return (

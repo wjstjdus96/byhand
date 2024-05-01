@@ -27,7 +27,7 @@ const Cart = () => {
       <CartHead />
       <CartPayment
         checkedItems={checkedItems}
-        checkedTotalPrice={convertPriceUnit(checkedItemsTotalPrice)}
+        checkedTotalPrice={checkedItemsTotalPrice}
       />
       {!Object.keys(cartItems).length && (
         <p className="text-center pt-10">장바구니가 비었습니다</p>
