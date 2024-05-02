@@ -1,35 +1,21 @@
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import AddressInfoSection from "../components/payment/addressInfoSection/AddressInfoSection";
-import BuyerInfoSection from "../components/payment/buyerInfoSection/BuyerInfoSection";
 import OrderInfoSection from "../components/payment/orderInfoSection/OrderDetails";
 import TotalPriceSection from "../components/payment/totalPriceSection/TotalPriceSection";
 import { Button } from "../components/ui/button";
 import Layout from "../layout/Layout";
 import { RequestPayParams, RequestPayResponse } from "../types/imp";
-import { useState } from "react";
-
-export interface IBuyerInfo {
-  buyerName: string;
-  buyerTel: string;
-  buyerEmail: string;
-}
 
 export interface IAddressInfo {
-  buyerAddr: string;
-  buyerPostCode: string;
+  recipientName: string;
+  recipientPhone: string;
+  deliveryAddress: string;
 }
 
 const Payment = () => {
   const { state } = useLocation();
-  const [buyerInfo, setBuyerInfo] = useState<IBuyerInfo>({
-    buyerName: "",
-    buyerTel: "",
-    buyerEmail: "",
-  });
-  const [addressInfo, setAddressInfo] = useState<IAddressInfo>({
-    buyerAddr: "",
-    buyerPostCode: "",
-  });
+  const [addressInfo, setAddressInfo] = useState<IAddressInfo | undefined>();
 
   const onClickPayment = () => {
     if (!window.IMP) return;
@@ -44,7 +30,6 @@ const Payment = () => {
       name: "아임포트 결제 데이터 분석",
       buyer_name: "홍길동",
       buyer_tel: "01012341234",
-      buyer_email: "example@example.com",
       buyer_addr: "신사동 661-16",
       buyer_postcode: "06018",
     };
@@ -70,8 +55,10 @@ const Payment = () => {
         <div className="grid grid-cols-5 gap-5">
           <div className="flex flex-col gap-5 col-span-3">
             <OrderInfoSection orderItems={state.orderedItems} />
-            <BuyerInfoSection buyerInfo={buyerInfo} />
-            <AddressInfoSection addressInfo={addressInfo} />
+            <AddressInfoSection
+              addressInfo={addressInfo}
+              setAddressInfo={setAddressInfo}
+            />
           </div>
           <div className="flex flex-col gap-5 col-span-2">
             <TotalPriceSection orderTotalPrice={state.totalPrice} />
