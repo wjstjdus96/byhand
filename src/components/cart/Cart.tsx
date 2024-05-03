@@ -2,7 +2,6 @@ import { useCheckedTotalPrice } from "../../hooks/cart/useCheckedTotalPrice";
 import { useProductsByProductIds } from "../../hooks/cart/useProductsByProductIds";
 import { useCheckboxSelection } from "../../hooks/useCheckboxSelection";
 import { useCartProductStore } from "../../store/cartStore";
-import { convertPriceUnit } from "../../utils/convertPriceUnit";
 import CartHead from "./CartHead";
 import CartList from "./CartList";
 import CartPayment from "./CartPayment";
@@ -21,6 +20,8 @@ const Cart = () => {
     checkedItems,
     products,
   });
+
+  console.log(cartItems);
 
   return (
     <div className="fixed top-0 right-0 w-[80vh] h-screen  py-6 px-8 bg-white shadow flex flex-col gap-6 z-20">

@@ -229,7 +229,7 @@ export interface RequestPayParams extends RequestPayAdditionalParams {
   /**
    * ### 주문자 주소
    */
-  buyer_addr?: string;
+  shipping_addr?: string;
   /**
    * ### 주문자 우편번호
    */
@@ -238,6 +238,9 @@ export interface RequestPayParams extends RequestPayAdditionalParams {
    * ### confirm_process 사용 시 가맹점 endpoint url 설정
    * - 기술지원 메일로 별도 요청이 필요합니다. (support@portone.io)
    */
+  recipient_name?: string;
+  recipient_phone?: string;
+
   confirm_url?: string;
   /**
    * ### 웹훅(Webhook) 수신 주소

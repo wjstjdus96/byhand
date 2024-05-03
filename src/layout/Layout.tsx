@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Cart from "../components/cart/Cart";
 import Footer from "../components/common/Footer";
 import Header from "../components/common/Header";

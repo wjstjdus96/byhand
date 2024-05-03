@@ -18,9 +18,6 @@ export const useProductDeletion = ({
   const onClickItemDelete = (productId: string) => {
     deleteMutation.mutate(productId, {
       onSuccess: () => {
-        toast({
-          description: "상품이 정상적으로 삭제되었습니다",
-        });
         if (uid)
           queryClient.invalidateQueries({ queryKey: ["sellProduct", uid] });
       },

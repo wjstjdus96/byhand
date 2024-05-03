@@ -36,7 +36,6 @@ export const useCartProductStore = create<ICartProductState>((set) => ({
     set((state) => {
       const newCartItems = { ...state.cartItems };
       delete newCartItems[cartItemId];
-      console;
       return { ...state, cartItems: newCartItems };
     });
   },

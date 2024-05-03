@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import AddressInfoSection from "../components/payment/addressInfoSection/AddressInfoSection";
+import BuyerInfoSection from "../components/payment/buyerInfoSection/BuyerInfoSection";
 import OrderInfoSection from "../components/payment/orderInfoSection/OrderDetails";
 import TotalPriceSection from "../components/payment/totalPriceSection/TotalPriceSection";
 import { Button } from "../components/ui/button";
+import { usePayment } from "../hooks/payment/usePayment";
 import Layout from "../layout/Layout";
-import { RequestPayParams, RequestPayResponse } from "../types/imp";
+import Loading from "../components/common/Loading";
 
 export interface IAddressInfo {
   recipientName: string;
@@ -13,40 +15,17 @@ export interface IAddressInfo {
   deliveryAddress: string;
 }
 
+export const SHIPPING_FEE = 3000;
+
 const Payment = () => {
   const { state } = useLocation();
   const [addressInfo, setAddressInfo] = useState<IAddressInfo | undefined>();
-
-  const onClickPayment = () => {
-    if (!window.IMP) return;
-    const { IMP } = window;
-    IMP.init("imp25384063");
-
-    const data: RequestPayParams = {
-      pg: "nice.iamport02m",
-      pay_method: "card",
-      merchant_uid: `mid_${new Date().getTime()}`,
-      amount: state.totalPrice,
-      name: "아임포트 결제 데이터 분석",
-      buyer_name: "홍길동",
-      buyer_tel: "01012341234",
-      buyer_addr: "신사동 661-16",
-      buyer_postcode: "06018",
-    };
-
-    const callback = (response: RequestPayResponse) => {
-      const { success, merchant_uid, error_msg, paid_amount, status } =
-        response;
-
-      if (success) {
-        alert("결제 성공");
-      } else {
-        alert(`결제 실패: ${error_msg}`);
-      }
-    };
-
-    IMP.request_pay(data, callback);
-  };
+  const { onClickPayment, isLoading } = usePayment({
+    addressInfo,
+    orderedItems: state.orderedItems,
+    orderedTotalPrice: state.totalPrice,
+    isCartItems: state.isCartItems,
+  });
 
   return (
     <Layout>
@@ -55,6 +34,7 @@ const Payment = () => {
         <div className="grid grid-cols-5 gap-5">
           <div className="flex flex-col gap-5 col-span-3">
             <OrderInfoSection orderItems={state.orderedItems} />
+            <BuyerInfoSection />
             <AddressInfoSection
               addressInfo={addressInfo}
               setAddressInfo={setAddressInfo}
@@ -66,6 +46,7 @@ const Payment = () => {
           </div>
         </div>
       </div>
+      {isLoading && <Loading />}
     </Layout>
   );
 };

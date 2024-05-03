@@ -13,6 +13,7 @@ const CartPayment = ({ checkedItems, checkedTotalPrice }: ICartPayment) => {
   const { onClickPurchase } = usePaymentRedirect({
     itemsToBuy: checkedItems,
     totalPrice: checkedTotalPrice,
+    isCartItems: true,
   });
 
   return (

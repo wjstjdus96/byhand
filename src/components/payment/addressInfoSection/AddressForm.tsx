@@ -35,7 +35,6 @@ const AddressForm = ({
   });
 
   const onSubmitHandler: SubmitHandler<IAddressFormData> = (data) => {
-    console.log(data);
     setIsOpen(false);
     setAddressInfo({
       recipientName: data.recipientName,

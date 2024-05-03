@@ -11,11 +11,13 @@ export interface IItemsToBuy {
 interface IUsePaymentRedirect {
   itemsToBuy: ICheckedItem[] | IItemsToBuy[];
   totalPrice: number;
+  isCartItems: boolean;
 }
 
 export const usePaymentRedirect = ({
   itemsToBuy,
   totalPrice,
+  isCartItems,
 }: IUsePaymentRedirect) => {
   const { closeCart } = useCartStore();
   const userId = getSessionItem("userId");
@@ -26,7 +28,7 @@ export const usePaymentRedirect = ({
       return;
     }
     navigate(`/payment/${userId}`, {
-      state: { orderedItems: itemsToBuy, totalPrice },
+      state: { orderedItems: itemsToBuy, totalPrice, isCartItems },
     });
     closeCart();
   };
