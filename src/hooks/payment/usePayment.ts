@@ -6,9 +6,11 @@ import { useCartDeletion } from "../cart/useCartDeletion";
 import { SHIPPING_FEE } from "./../../pages/Payment";
 import { IOrderItem, useAddOrder } from "./useAddOrder";
 import { useReduceProductQuantity } from "./useReduceProductQuantity";
+import { IUserData } from "../../api/user";
 
 interface IUsePayment {
   addressInfo: IAddressInfo | undefined;
+  buyerInfo: IUserData | undefined;
   orderedItems: IOrderItem[];
   orderedTotalPrice: number;
   isCartItems: boolean;
@@ -16,6 +18,7 @@ interface IUsePayment {
 
 export const usePayment = ({
   addressInfo,
+  buyerInfo,
   orderedItems,
   orderedTotalPrice,
   isCartItems,
@@ -32,6 +35,11 @@ export const usePayment = ({
       return;
     }
 
+    if (!buyerInfo) {
+      alert("로그인을 다시 시도하신 후 결제해주세요");
+      return;
+    }
+
     if (!window.IMP) return;
     const { IMP } = window;
     IMP.init("imp25384063");
@@ -42,8 +50,8 @@ export const usePayment = ({
       merchant_uid: `mid_${new Date().getTime()}`,
       amount: orderedTotalPrice + SHIPPING_FEE,
       name: "BYHAND 상품 결제",
-      buyer_name: "홍길동",
-      buyer_email: "01012341234",
+      buyer_name: buyerInfo.userName,
+      buyer_email: buyerInfo.userEmail,
       recipient_name: addressInfo.recipientName,
       recipient_phone: addressInfo.recipientPhone,
       shipping_addr: addressInfo.deliveryAddress,

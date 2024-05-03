@@ -1,7 +1,7 @@
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
-interface IUserData {
+export interface IUserData {
   userName: string;
   isSeller: boolean;
   userEmail: string;

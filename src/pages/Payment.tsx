@@ -8,6 +8,7 @@ import { Button } from "../components/ui/button";
 import { usePayment } from "../hooks/payment/usePayment";
 import Layout from "../layout/Layout";
 import Loading from "../components/common/Loading";
+import { useUserInfo } from "../hooks/useUserInfo";
 
 export interface IAddressInfo {
   recipientName: string;
@@ -15,17 +16,21 @@ export interface IAddressInfo {
   deliveryAddress: string;
 }
 
-export const SHIPPING_FEE = 3000;
+export const SHIPPING_FEE = 2500;
 
 const Payment = () => {
   const { state } = useLocation();
   const [addressInfo, setAddressInfo] = useState<IAddressInfo | undefined>();
+  const { data: buyerInfo } = useUserInfo();
   const { onClickPayment, isLoading } = usePayment({
     addressInfo,
+    buyerInfo,
     orderedItems: state.orderedItems,
     orderedTotalPrice: state.totalPrice,
     isCartItems: state.isCartItems,
   });
+
+  console.log(buyerInfo);
 
   return (
     <Layout>
@@ -34,7 +39,7 @@ const Payment = () => {
         <div className="grid grid-cols-5 gap-5">
           <div className="flex flex-col gap-5 col-span-3">
             <OrderInfoSection orderItems={state.orderedItems} />
-            <BuyerInfoSection />
+            <BuyerInfoSection buyerInfo={buyerInfo} />
             <AddressInfoSection
               addressInfo={addressInfo}
               setAddressInfo={setAddressInfo}
