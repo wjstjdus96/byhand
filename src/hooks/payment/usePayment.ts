@@ -1,11 +1,11 @@
-import { SHIPPING_FEE } from "./../../pages/Payment";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { IAddressInfo } from "../../pages/Payment";
 import { RequestPayParams, RequestPayResponse } from "../../types/imp";
+import { useCartDeletion } from "../cart/useCartDeletion";
+import { SHIPPING_FEE } from "./../../pages/Payment";
 import { IOrderItem, useAddOrder } from "./useAddOrder";
 import { useReduceProductQuantity } from "./useReduceProductQuantity";
-import { useCartDeletion } from "../cart/useCartDeletion";
-import { useNavigate } from "react-router-dom";
 
 interface IUsePayment {
   addressInfo: IAddressInfo | undefined;

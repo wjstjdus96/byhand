@@ -1,59 +1,14 @@
-import { SubmitHandler, useForm } from "react-hook-form";
-import { auth } from "../../../api/auth";
+import { useSignup } from "../../../hooks/auth/useSignup";
 import { TextInput } from "../../common/form/TextInput";
 import { Button } from "../../ui/button";
 import SelectAuthority from "./SelectAuthority";
-import { useNavigate } from "react-router-dom";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { signupSchema } from "../../../utils/validationSchema";
-import { setUser } from "../../../api/user";
-import { authReq, setUserReq } from "../../../utils/dataSchema";
-
-export interface ISignupData {
-  email: string;
-  password: string;
-  confirmPassword: string;
-  nickname: string;
-  authority: string;
-}
 
 const SignupForm = () => {
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<ISignupData>({
-    resolver: zodResolver(signupSchema),
-  });
-  const navigate = useNavigate();
-
-  const onSubmitHandler: SubmitHandler<ISignupData> = (data) => {
-    try {
-      const sinupReq = authReq(data);
-      const userReq = setUserReq(data);
-
-      auth("signUp", sinupReq)
-        .then(async (res) => {
-          if (res.status == 200) {
-            setUser(res.data.localId, userReq);
-            navigate("/login");
-          }
-        })
-        .catch((e) => {
-          const errorMsg = e.response.data.error.message;
-          if (errorMsg == "EMAIL_EXISTS") {
-            alert("해당 이메일 주소는 이미 다른 계정에서 사용 중입니다.");
-          }
-        });
-    } catch (e: any) {
-      alert(e.response.data);
-    }
-  };
+  const { onSubmit, register, errors, control } = useSignup();
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmitHandler)}
+      onSubmit={onSubmit}
       className="flex flex-col justify-center items-center w-1/4 gap-6"
     >
       <TextInput

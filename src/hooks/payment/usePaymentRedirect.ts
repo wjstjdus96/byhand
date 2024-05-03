@@ -27,6 +27,10 @@ export const usePaymentRedirect = ({
       alert("구매할 상품이 없습니다");
       return;
     }
+    if (itemsToBuy[0].itemCount == 0) {
+      alert("수량을 선택해주세요");
+      return;
+    }
     navigate(`/payment/${userId}`, {
       state: { orderedItems: itemsToBuy, totalPrice, isCartItems },
     });
