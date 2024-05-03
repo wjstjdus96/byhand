@@ -22,10 +22,9 @@ const Cart = () => {
   });
 
   console.log(cartItems);
-
   return (
-    <div className="fixed top-0 right-0 w-[80vh] h-screen  py-6 px-8 bg-white shadow flex flex-col gap-6 z-20">
-      <CartHead />
+    <div className="mt-6 flex flex-col gap-5 ">
+      {/* <CartHead /> */}
       <CartPayment
         checkedItems={checkedItems}
         checkedTotalPrice={checkedItemsTotalPrice}

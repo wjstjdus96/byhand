@@ -30,8 +30,6 @@ const Payment = () => {
     isCartItems: state.isCartItems,
   });
 
-  console.log(buyerInfo);
-
   return (
     <Layout>
       <div className="px-[20vw] py-20 min-h-[75vh]">

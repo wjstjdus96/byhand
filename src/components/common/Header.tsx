@@ -6,6 +6,7 @@ import { useHeaderVisibility } from "../../hooks/useHeaderVisibility";
 import { useCartStore } from "../../store/cartStore";
 import { checkAuthority } from "../../utils/checkAuthority";
 import { useLogout } from "../../hooks/useLogout";
+import CartContainer from "../cart/CartContainer";
 
 const Header = () => {
   const { isVisible } = useHeaderVisibility();
@@ -53,7 +54,9 @@ const Header = () => {
         {auth == "buyer" && (
           <>
             <li className="menu-item" onClick={toggleCart}>
-              <MdShoppingCart size={24} />
+              <CartContainer>
+                <MdShoppingCart size={24} />
+              </CartContainer>
             </li>
             <li
               className="menu-item"
