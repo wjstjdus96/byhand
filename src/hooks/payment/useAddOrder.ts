@@ -7,7 +7,15 @@ export interface IOrderReqData {
   buyerId: string;
   orderedProducts: IOrderedProduct[];
   purchaseAmount: number;
-  orderedAt: FieldValue;
+  orderedAt: FieldValue | any;
+}
+
+export interface IOrderResData {
+  purchaseId: string;
+  buyerId: string;
+  orderedProducts: IOrderedProduct[];
+  purchaseAmount: number;
+  orderedAt: FieldValue | any;
 }
 
 export interface IOrderedProduct {
