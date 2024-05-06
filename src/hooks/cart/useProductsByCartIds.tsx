@@ -3,10 +3,14 @@ import { getProductsByProductsId } from "../../api/product";
 import { useEffect } from "react";
 import { useCartProductStore } from "../../store/cartStore";
 import { getSessionItem } from "../../utils/handleSession";
+import { ICartProductData } from "../../types/cart";
 
-export const useProductsByProductIds = () => {
-  const { cartItems } = useCartProductStore();
-  let productIds = Object.keys(cartItems);
+interface IUseProductByCartIds {
+  cartItems: ICartProductData;
+}
+
+export const useProductsByCartIds = ({ cartItems }: IUseProductByCartIds) => {
+  // const { cartItems } = useCartProductStore();
   const userId = getSessionItem("userId");
   const {
     data: products,
@@ -14,14 +18,13 @@ export const useProductsByProductIds = () => {
     isLoading,
   } = useQuery({
     queryKey: ["cart", userId],
-    queryFn: () => getProductsByProductsId(productIds),
+    queryFn: () => getProductsByProductsId(Object.keys(cartItems)),
     refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
-    productIds = Object.keys(cartItems);
     refetch();
   }, [cartItems]);
 
-  return { products, isLoading };
+  return { products, isLoading, refetch };
 };

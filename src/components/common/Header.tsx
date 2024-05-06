@@ -11,7 +11,6 @@ import CartContainer from "../cart/CartContainer";
 const Header = () => {
   const { isVisible } = useHeaderVisibility();
   const navigate = useNavigate();
-  const { toggleCart } = useCartStore();
   const { userId, auth } = checkAuthority();
   const { logout } = useLogout();
   const onClickMenu = (endpoint?: string) => {
@@ -53,7 +52,7 @@ const Header = () => {
         )}
         {auth == "buyer" && (
           <>
-            <li className="menu-item" onClick={toggleCart}>
+            <li className="menu-item">
               <CartContainer>
                 <MdShoppingCart size={24} />
               </CartContainer>

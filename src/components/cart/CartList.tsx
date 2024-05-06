@@ -1,3 +1,4 @@
+import { RefetchOptions } from "@tanstack/react-query";
 import { ICheckedItem } from "../../hooks/useCheckboxSelection";
 import { useCartProductStore } from "../../store/cartStore";
 import { IProductResData } from "../../types/product";
@@ -7,10 +8,11 @@ import CartListItem from "./CartListItem";
 
 interface ICartList {
   checkedItems: ICheckedItem[];
-  products: IProductResData[] | undefined;
+  products: IProductResData[];
   singleCheckHandler: (isCheck: boolean, currentItem: ICheckedItem) => void;
   allCheckHandler: (isCheck: boolean) => void;
   initCheckHandler: () => void;
+  refetch: (options?: RefetchOptions | undefined) => any;
 }
 
 const CartList = ({
@@ -19,19 +21,21 @@ const CartList = ({
   checkedItems,
   initCheckHandler,
   products,
+  refetch,
 }: ICartList) => {
   const { cartItems, deleteCartItem } = useCartProductStore();
 
   const onClickDelete = () => {
     checkedItems.forEach((item) => {
       deleteCartItem(item.itemId);
-      initCheckHandler();
     });
+    initCheckHandler();
+    refetch();
   };
 
   return (
     <div className="h-full overflow-y-hidden">
-      {products && products?.length != 0 && (
+      {products.length != 0 ? (
         <>
           <ProductBoardHead
             totLength={products.length}
@@ -52,6 +56,8 @@ const CartList = ({
             ))}
           </div>
         </>
+      ) : (
+        <p className="text-center pt-10">장바구니가 비었습니다</p>
       )}
     </div>
   );
