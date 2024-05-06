@@ -13,7 +13,9 @@ const Collection = ({ children, title, category }: ICollection) => {
         <h2 className="text-xl font-semibold">{title}</h2>
         <CollectionMoreBtn category={category} />
       </div>
-      <div className="grid grid-cols-6 gap-3">{children}</div>
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+        {children}
+      </div>
     </div>
   );
 };
