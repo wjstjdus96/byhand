@@ -8,7 +8,11 @@ export const useProductsByProductIds = () => {
   const { cartItems } = useCartProductStore();
   let productIds = Object.keys(cartItems);
   const userId = getSessionItem("userId");
-  const { data: products, refetch } = useQuery({
+  const {
+    data: products,
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["cart", userId],
     queryFn: () => getProductsByProductsId(productIds),
     refetchOnWindowFocus: false,
@@ -19,5 +23,5 @@ export const useProductsByProductIds = () => {
     refetch();
   }, [cartItems]);
 
-  return { products };
+  return { products, isLoading };
 };

@@ -18,12 +18,12 @@ const ProductBoardHead = ({
   deleteCheckedItemsHandler,
 }: IProductBoardHead) => {
   const paddingSize = {
-    small: "p-2",
-    medium: "p-0",
+    small: "p-2  mb-1",
+    medium: "p-0  mb-2",
   }[size];
 
   return (
-    <div className={`flex items-center justify-between mb-2 ${paddingSize}`}>
+    <div className={`flex items-center justify-between ${paddingSize}`}>
       <Checkbox
         onCheckedChange={allCheckHandler}
         checked={checkedItems.length == totLength}

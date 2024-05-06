@@ -1,6 +1,6 @@
 import { Skeleton } from "../../ui/skeleton";
 
-const CollectionSkeleton = () => {
+const ProductGridItemSkeleton = () => {
   return (
     <div>
       <Skeleton className="w-full rounded-sm aspect-square " />
@@ -13,4 +13,4 @@ const CollectionSkeleton = () => {
   );
 };
 
-export default CollectionSkeleton;
+export default ProductGridItemSkeleton;

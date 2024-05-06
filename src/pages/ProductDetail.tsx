@@ -6,12 +6,17 @@ import { Separator } from "../components/ui/separator";
 import { useProductDetail } from "../hooks/productDetails.tsx/useProductDetail";
 import Layout from "../layout/Layout";
 import Loading from "../components/common/Loading";
+import { useEffect } from "react";
 
 function ProductDetail() {
   const { productId } = useParams();
   const { data, isLoading } = useProductDetail({
     productId: productId ? productId : "",
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Layout>

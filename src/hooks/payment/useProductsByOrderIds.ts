@@ -8,11 +8,12 @@ export const useProductsByOrderIds = ({
   orderItemsId: string[];
 }) => {
   const userId = getSessionItem("userId");
-  const { data: orderProducts } = useQuery({
+  const { data: orderProducts, isLoading: isOrderProductsLoading } = useQuery({
     queryKey: ["order", userId],
     queryFn: () => getProductsByProductsId(orderItemsId),
     refetchOnWindowFocus: false,
+    staleTime: 0,
   });
 
-  return { orderProducts };
+  return { orderProducts, isOrderProductsLoading };
 };

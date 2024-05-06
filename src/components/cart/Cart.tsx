@@ -2,7 +2,7 @@ import { useCheckedTotalPrice } from "../../hooks/cart/useCheckedTotalPrice";
 import { useProductsByProductIds } from "../../hooks/cart/useProductsByProductIds";
 import { useCheckboxSelection } from "../../hooks/useCheckboxSelection";
 import { useCartProductStore } from "../../store/cartStore";
-import CartHead from "./CartHead";
+import Spinner from "../common/Spinner";
 import CartList from "./CartList";
 import CartPayment from "./CartPayment";
 
@@ -24,21 +24,21 @@ const Cart = () => {
   console.log(cartItems);
   return (
     <div className="mt-6 flex flex-col gap-5 ">
-      {/* <CartHead /> */}
       <CartPayment
         checkedItems={checkedItems}
         checkedTotalPrice={checkedItemsTotalPrice}
       />
-      {!Object.keys(cartItems).length && (
+      {!Object.keys(cartItems).length ? (
         <p className="text-center pt-10">장바구니가 비었습니다</p>
+      ) : (
+        <CartList
+          products={products}
+          checkedItems={checkedItems}
+          singleCheckHandler={handleSingleCheck}
+          allCheckHandler={handleAllCheck}
+          initCheckHandler={handleInitItems}
+        />
       )}
-      <CartList
-        products={products}
-        checkedItems={checkedItems}
-        singleCheckHandler={handleSingleCheck}
-        allCheckHandler={handleAllCheck}
-        initCheckHandler={handleInitItems}
-      />
     </div>
   );
 };

@@ -9,11 +9,17 @@ interface IProductsBoard {
 const ProductsBoard = forwardRef<HTMLDivElement, IProductsBoard>(
   ({ resultData }, ref) => {
     return (
-      <div className="grid grid-cols-6 gap-3">
-        {resultData.map((item: any) => (
-          <ProductGridItem data={item} lastItemRef={ref} />
-        ))}
-      </div>
+      <>
+        {resultData.length == 0 ? (
+          <div className="py-24 text-center">상품이 없습니다</div>
+        ) : (
+          <div className="grid grid-cols-6 gap-x-3 gap-y-6">
+            {resultData.map((item: any) => (
+              <ProductGridItem data={item} lastItemRef={ref} />
+            ))}
+          </div>
+        )}
+      </>
     );
   }
 );

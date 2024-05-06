@@ -37,8 +37,9 @@ const CartListItem = ({
       checkHandler={singleCheckHandler}
       checkedItems={checkedItems}
       selectedCnt={selectedCnt}
+      isCart={true}
     >
-      <div className="flex flex-col gap-2 items-end">
+      <div className="flex flex-col gap-1 items-end">
         <QuantityInput
           selectedQuantity={selectedQuantity}
           onClickMinus={onClickMinus}

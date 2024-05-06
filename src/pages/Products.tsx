@@ -7,12 +7,13 @@ import { useFilteredResults } from "../hooks/products/useFilteredResults";
 import Layout from "../layout/Layout";
 import { useCategoryType } from "../hooks/products/useCategoryType";
 import Spinner from "../components/common/Spinner";
+import ProductsBoardSkeleton from "../components/products/ProductsBoardSkeleton";
 
 function Products() {
   const [keyword, setKeyword] = useState("");
   const { selectedCategory, setCategoryParams } = useCategoryType();
   const [selectedSort, setSelectedSort] = useState("createdAt-desc");
-  const { products, ref, isFetchingNextPage } = useFilteredResults({
+  const { products, ref, isFetchingNextPage, isLoading } = useFilteredResults({
     keyword,
     category: selectedCategory,
     sort: selectedSort,
@@ -35,13 +36,8 @@ function Products() {
             setSelectedSort={setSelectedSort}
           />
         </div>
-        {products && products?.length != 0 ? (
-          <ProductsBoard ref={ref} resultData={products} />
-        ) : (
-          <div className="flex items-center justify-center">
-            상품이 없습니다
-          </div>
-        )}
+        {isLoading && <ProductsBoardSkeleton />}
+        {products && <ProductsBoard ref={ref} resultData={products} />}
         {isFetchingNextPage && <Spinner size="sm" />}
       </div>
     </Layout>

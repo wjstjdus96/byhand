@@ -9,12 +9,19 @@ interface IProductBoardItem {
   checkHandler: (isCheck: boolean, currentItem: ICheckedItem) => void;
   checkedItems: ICheckedItem[];
   selectedCnt?: number;
+  isCart?: boolean;
 }
 
 const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
-  ({ item, children, checkHandler, checkedItems, selectedCnt }, ref) => {
+  (
+    { item, children, checkHandler, checkedItems, selectedCnt, isCart },
+    ref
+  ) => {
     return (
-      <div className="flex h-28 gap-5 py-2" ref={ref}>
+      <div
+        className={`flex h-28  py-2 ${isCart ? "gap-2" : "gap-5"}`}
+        ref={ref}
+      >
         <Checkbox
           onCheckedChange={(checked) => {
             checkHandler(
@@ -31,8 +38,10 @@ const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
           className="object-cover w-24 rounded-sm"
         />
         <div className="flex flex-col justify-between w-full py-1">
-          <span>{item.productName}</span>
-          <span className="text-sm">
+          <span className={`${isCart ? "text-sm" : "text-md"}`}>
+            {item.productName}
+          </span>
+          <span className={`${isCart ? "text-xs" : "text-sm"}`}>
             {convertPriceUnit(item.productPrice)}원
           </span>
           <div className="flex items-end justify-between">

@@ -19,12 +19,12 @@ const QuantityInput = ({
   size,
 }: IQuantityInput) => {
   const buttonSize = {
-    small: "p-1 text-xs",
+    small: "p-1 text-[10px]",
     medium: "p-2",
   }[size];
 
   const numberSize = {
-    small: "w-6 text-xs",
+    small: "w-5 text-[10px]",
     medium: "w-10",
   }[size];
 
