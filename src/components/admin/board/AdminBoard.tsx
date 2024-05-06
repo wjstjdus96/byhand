@@ -61,7 +61,7 @@ const AdminBoard = () => {
                   </div>
                 </ProductBoardItem>
               ))}
-            {isFetchingNextPage && <Spinner />}
+            {isFetchingNextPage && <Spinner size="sm" />}
           </div>
         </>
       )}

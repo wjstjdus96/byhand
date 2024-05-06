@@ -1,7 +1,7 @@
 import { serverTimestamp } from "firebase/firestore";
-import { ISignupData } from "../components/auth/signup/SignupForm";
 import { IProductEditReqData, IProductFormData } from "../types/product";
 import { getSessionItem } from "./handleSession";
+import { ISignupData } from "../hooks/auth/useSignup";
 
 interface IAuthReq {
   email: string;
@@ -18,8 +18,9 @@ export const authReq = (data: IAuthReq) => {
 
 export const setUserReq = (data: ISignupData) => {
   return {
-    nickName: data.nickname,
+    userName: data.nickname,
     isSeller: data.authority == "seller",
+    userEmail: data.email,
   };
 };
 

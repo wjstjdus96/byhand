@@ -11,6 +11,7 @@ import Products from "../pages/Products";
 import ProductDetail from "../pages/ProductDetail";
 import OnlyBuyerRoute from "./OnlyBuyerRoute";
 import MyPage from "../pages/MyPage";
+import Payment from "../pages/Payment";
 
 const Router = () => {
   return (
@@ -38,6 +39,7 @@ const Router = () => {
         </Route>
         <Route element={<OnlyBuyerRoute />}>
           <Route path="/mypage/:memberId" element={<MyPage />} />
+          <Route path="/payment/:buyerId" element={<Payment />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -2,7 +2,6 @@ import { useCheckedTotalPrice } from "../../hooks/cart/useCheckedTotalPrice";
 import { useProductsByProductIds } from "../../hooks/cart/useProductsByProductIds";
 import { useCheckboxSelection } from "../../hooks/useCheckboxSelection";
 import { useCartProductStore } from "../../store/cartStore";
-import { convertPriceUnit } from "../../utils/convertPriceUnit";
 import CartHead from "./CartHead";
 import CartList from "./CartList";
 import CartPayment from "./CartPayment";
@@ -22,12 +21,13 @@ const Cart = () => {
     products,
   });
 
+  console.log(cartItems);
   return (
-    <div className="fixed top-0 right-0 w-[80vh] h-screen  py-6 px-8 bg-white shadow flex flex-col gap-6 z-20">
-      <CartHead />
+    <div className="mt-6 flex flex-col gap-5 ">
+      {/* <CartHead /> */}
       <CartPayment
-        checkedNum={checkedItems.length}
-        checkedTotalPrice={convertPriceUnit(checkedItemsTotalPrice)}
+        checkedItems={checkedItems}
+        checkedTotalPrice={checkedItemsTotalPrice}
       />
       {!Object.keys(cartItems).length && (
         <p className="text-center pt-10">장바구니가 비었습니다</p>

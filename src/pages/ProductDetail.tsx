@@ -3,7 +3,7 @@ import ProductDescription from "../components/productDetail/ProductDescription";
 import ProductImageCarousel from "../components/productDetail/ProductImageCarousel";
 import ProductInfoSection from "../components/productDetail/ProductInfoSection";
 import { Separator } from "../components/ui/separator";
-import { useProductDetail } from "../hooks/useProductDetail";
+import { useProductDetail } from "../hooks/productDetails.tsx/useProductDetail";
 import Layout from "../layout/Layout";
 import Loading from "../components/common/Loading";
 

@@ -6,8 +6,8 @@ import { getSessionItem } from "../../utils/handleSession";
 
 export const useProductsByProductIds = () => {
   const { cartItems } = useCartProductStore();
-  const userId = getSessionItem("userId");
   let productIds = Object.keys(cartItems);
+  const userId = getSessionItem("userId");
   const { data: products, refetch } = useQuery({
     queryKey: ["cart", userId],
     queryFn: () => getProductsByProductsId(productIds),
@@ -15,6 +15,7 @@ export const useProductsByProductIds = () => {
   });
 
   useEffect(() => {
+    productIds = Object.keys(cartItems);
     refetch();
   }, [cartItems]);
 

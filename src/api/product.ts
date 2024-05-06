@@ -6,6 +6,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  increment,
   limit,
   orderBy,
   query,
@@ -15,10 +16,15 @@ import {
 } from "firebase/firestore";
 import { IProductRegisterReqData, IProductResData } from "../types/product";
 import { db } from "./firebase";
+import { IOrderItem, IOrderReqData } from "../hooks/payment/useAddOrder";
 
 export const registerProduct = async (req: IProductRegisterReqData) => {
   const res = await addDoc(collection(db, "product"), req);
   return res;
+};
+
+export const registerOrder = (req: IOrderReqData) => {
+  return addDoc(collection(db, "order"), req);
 };
 
 export const deleteProduct = async (productId: string) => {
@@ -136,4 +142,18 @@ export const getProductsByProductsId = async (
   const productsArr = await Promise.all(productsPromise);
   const products = productsArr.flat();
   return products;
+};
+
+export const updateProductsQuantity = async (orderedItems: IOrderItem[]) => {
+  try {
+    for (const { itemId, itemCount } of orderedItems) {
+      const productRef = doc(db, "product", itemId);
+
+      await updateDoc(productRef, {
+        productQuantity: increment(-1 * itemCount),
+      });
+    }
+  } catch (e) {
+    console.log(e);
+  }
 };
