@@ -18,10 +18,7 @@ const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
     ref
   ) => {
     return (
-      <div
-        className={`flex h-28  py-2 ${isCart ? "gap-2" : "gap-5"}`}
-        ref={ref}
-      >
+      <div className={`flex py-2 ${isCart ? "gap-2" : "gap-5"}`} ref={ref}>
         <Checkbox
           onCheckedChange={(checked) => {
             checkHandler(
@@ -33,21 +30,35 @@ const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
           }}
           checked={checkedItems.map((el) => el.itemId).includes(item.id)}
         />
-        <img
-          src={item.productImage[0]}
-          className="object-cover w-24 rounded-sm"
-        />
-        <div className="flex flex-col justify-between w-full py-1">
+        <div className={`${isCart ? "w-32" : "w-28"} aspect-square`}>
+          <img
+            src={item.productImage[0]}
+            className="object-cover w-full h-full rounded-sm"
+          />
+        </div>
+        <div className="flex flex-col gap-1 justify-between w-full py-1">
           <span className={`${isCart ? "text-sm" : "text-md"}`}>
             {item.productName}
           </span>
-          <span className={`${isCart ? "text-xs" : "text-sm"}`}>
-            {convertPriceUnit(item.productPrice)}원
-          </span>
-          <div className="flex items-end justify-between">
-            <p className="text-xs">남은수량: {item.productQuantity}개</p>
-            {children}
-          </div>
+          {isCart ? (
+            <>
+              <span className={`${isCart ? "text-[11px]" : "text-sm"}`}>
+                {convertPriceUnit(item.productPrice)}원 · 남은수량:{" "}
+                {item.productQuantity}개
+              </span>
+              {children}
+            </>
+          ) : (
+            <>
+              <span className={`${isCart ? "text-xs" : "text-sm"}`}>
+                {convertPriceUnit(item.productPrice)}원
+              </span>
+              <div className="flex items-end justify-between">
+                <p className="text-xs">남은수량: {item.productQuantity}개</p>
+                {children}
+              </div>
+            </>
+          )}
         </div>
       </div>
     );

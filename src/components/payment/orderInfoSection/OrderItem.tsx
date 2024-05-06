@@ -12,7 +12,7 @@ const OrderItem = ({ productInfo, selectedQuantity }: IOrderItem) => {
     <div className="flex gap-3">
       <img
         src={productInfo.productImage[0]}
-        className="object-cover w-24 rounded-sm"
+        className="object-cover w-24 aspect-square rounded-sm"
       />
       <div className="flex flex-col gap-1 w-full">
         <span>{productInfo.productName}</span>

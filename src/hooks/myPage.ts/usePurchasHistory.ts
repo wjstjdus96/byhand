@@ -4,11 +4,11 @@ import { getPurchaseHistory } from "../../api/user";
 
 export const usePurchaseHistory = () => {
   const buyerId = getSessionItem("userId");
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["purchaseHistory", buyerId],
     queryFn: () => getPurchaseHistory(buyerId!),
     refetchOnWindowFocus: false,
   });
 
-  return { data };
+  return { data, isLoading };
 };

@@ -39,7 +39,7 @@ const CartListItem = ({
       selectedCnt={selectedCnt}
       isCart={true}
     >
-      <div className="flex flex-col gap-1 items-end">
+      <div className="flex gap-1 justify-between items-center">
         <QuantityInput
           selectedQuantity={selectedQuantity}
           onClickMinus={onClickMinus}

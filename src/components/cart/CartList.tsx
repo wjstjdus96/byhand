@@ -41,7 +41,7 @@ const CartList = ({
             deleteCheckedItemsHandler={onClickDelete}
           />
           <Separator />
-          <div className="h-full overflow-y-auto pb-10 pt-2 px-2">
+          <div className="h-full overflow-y-auto pb-20 pt-2 px-2">
             {products.map((product) => (
               <CartListItem
                 product={product}
