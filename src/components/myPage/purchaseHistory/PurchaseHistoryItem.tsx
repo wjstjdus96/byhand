@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { IOrderResData } from "../../../hooks/payment/useAddOrder";
 import { convertTimestamp } from "../../../utils/convertTimestamp";
 import { Separator } from "../../ui/separator";
@@ -15,7 +14,7 @@ const PurchaseHistoryItem = ({ historyItem }: IPurchaseHistoryItem) => {
         {convertTimestamp(historyItem.orderedAt.seconds)}
       </p>
       <Separator />
-      {historyItem.orderedProducts.map((item, idx) => (
+      {historyItem.orderedProducts.map((_, idx) => (
         <PurchaseItem
           historyItems={historyItem.orderedProducts}
           historyId={historyItem.purchaseId}

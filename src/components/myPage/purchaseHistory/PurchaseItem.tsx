@@ -22,10 +22,6 @@ const PurchaseItem = ({ itemIdx, historyId, historyItems }: IPurchaseItem) => {
     itemIdx,
   });
 
-  useEffect(() => {
-    console.log("리렌더링 발생");
-  }, [historyItems[itemIdx].orderStatus]);
-
   return (
     <div>
       {productDetail && (
