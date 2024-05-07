@@ -61,27 +61,18 @@ export const usePayment = ({
       const { success, error_msg } = response;
       if (success) {
         setIsLoading(true);
-        await AddOrderToDB({ orderedItems, orderedTotalPrice });
-        await reduceProductsQuantity({ orderedItems });
         if (isCartItems) {
-          await deleteCartItems(orderedItems);
-        }
-        setIsLoading(false);
-        alert("결제 성공");
-        navigate("/");
-      } else {
-        setIsLoading(true);
-        if (isCartItems) {
-          console.log("dk");
           queryClient.invalidateQueries({ queryKey: ["cart"] }).then(() => {
             deleteCartItems(orderedItems);
-            console.log("으아");
           });
         }
         await AddOrderToDB({ orderedItems, orderedTotalPrice });
         await reduceProductsQuantity({ orderedItems });
 
         setIsLoading(false);
+        alert("결제 성공");
+        navigate("/");
+      } else {
         alert(`결제 실패: ${error_msg}`);
       }
     };

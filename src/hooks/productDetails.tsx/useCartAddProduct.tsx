@@ -1,7 +1,5 @@
-import { queryClient } from "../../App";
 import { toast } from "../../components/ui/use-toast";
 import { useCartProductStore } from "../../store/cartStore";
-import { getSessionItem } from "../../utils/handleSession";
 
 interface IUseCartAddProduct {
   cartItemId: string;
