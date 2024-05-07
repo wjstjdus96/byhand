@@ -15,7 +15,6 @@ export const useCartAddProduct = ({
   maxQuantity,
 }: IUseCartAddProduct) => {
   const { addCartItem, findCartItem } = useCartProductStore();
-  const userId = getSessionItem("userId");
 
   const checkIsNoting = () => {
     if (cartItemCount == 0) {

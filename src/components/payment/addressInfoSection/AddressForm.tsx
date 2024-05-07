@@ -1,13 +1,11 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useAddress } from "../../../hooks/payment/useAddress";
+import { IAddressInfo } from "../../../pages/Payment";
+import { shippingAddressSchema } from "../../../utils/validationSchema";
 import { TextInput } from "../../common/form/TextInput";
 import { Button } from "../../ui/button";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { shippingAddressSchema } from "../../../utils/validationSchema";
-import { IAddressInfo } from "../../../pages/Payment";
-import { useEffect } from "react";
-import { useDaumPostcodePopup } from "react-daum-postcode";
-import { postcodeScriptUrl } from "react-daum-postcode/lib/loadPostcode";
-import { useAddress } from "../../../hooks/payment/useAddress";
 
 interface IAddressForm {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
