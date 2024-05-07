@@ -47,13 +47,14 @@ export const getPurchaseHistory = async (buyerId: string) => {
     let q = query(
       collection(db, "order"),
       where("buyerId", "==", buyerId),
-      orderBy("orderedAt", "asc")
+      orderBy("orderedAt", "desc")
     );
     const querySnapshot = await getDocs(q);
     const res: IOrderResData[] = querySnapshot.docs.map((doc) => ({
       purchaseId: doc.id,
       ...(doc.data() as IOrderReqData),
     }));
+
     return res;
   } catch (e) {
     console.log(e);

@@ -4,12 +4,12 @@ import { getSessionItem } from "../utils/handleSession";
 
 export const useUserInfo = () => {
   const uid = getSessionItem("userId");
-  const { data } = useQuery({
+  const { data: userInfo, isLoading: isuserInfoLoading } = useQuery({
     queryKey: ["user", uid],
     queryFn: () => getUser({ uid: uid! }),
     refetchOnWindowFocus: false,
     staleTime: Infinity,
   });
 
-  return { data };
+  return { userInfo, isuserInfoLoading };
 };

@@ -3,20 +3,20 @@ import { MdShoppingCart } from "@react-icons/all-files/md/MdShoppingCart";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logoImage.png";
 import { useHeaderVisibility } from "../../hooks/useHeaderVisibility";
-import { useCartStore } from "../../store/cartStore";
-import { checkAuthority } from "../../utils/checkAuthority";
 import { useLogout } from "../../hooks/useLogout";
+import { checkAuthority } from "../../utils/checkAuthority";
 import CartContainer from "../cart/CartContainer";
+import { useCartProductStore } from "../../store/cartStore";
 
 const Header = () => {
   const { isVisible } = useHeaderVisibility();
   const navigate = useNavigate();
-  const { toggleCart } = useCartStore();
   const { userId, auth } = checkAuthority();
   const { logout } = useLogout();
   const onClickMenu = (endpoint?: string) => {
     navigate(`/${endpoint ? endpoint : ""}`);
   };
+  const { cartItems } = useCartProductStore();
 
   const header_style = `fixed top-0 left-0 z-10 w-full h-12 py-2 px-10 flex items-center justify-between bg-white shadow-md transition-transform duration-300 ${
     isVisible ? "translate-y-0" : "-translate-y-full"
@@ -53,16 +53,21 @@ const Header = () => {
         )}
         {auth == "buyer" && (
           <>
-            <li className="menu-item" onClick={toggleCart}>
+            <li className="menu-item">
               <CartContainer>
-                <MdShoppingCart size={24} />
+                <div className="relative">
+                  <MdShoppingCart size={28} />
+                  <span className="absolute bottom-[-5px] right-[-8px] w-5 h-5 flex items-center justify-center text-xs rounded-full bg-[#312fd0] text-white">
+                    {Object.keys(cartItems).length}
+                  </span>
+                </div>
               </CartContainer>
             </li>
             <li
               className="menu-item"
               onClick={() => onClickMenu(`mypage/${userId}`)}
             >
-              <CgProfile size={24} />
+              <CgProfile size={26} />
             </li>
           </>
         )}

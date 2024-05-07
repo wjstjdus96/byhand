@@ -3,8 +3,7 @@ import { useCartProductStore } from "../store/cartStore";
 
 interface IUseQuantitySelection {
   maxQuantity: number;
-  initialCnt?: number;
-  isCartItem?: boolean;
+  initialCnt: number;
   cartItemId?: string;
 }
 
@@ -14,9 +13,7 @@ export const useQuantitySelection = ({
   cartItemId,
 }: IUseQuantitySelection) => {
   const { addCartItem } = useCartProductStore();
-  const [selectedQuantity, setSelectedQuantity] = useState<number>(
-    initialCnt ? initialCnt : 0
-  );
+  const [selectedQuantity, setSelectedQuantity] = useState<number>(initialCnt);
 
   const onClickMinus = () => {
     setSelectedQuantity((prev) => prev - 1);
@@ -30,7 +27,7 @@ export const useQuantitySelection = ({
   const isPlusDisabled = selectedQuantity == maxQuantity;
 
   useEffect(() => {
-    if (cartItemId) {
+    if (cartItemId && initialCnt) {
       addCartItem(cartItemId, selectedQuantity);
     }
   }, [selectedQuantity]);

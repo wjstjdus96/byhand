@@ -16,7 +16,7 @@ export const useCartAddProduct = ({
 
   const checkIsNoting = () => {
     if (cartItemCount == 0) {
-      toast({ description: "개수를 선택해주세요" });
+      toast({ description: "개수를 선택해주세요", duration: 700 });
       return true;
     }
     return false;
@@ -24,7 +24,10 @@ export const useCartAddProduct = ({
 
   const checkIsExceedMax = (totalCount: number) => {
     if (totalCount > maxQuantity) {
-      toast({ description: "최대 수량 이상의 개수를 담을 수 없습니다" });
+      toast({
+        description: "최대 수량 이상의 개수를 담을 수 없습니다",
+        duration: 700,
+      });
       return true;
     }
     return false;
@@ -32,7 +35,7 @@ export const useCartAddProduct = ({
 
   const addCart = (cartItemCount: number) => {
     addCartItem(cartItemId, cartItemCount);
-    toast({ description: "장바구니에 담겼습니다" });
+    toast({ description: "장바구니에 담겼습니다", duration: 700 });
   };
 
   const onClickAddItem = () => {

@@ -13,7 +13,9 @@ const AdminBoardDeleteBtn = ({ deleteHandler }: IAdminBoardDeleteBtn) => {
       actionName="삭제"
       onClickAction={deleteHandler}
     >
-      <Button className="p-2 h-6 text-xs font-normal">삭제</Button>
+      <Button variant="outline" className="p-2 h-6 text-xs font-normal">
+        삭제
+      </Button>
     </AlertDialogBox>
   );
 };

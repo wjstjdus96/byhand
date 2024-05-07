@@ -25,6 +25,7 @@ const ProductQuantitySection = ({
     isPlusDisabled,
   } = useQuantitySelection({
     maxQuantity: quantity,
+    initialCnt: 0,
   });
   const { productId } = useParams();
   const { onClickAddItem } = useCartAddProduct({

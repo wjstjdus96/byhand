@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { getSessionItem } from "../../utils/handleSession";
-import { useCartStore } from "../../store/cartStore";
 import { ICheckedItem } from "../useCheckboxSelection";
 
 export interface IItemsToBuy {
@@ -19,7 +18,6 @@ export const usePaymentRedirect = ({
   totalPrice,
   isCartItems,
 }: IUsePaymentRedirect) => {
-  const { closeCart } = useCartStore();
   const userId = getSessionItem("userId");
   const navigate = useNavigate();
   const onClickPurchase = () => {
@@ -34,7 +32,6 @@ export const usePaymentRedirect = ({
     navigate(`/payment/${userId}`, {
       state: { orderedItems: itemsToBuy, totalPrice, isCartItems },
     });
-    closeCart();
   };
 
   return { onClickPurchase };

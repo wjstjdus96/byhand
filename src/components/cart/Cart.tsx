@@ -1,8 +1,7 @@
 import { useCheckedTotalPrice } from "../../hooks/cart/useCheckedTotalPrice";
-import { useProductsByProductIds } from "../../hooks/cart/useProductsByProductIds";
+import { useProductsByCartIds } from "../../hooks/cart/useProductsByCartIds";
 import { useCheckboxSelection } from "../../hooks/useCheckboxSelection";
 import { useCartProductStore } from "../../store/cartStore";
-import CartHead from "./CartHead";
 import CartList from "./CartList";
 import CartPayment from "./CartPayment";
 
@@ -15,30 +14,31 @@ const Cart = () => {
         itemCount,
       })),
     });
-  const { products } = useProductsByProductIds();
+  const { products, refetch } = useProductsByCartIds({ cartItems });
   const { checkedItemsTotalPrice } = useCheckedTotalPrice({
     checkedItems,
     products,
+    cartItems,
   });
 
   console.log(cartItems);
+  console.log(products);
   return (
-    <div className="mt-6 flex flex-col gap-5 ">
-      {/* <CartHead /> */}
+    <div className="mt-6 h-full flex flex-col gap-5">
       <CartPayment
         checkedItems={checkedItems}
         checkedTotalPrice={checkedItemsTotalPrice}
       />
-      {!Object.keys(cartItems).length && (
-        <p className="text-center pt-10">장바구니가 비었습니다</p>
+      {products && (
+        <CartList
+          products={products}
+          checkedItems={checkedItems}
+          singleCheckHandler={handleSingleCheck}
+          allCheckHandler={handleAllCheck}
+          initCheckHandler={handleInitItems}
+          refetch={refetch}
+        />
       )}
-      <CartList
-        products={products}
-        checkedItems={checkedItems}
-        singleCheckHandler={handleSingleCheck}
-        allCheckHandler={handleAllCheck}
-        initCheckHandler={handleInitItems}
-      />
     </div>
   );
 };

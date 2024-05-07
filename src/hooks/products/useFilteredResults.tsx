@@ -22,6 +22,7 @@ export const useFilteredResults = ({
     fetchNextPage,
     isFetchingNextPage,
     refetch,
+    isLoading,
   } = useInfiniteQuery({
     queryKey: ["products", category, keyword, sort],
     queryFn: ({ pageParam }: { pageParam: any }) =>
@@ -59,5 +60,5 @@ export const useFilteredResults = ({
     }
   }, [inView, isFetchingNextPage]);
 
-  return { products, ref, isFetchingNextPage };
+  return { products, ref, isFetchingNextPage, isLoading };
 };

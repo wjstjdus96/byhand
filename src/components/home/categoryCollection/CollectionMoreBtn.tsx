@@ -7,7 +7,10 @@ const CollectionMoreBtn = ({ category }: { category: string }) => {
   };
 
   return (
-    <div className="text-sm cursor-pointer" onClick={onClickBtn}>
+    <div
+      className="text-sm cursor-pointer  hover:font-semibold"
+      onClick={onClickBtn}
+    >
       더보기
     </div>
   );

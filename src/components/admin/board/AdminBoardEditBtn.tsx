@@ -12,7 +12,11 @@ const AdminBoardEditBtn = ({ productId }: IAdminBoardEditBtn) => {
   };
 
   return (
-    <Button onClick={onClickEdit} className="p-2 h-6 text-xs font-normal">
+    <Button
+      variant="outline"
+      onClick={onClickEdit}
+      className="p-2 h-6 text-xs font-normal"
+    >
       수정
     </Button>
   );

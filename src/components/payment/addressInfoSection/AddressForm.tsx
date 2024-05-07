@@ -1,10 +1,11 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useAddress } from "../../../hooks/payment/useAddress";
+import { IAddressInfo } from "../../../pages/Payment";
+import { shippingAddressSchema } from "../../../utils/validationSchema";
 import { TextInput } from "../../common/form/TextInput";
 import { Button } from "../../ui/button";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { shippingAddressSchema } from "../../../utils/validationSchema";
-import { IAddressInfo } from "../../../pages/Payment";
-import { useEffect } from "react";
 
 interface IAddressForm {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,10 +15,11 @@ interface IAddressForm {
   >;
 }
 
-interface IAddressFormData {
+export interface IAddressFormData {
   recipientName: string;
   recipientPhone: string;
   deliveryAddress: string;
+  deliveryPostcode: string;
 }
 
 const AddressForm = ({
@@ -33,6 +35,7 @@ const AddressForm = ({
   } = useForm<IAddressFormData>({
     resolver: zodResolver(shippingAddressSchema),
   });
+  const { handleClick } = useAddress({ setValue });
 
   const onSubmitHandler: SubmitHandler<IAddressFormData> = (data) => {
     setIsOpen(false);
@@ -40,6 +43,7 @@ const AddressForm = ({
       recipientName: data.recipientName,
       recipientPhone: data.recipientPhone,
       deliveryAddress: data.deliveryAddress,
+      deliveryPostCode: data.deliveryPostcode,
     });
   };
 
@@ -48,6 +52,7 @@ const AddressForm = ({
       setValue("recipientName", addressInfo.recipientName);
       setValue("recipientPhone", addressInfo.recipientPhone);
       setValue("deliveryAddress", addressInfo.deliveryAddress);
+      setValue("deliveryPostcode", addressInfo.deliveryPostCode);
     }
   }, []);
 
@@ -70,10 +75,21 @@ const AddressForm = ({
           errorMsg={errors.recipientPhone?.message}
         />
       </div>
+      <div className="flex gap-6 items-end">
+        <TextInput
+          name="deliveryPostcode"
+          register={register}
+          label="배송지 우편번호"
+          errorMsg={errors.deliveryPostcode?.message}
+        />
+        <Button type="button" variant="secondary" onClick={handleClick}>
+          우편번호 찾기
+        </Button>
+      </div>
       <TextInput
         name="deliveryAddress"
         register={register}
-        label="배송지 주소"
+        label="배송지 상세 주소"
         errorMsg={errors.deliveryAddress?.message}
       />
       <Button type="submit" className="w-20 self-end">
