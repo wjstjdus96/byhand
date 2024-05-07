@@ -1,11 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { loginSchema } from "../../utils/validationSchema";
-import { authReq } from "../../utils/dataSchema";
-import { auth } from "../../api/auth";
-import { getUser } from "../../api/user";
-import { setSessionItem } from "../../utils/handleSession";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../api/auth";
+import { useUserStore } from "../../store/userStore";
+import { loginSchema } from "../../utils/validationSchema";
 
 interface ILoginData {
   email: string;
@@ -16,40 +14,34 @@ export const useLogin = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ILoginData>({ resolver: zodResolver(loginSchema) });
-
+  const { setUser } = useUserStore();
   const navigate = useNavigate();
 
-  const onHandleRedirct = (isSeller: boolean, userId?: string) => {
+  const onHandleRedirct = (isSeller: boolean, userId: string) => {
     if (isSeller) navigate(`/admin/${userId}`);
     else navigate("/");
   };
 
   const onSubmitHandler: SubmitHandler<ILoginData> = (data) => {
     try {
-      const req = authReq(data);
+      const req = {
+        email: data.email,
+        password: data.password,
+      };
 
-      auth("signInWithPassword", req)
-        .then(async (res) => {
-          if (res.status == 200) {
-            const data = await getUser({ uid: res.data.localId });
-            if (data) {
-              setSessionItem("userId", res.data.localId);
-              setSessionItem("auth", data.isSeller.toString());
-              onHandleRedirct(data.isSeller, res.data.localId);
-            }
+      login({ req })
+        .then((res) => {
+          if (res) {
+            setUser(res);
+            onHandleRedirct(res.isSeller, res.uid);
+          } else {
+            reset();
           }
         })
-        .catch((e) => {
-          const errorMsg = e.response.data.error.message;
-          if (errorMsg == "EMAIL_NOT_FOUND") {
-            alert("이메일이 틀렸습니다");
-          }
-          if (errorMsg == "INVALID_PASSWORD") {
-            alert("비밀번호가 틀렸습니다");
-          }
-        });
+        .catch((e) => alert("에러가 발생했습니다" + e));
     } catch (e: any) {
       alert(e.response.data);
     }

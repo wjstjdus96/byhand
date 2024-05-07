@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { FieldValue, serverTimestamp } from "firebase/firestore";
 import { registerOrder } from "../../api/product";
-import { getSessionItem } from "../../utils/handleSession";
+import { useUserStore } from "../../store/userStore";
 
 export interface IOrderReqData {
   buyerId: string;
@@ -35,7 +35,7 @@ interface IAddOrderToDB {
 }
 
 export const useAddOrder = () => {
-  const userId = getSessionItem("userId");
+  const { user } = useUserStore();
   const addMutation = useMutation({
     mutationFn: (doc: IOrderReqData) => registerOrder(doc),
     onSuccess: () => {
@@ -48,7 +48,7 @@ export const useAddOrder = () => {
     orderedTotalPrice,
   }: IAddOrderToDB) => {
     const reqData: IOrderReqData = {
-      buyerId: userId!,
+      buyerId: user?.uid!,
       orderedProducts: orderedItems.map((item) => ({
         orderProductId: item.itemId,
         orderQuantity: item.itemCount,

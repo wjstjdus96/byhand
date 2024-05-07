@@ -2,11 +2,11 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import { getSellerProducts } from "../../api/product";
+import { useUserStore } from "../../store/userStore";
 import { IProductRegisterReqData } from "../../types/product";
-import { getSessionItem } from "../../utils/handleSession";
 
 export const useSellerProducts = () => {
-  const uid = getSessionItem("userId");
+  const { user } = useUserStore();
   const { ref, inView } = useInView();
   const {
     data: querySnap,
@@ -14,9 +14,9 @@ export const useSellerProducts = () => {
     isFetchingNextPage,
     isLoading,
   } = useInfiniteQuery({
-    queryKey: ["sellProduct", uid],
+    queryKey: ["sellProduct", user?.uid],
     queryFn: ({ pageParam }: { pageParam: any }) =>
-      getSellerProducts(uid!, 20, pageParam),
+      getSellerProducts(user?.uid!, 20, pageParam),
     initialPageParam: null,
     getNextPageParam: (querySnapshot) => {
       if (querySnapshot.size < 10) return null;

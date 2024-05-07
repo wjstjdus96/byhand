@@ -12,6 +12,8 @@ interface IOrderInfoSection {
 }
 
 const OrderInfoSection = ({ orderItems, orderProducts }: IOrderInfoSection) => {
+  console.log("orderProducts");
+
   return (
     <PaymentSection sectionTitle="주문 상품 정보">
       <div className="flex flex-col gap-3">

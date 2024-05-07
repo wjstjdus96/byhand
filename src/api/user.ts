@@ -35,7 +35,7 @@ export const getUser = async ({ uid }: { uid: string }) => {
   try {
     const res = await getDoc(doc(db, "users", uid));
     if (res.exists()) {
-      return res.data() as IUserData;
+      return { uid: uid, ...(res.data() as IUserData) };
     }
   } catch (e) {
     alert(e);

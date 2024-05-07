@@ -1,15 +1,16 @@
 import { useMutation } from "@tanstack/react-query";
+import { serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { IProductFormData, IProductRegisterReqData } from "../../types/product";
-import { registerProduct } from "../../api/product";
 import { SubmitHandler } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { getImageUrl } from "../../api/image";
-import { registerReq } from "../../utils/dataSchema";
+import { registerProduct } from "../../api/product";
 import { toast } from "../../components/ui/use-toast";
-import { getSessionItem } from "../../utils/handleSession";
+import { useUserStore } from "../../store/userStore";
+import { IProductFormData, IProductRegisterReqData } from "../../types/product";
 
 export const useRegisterHandler = () => {
+  const { user } = useUserStore();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -21,7 +22,18 @@ export const useRegisterHandler = () => {
     setIsLoading(true);
 
     const imageUrl = await getImageUrl(data.productImage);
-    const doc = registerReq(data, imageUrl);
+
+    const doc = {
+      sellerId: user?.uid!,
+      productImage: imageUrl,
+      productName: data.productName,
+      productCategory: data.productCategory,
+      productPrice: Number(data.productPrice),
+      productQuantity: Number(data.productQuantity),
+      productDescription: data.productDescription,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    };
 
     registerMutation.mutate(doc, {
       onSuccess: () => {
@@ -29,7 +41,7 @@ export const useRegisterHandler = () => {
         toast({
           description: "상품이 정상적으로 등록되었습니다",
         });
-        navigate(`/admin/${getSessionItem("userId")}`);
+        navigate(`/admin/${user?.uid}`);
       },
     });
   };

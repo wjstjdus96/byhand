@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProductsByProductsId } from "../../api/product";
 import { useEffect } from "react";
-import { useCartProductStore } from "../../store/cartStore";
-import { getSessionItem } from "../../utils/handleSession";
+import { getProductsByProductsId } from "../../api/product";
+import { useUserStore } from "../../store/userStore";
 import { ICartProductData } from "../../types/cart";
 
 interface IUseProductByCartIds {
@@ -10,14 +9,13 @@ interface IUseProductByCartIds {
 }
 
 export const useProductsByCartIds = ({ cartItems }: IUseProductByCartIds) => {
-  // const { cartItems } = useCartProductStore();
-  const userId = getSessionItem("userId");
+  const { user } = useUserStore();
   const {
     data: products,
     refetch,
     isLoading,
   } = useQuery({
-    queryKey: ["cart", userId],
+    queryKey: ["cart", user?.uid],
     queryFn: () => getProductsByProductsId(Object.keys(cartItems)),
     refetchOnWindowFocus: false,
   });

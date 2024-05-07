@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUser } from "../api/user";
-import { getSessionItem } from "../utils/handleSession";
+import { useUserStore } from "../store/userStore";
 
 export const useUserInfo = () => {
-  const uid = getSessionItem("userId");
+  const { user } = useUserStore();
   const { data: userInfo, isLoading: isuserInfoLoading } = useQuery({
-    queryKey: ["user", uid],
-    queryFn: () => getUser({ uid: uid! }),
+    queryKey: ["user", user?.uid],
+    queryFn: () => getUser({ uid: user?.uid! }),
     refetchOnWindowFocus: false,
     staleTime: Infinity,
   });
