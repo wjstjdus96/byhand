@@ -16,6 +16,7 @@ export interface IAddressInfo {
   recipientName: string;
   recipientPhone: string;
   deliveryAddress: string;
+  deliveryPostCode: string;
 }
 
 export const SHIPPING_FEE = 2500;

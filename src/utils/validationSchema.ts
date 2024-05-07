@@ -61,4 +61,5 @@ export const shippingAddressSchema = z.object({
     .min(1, { message: "수령인 전화번호을 입력해주세요" })
     .regex(/^\d+$/, { message: "유효한 전화번호를 입력해주세요" }),
   deliveryAddress: z.string().min(1, { message: "배송지 주소를 입력해주세요" }),
+  deliveryPostcode: z.string().min(1, { message: "우편번호를 입력해주세요" }),
 });

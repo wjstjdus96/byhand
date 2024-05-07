@@ -20,7 +20,7 @@ const AddressInfoSection = ({
           <p>
             {addressInfo.recipientName} | {addressInfo.recipientPhone}
           </p>
-          {/* <p>{addressInfo.buyerPostCode}</p> */}
+          <p>{addressInfo.deliveryPostCode}</p>
           <p>{addressInfo.deliveryAddress}</p>
         </div>
       )}
