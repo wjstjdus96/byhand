@@ -21,7 +21,8 @@ const Cart = () => {
     cartItems,
   });
 
-  // console.log(products);
+  console.log(cartItems);
+  console.log(products);
   return (
     <div className="mt-6 h-full flex flex-col gap-5">
       <CartPayment

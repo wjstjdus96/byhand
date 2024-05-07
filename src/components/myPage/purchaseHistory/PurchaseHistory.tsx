@@ -5,8 +5,6 @@ import PurchaseHistoryItem from "./PurchaseHistoryItem";
 const PurchaseHistory = () => {
   const { data: historyItems, isLoading } = usePurchaseHistory();
 
-  console.log(historyItems);
-
   return (
     <div>
       <h5 className="text-lg font-semibold mb-3">구매내역</h5>

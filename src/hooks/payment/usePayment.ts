@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { IUserData } from "../../api/user";
 import { IAddressInfo } from "../../pages/Payment";
 import { RequestPayParams, RequestPayResponse } from "../../types/imp";
 import { useCartDeletion } from "../cart/useCartDeletion";
-import { SHIPPING_FEE } from "./../../pages/Payment";
 import { IOrderItem, useAddOrder } from "./useAddOrder";
 import { useReduceProductQuantity } from "./useReduceProductQuantity";
-import { IUserData } from "../../api/user";
+import { queryClient } from "../../App";
 
 interface IUsePayment {
   addressInfo: IAddressInfo | undefined;
@@ -48,13 +48,13 @@ export const usePayment = ({
       pg: "nice.iamport02m",
       pay_method: "card",
       merchant_uid: `mid_${new Date().getTime()}`,
-      amount: orderedTotalPrice + SHIPPING_FEE,
+      amount: 500,
       name: "BYHAND 상품 결제",
       buyer_name: buyerInfo.userName,
       buyer_email: buyerInfo.userEmail,
       recipient_name: addressInfo.recipientName,
       recipient_phone: addressInfo.recipientPhone,
-      shipping_addr: addressInfo.deliveryAddress,
+      shipping_addr: addressInfo.deliveryPostCode + addressInfo.deliveryAddress,
     };
 
     const callback = async (response: RequestPayResponse) => {
@@ -70,6 +70,18 @@ export const usePayment = ({
         alert("결제 성공");
         navigate("/");
       } else {
+        setIsLoading(true);
+        if (isCartItems) {
+          console.log("dk");
+          queryClient.invalidateQueries({ queryKey: ["cart"] }).then(() => {
+            deleteCartItems(orderedItems);
+            console.log("으아");
+          });
+        }
+        await AddOrderToDB({ orderedItems, orderedTotalPrice });
+        await reduceProductsQuantity({ orderedItems });
+
+        setIsLoading(false);
         alert(`결제 실패: ${error_msg}`);
       }
     };

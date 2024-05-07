@@ -13,7 +13,7 @@ const PurchaseHistoryItem = ({ historyItem }: IPurchaseHistoryItem) => {
     <div className="flex flex-col gap-3 bg-slate-50 p-5 rounded-lg">
       <div className="flex justify-between">
         <p className="text-sm">
-          {convertTimestamp(historyItem.orderedAt.seconds)}
+          {convertTimestamp(historyItem.orderedAt.toDate())}
         </p>
         <span className=" text-sm">
           총 주문 금액: {convertPriceUnit(historyItem.purchaseAmount)} 원
