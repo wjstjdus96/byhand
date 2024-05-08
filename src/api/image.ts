@@ -7,7 +7,7 @@ export const uploadProductImage = async (file: File, name: string) => {
   return await uploadBytes(storageRef, file);
 };
 
-export const getImageUrl = async (productImage: (string | File)[]) => {
+export const getImagesUrl = async (productImage: (string | File)[]) => {
   const imageArray: string[] = [];
 
   for (const image of productImage) {
@@ -21,4 +21,10 @@ export const getImageUrl = async (productImage: (string | File)[]) => {
   }
 
   return imageArray;
+};
+
+export const getImageUrl = async (productImage: File) => {
+  const snapshot = await uploadProductImage(productImage, productImage.name);
+  const downloadUrl = await getDownloadURL(snapshot.ref);
+  return downloadUrl;
 };

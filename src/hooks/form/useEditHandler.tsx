@@ -3,7 +3,7 @@ import { serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { getImageUrl } from "../../api/image";
+import { getImagesUrl } from "../../api/image";
 import { updateProduct } from "../../api/product";
 import { toast } from "../../components/ui/use-toast";
 import { useUserStore } from "../../store/userStore";
@@ -25,7 +25,7 @@ export const useEditHandler = ({
   const onEditHandler: SubmitHandler<IProductFormData> = async (data) => {
     setIsLoading(true);
 
-    const imageUrl = await getImageUrl(data.productImage);
+    const imageUrl = await getImagesUrl(data.productImage);
 
     const doc = {
       productImage: imageUrl,
