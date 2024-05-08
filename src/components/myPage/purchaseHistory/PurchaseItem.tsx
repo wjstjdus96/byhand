@@ -28,7 +28,7 @@ const PurchaseItem = ({ itemIdx, historyId, historyItems }: IPurchaseItem) => {
         <>
           <div className="flex gap-3 items-center">
             <img
-              src={productDetail.productImage[0]}
+              src={productDetail.productThumbnail}
               className="object-cover w-20 rounded-sm"
             />
             <div className="flex flex-col  gap-1 w-full py-1">

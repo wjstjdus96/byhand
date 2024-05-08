@@ -17,9 +17,9 @@ const ProductGridItem = ({ data, lastItemRef }: IProductGridItem) => {
     <div onClick={onClickItem} ref={lastItemRef} className="cursor-pointer">
       <div className="flex w-full aspect-square overflow-hidden">
         <img
-          src={data.productImage[0]}
+          src={data.productThumbnail}
           alt="상품이미지"
-          className=" rounded-sm w-full h-full object-cover transition-transform transform hover:scale-110"
+          className=" rounded-sm w-full h-full object-cover transition-transform transform hover:scale-[1.03]"
         />
       </div>
       <div className="flex flex-col gap-2 py-2 px-1">

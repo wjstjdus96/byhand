@@ -2,9 +2,10 @@ import { forwardRef } from "react";
 import { ICheckedItem } from "../../../hooks/useCheckboxSelection";
 import { convertPriceUnit } from "../../../utils/convertPriceUnit";
 import { Checkbox } from "../../ui/checkbox";
+import { IProductResData } from "../../../types/product";
 
 interface IProductBoardItem {
-  item: any;
+  item: IProductResData;
   children: React.ReactNode;
   checkHandler: (isCheck: boolean, currentItem: ICheckedItem) => void;
   checkedItems: ICheckedItem[];
@@ -22,7 +23,7 @@ const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
         <Checkbox
           onCheckedChange={(checked) => {
             checkHandler(
-              checked,
+              checked as boolean,
               selectedCnt
                 ? { itemId: item.id, itemCount: selectedCnt }
                 : { itemId: item.id }
@@ -32,7 +33,7 @@ const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
         />
         <div className={`${isCart ? "w-32" : "w-28"} aspect-square`}>
           <img
-            src={item.productImage[0]}
+            src={item.productThumbnail}
             className="object-cover w-full h-full rounded-sm"
           />
         </div>
