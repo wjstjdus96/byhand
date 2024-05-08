@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { updatePurchaseHistory } from "../../api/user";
-import { IOrderedProduct } from "../payment/useAddOrder";
+import { IOrderedProduct } from "../../types/order";
 
 interface IUseOrderCancel {
   historyItems: IOrderedProduct[];

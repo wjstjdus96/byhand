@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IUserData } from "../../api/user";
-import { IAddressInfo, SHIPPING_FEE } from "../../pages/Payment";
+import { SHIPPING_FEE } from "../../pages/Payment";
 import { RequestPayParams, RequestPayResponse } from "../../types/imp";
 import { useCartDeletion } from "../cart/useCartDeletion";
-import { IOrderItem, useAddOrder } from "./useAddOrder";
 import { useReduceProductQuantity } from "./useReduceProductQuantity";
 import { queryClient } from "../../App";
+import { IAddressInfo, IOrderItem } from "../../types/order";
+import { useAddOrder } from "./useAddOrder";
 
 interface IUsePayment {
   addressInfo: IAddressInfo | undefined;

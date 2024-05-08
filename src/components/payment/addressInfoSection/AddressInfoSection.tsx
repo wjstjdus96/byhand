@@ -1,4 +1,4 @@
-import { IAddressInfo } from "../../../pages/Payment";
+import { IAddressInfo } from "../../../types/order";
 import { Button } from "../../ui/button";
 import PaymentSection from "../PaymentSection";
 import AddressModal from "./AddressModal";

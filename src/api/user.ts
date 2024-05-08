@@ -10,11 +10,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
-import {
-  IOrderReqData,
-  IOrderResData,
-  IOrderedProduct,
-} from "../hooks/payment/useAddOrder";
+import { IOrderReqData, IOrderResData, IOrderedProduct } from "../types/order";
 
 export interface IUserData {
   userName: string;

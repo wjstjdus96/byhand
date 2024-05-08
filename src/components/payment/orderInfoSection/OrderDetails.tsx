@@ -1,13 +1,11 @@
-import { useEffect } from "react";
-import { IItemsToBuy } from "../../../hooks/payment/usePaymentRedirect";
-import { useProductsByOrderIds } from "../../../hooks/payment/useProductsByOrderIds";
 import { ICheckedItem } from "../../../hooks/useCheckboxSelection";
+import { IOrderItem } from "../../../types/order";
 import { IProductResData } from "../../../types/product";
 import PaymentSection from "../PaymentSection";
 import OrderItem from "./OrderItem";
 
 interface IOrderInfoSection {
-  orderItems: ICheckedItem[] | IItemsToBuy[];
+  orderItems: ICheckedItem[] | IOrderItem[];
   orderProducts: IProductResData[] | undefined;
 }
 

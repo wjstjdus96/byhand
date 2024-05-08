@@ -1,6 +1,5 @@
 import { IoClose } from "@react-icons/all-files/io5/IoClose";
 import { useState } from "react";
-import { IAddressInfo } from "../../../pages/Payment";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -10,6 +9,7 @@ import {
   AlertDialogTrigger,
 } from "../../ui/alert-dialog";
 import AddressForm from "./AddressForm";
+import { IAddressInfo } from "../../../types/order";
 
 interface IAddressModal {
   children: JSX.Element;

@@ -1,14 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../../store/userStore";
 import { ICheckedItem } from "../useCheckboxSelection";
-
-export interface IItemsToBuy {
-  itemId: string;
-  itemCount: number;
-}
+import { IOrderItem } from "../../types/order";
 
 interface IUsePaymentRedirect {
-  itemsToBuy: ICheckedItem[] | IItemsToBuy[];
+  itemsToBuy: ICheckedItem[] | IOrderItem[];
   totalPrice: number;
   isCartItems: boolean;
 }

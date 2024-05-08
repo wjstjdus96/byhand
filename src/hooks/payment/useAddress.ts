@@ -1,7 +1,7 @@
 import { postcodeScriptUrl } from "react-daum-postcode/lib/loadPostcode";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { UseFormSetValue } from "react-hook-form";
-import { IAddressFormData } from "../../components/payment/addressInfoSection/AddressForm";
+import { IAddressFormData } from "../../types/order";
 
 export const useAddress = ({
   setValue,

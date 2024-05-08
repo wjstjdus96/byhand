@@ -1,4 +1,4 @@
-import { IOrderResData } from "../../../hooks/payment/useAddOrder";
+import { IOrderResData } from "../../../types/order";
 import { convertPriceUnit } from "../../../utils/convertPriceUnit";
 import { convertTimestamp } from "../../../utils/convertTimestamp";
 import { Separator } from "../../ui/separator";
