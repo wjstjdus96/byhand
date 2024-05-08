@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useOrderCancel } from "../../../hooks/myPage.ts/useOrderCancel";
-import { IOrderedProduct } from "../../../hooks/payment/useAddOrder";
 import { useProductDetail } from "../../../hooks/productDetails.tsx/useProductDetail";
 import AlertDialogBox from "../../common/AlertDialogBox";
 import { Badge } from "../../ui/badge";
 import { Button } from "../../ui/button";
+import { IOrderedProduct } from "../../../types/order";
 
 interface IPurchaseItem {
   historyItems: IOrderedProduct[];
@@ -28,7 +28,7 @@ const PurchaseItem = ({ itemIdx, historyId, historyItems }: IPurchaseItem) => {
         <>
           <div className="flex gap-3 items-center">
             <img
-              src={productDetail.productImage[0]}
+              src={productDetail.productThumbnail}
               className="object-cover w-20 rounded-sm"
             />
             <div className="flex flex-col  gap-1 w-full py-1">

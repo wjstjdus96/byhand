@@ -1,12 +1,6 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import { ICartProductData } from "../types/cart";
-import { createJSONStorage, persist } from "zustand/middleware";
-
-interface ICartState {
-  isCartOpen: boolean;
-  toggleCart: () => void;
-  closeCart: () => void;
-}
 
 interface ICartProductState {
   cartItems: ICartProductData;
@@ -14,12 +8,6 @@ interface ICartProductState {
   findCartItem: any;
   deleteCartItem: (cartItemId: string) => void;
 }
-
-export const useCartStore = create<ICartState>((set) => ({
-  isCartOpen: false,
-  toggleCart: () => set((state) => ({ isCartOpen: !state.isCartOpen })),
-  closeCart: () => set(() => ({ isCartOpen: false })),
-}));
 
 export const useCartProductStore = create(
   persist<ICartProductState>(

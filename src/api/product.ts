@@ -16,7 +16,7 @@ import {
 } from "firebase/firestore";
 import { IProductRegisterReqData, IProductResData } from "../types/product";
 import { db } from "./firebase";
-import { IOrderItem, IOrderReqData } from "../hooks/payment/useAddOrder";
+import { IOrderItem, IOrderReqData } from "../types/order";
 
 export const registerProduct = async (req: IProductRegisterReqData) => {
   const res = await addDoc(collection(db, "product"), req);

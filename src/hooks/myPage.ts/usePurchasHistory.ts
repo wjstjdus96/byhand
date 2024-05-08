@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getSessionItem } from "../../utils/handleSession";
 import { getPurchaseHistory } from "../../api/user";
+import { useUserStore } from "../../store/userStore";
 
 export const usePurchaseHistory = () => {
-  const buyerId = getSessionItem("userId");
+  const { user } = useUserStore();
   const { data, isLoading } = useQuery({
-    queryKey: ["purchaseHistory", buyerId],
-    queryFn: () => getPurchaseHistory(buyerId!),
+    queryKey: ["purchaseHistory", user?.uid],
+    queryFn: () => getPurchaseHistory(user?.uid!),
     refetchOnWindowFocus: false,
   });
 

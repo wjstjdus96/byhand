@@ -4,15 +4,17 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logoImage.png";
 import { useHeaderVisibility } from "../../hooks/useHeaderVisibility";
 import { useLogout } from "../../hooks/useLogout";
-import { checkAuthority } from "../../utils/checkAuthority";
 import CartContainer from "../cart/CartContainer";
 import { useCartProductStore } from "../../store/cartStore";
+import { useAuthority } from "../../hooks/useAuthority";
+import { useUserStore } from "../../store/userStore";
 
 const Header = () => {
   const { isVisible } = useHeaderVisibility();
   const navigate = useNavigate();
-  const { userId, auth } = checkAuthority();
+  const { auth } = useAuthority();
   const { logout } = useLogout();
+  const { user } = useUserStore();
   const onClickMenu = (endpoint?: string) => {
     navigate(`/${endpoint ? endpoint : ""}`);
   };
@@ -39,7 +41,7 @@ const Header = () => {
         {auth == "seller" && (
           <li
             className="menu-item"
-            onClick={() => onClickMenu(`admin/${userId}`)}
+            onClick={() => onClickMenu(`admin/${user?.uid}`)}
           >
             나의 판매상품
           </li>
@@ -65,7 +67,7 @@ const Header = () => {
             </li>
             <li
               className="menu-item"
-              onClick={() => onClickMenu(`mypage/${userId}`)}
+              onClick={() => onClickMenu(`mypage/${user?.uid}`)}
             >
               <CgProfile size={26} />
             </li>

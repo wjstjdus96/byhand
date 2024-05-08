@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { updateProductsQuantity } from "../../api/product";
-import { IOrderItem } from "./useAddOrder";
 import { queryClient } from "../../App";
+import { IOrderItem } from "../../types/order";
 
 export const useReduceProductQuantity = ({
   orderedItems,

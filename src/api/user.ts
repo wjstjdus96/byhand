@@ -10,11 +10,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
-import {
-  IOrderReqData,
-  IOrderResData,
-  IOrderedProduct,
-} from "../hooks/payment/useAddOrder";
+import { IOrderReqData, IOrderResData, IOrderedProduct } from "../types/order";
 
 export interface IUserData {
   userName: string;
@@ -35,7 +31,7 @@ export const getUser = async ({ uid }: { uid: string }) => {
   try {
     const res = await getDoc(doc(db, "users", uid));
     if (res.exists()) {
-      return res.data() as IUserData;
+      return { uid: uid, ...(res.data() as IUserData) };
     }
   } catch (e) {
     alert(e);

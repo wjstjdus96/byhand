@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IUserData } from "../../api/user";
-import { IAddressInfo } from "../../pages/Payment";
+import { SHIPPING_FEE } from "../../pages/Payment";
 import { RequestPayParams, RequestPayResponse } from "../../types/imp";
 import { useCartDeletion } from "../cart/useCartDeletion";
-import { IOrderItem, useAddOrder } from "./useAddOrder";
 import { useReduceProductQuantity } from "./useReduceProductQuantity";
 import { queryClient } from "../../App";
+import { IAddressInfo, IOrderItem } from "../../types/order";
+import { useAddOrder } from "./useAddOrder";
 
 interface IUsePayment {
   addressInfo: IAddressInfo | undefined;
@@ -48,7 +49,7 @@ export const usePayment = ({
       pg: "nice.iamport02m",
       pay_method: "card",
       merchant_uid: `mid_${new Date().getTime()}`,
-      amount: 500,
+      amount: orderedTotalPrice + SHIPPING_FEE,
       name: "BYHAND 상품 결제",
       buyer_name: buyerInfo.userName,
       buyer_email: buyerInfo.userEmail,

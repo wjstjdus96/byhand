@@ -1,6 +1,6 @@
 import { queryClient } from "../../App";
 import { useCartProductStore } from "../../store/cartStore";
-import { getSessionItem } from "../../utils/handleSession";
+import { useUserStore } from "../../store/userStore";
 
 interface IOrderItems {
   itemCount: number;
@@ -8,13 +8,13 @@ interface IOrderItems {
 }
 
 export const useCartDeletion = () => {
-  const userId = getSessionItem("userId");
+  const { user } = useUserStore();
   const { deleteCartItem } = useCartProductStore();
   const deleteCartItems = async (orderedCartItems: IOrderItems[]) => {
     orderedCartItems.forEach((item) => {
       deleteCartItem(item.itemId);
     });
-    queryClient.invalidateQueries({ queryKey: ["cart", userId] });
+    queryClient.invalidateQueries({ queryKey: ["cart", user?.uid] });
     console.log("장바구니 삭제 완료");
   };
 

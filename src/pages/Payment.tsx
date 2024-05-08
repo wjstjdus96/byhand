@@ -6,18 +6,11 @@ import BuyerInfoSection from "../components/payment/buyerInfoSection/BuyerInfoSe
 import OrderInfoSection from "../components/payment/orderInfoSection/OrderDetails";
 import TotalPriceSection from "../components/payment/totalPriceSection/TotalPriceSection";
 import { Button } from "../components/ui/button";
-import { IOrderItem } from "../hooks/payment/useAddOrder";
 import { usePayment } from "../hooks/payment/usePayment";
 import { useProductsByOrderIds } from "../hooks/payment/useProductsByOrderIds";
 import { useUserInfo } from "../hooks/useUserInfo";
 import Layout from "../layout/Layout";
-
-export interface IAddressInfo {
-  recipientName: string;
-  recipientPhone: string;
-  deliveryAddress: string;
-  deliveryPostCode: string;
-}
+import { IAddressInfo, IOrderItem } from "../types/order";
 
 export const SHIPPING_FEE = 2500;
 

@@ -1,4 +1,5 @@
 export interface IProductRegisterReqData {
+  productThumbnail: string;
   productImage: string[];
   productName: string;
   productCategory: string;
@@ -11,6 +12,7 @@ export interface IProductRegisterReqData {
 }
 
 export interface IProductEditReqData {
+  // productThumbnail: string;
   productImage: string[];
   productName: string;
   productCategory: string;
@@ -35,6 +37,7 @@ export interface ICategoryType {
 }
 
 export interface IProductResData {
+  productThumbnail: string;
   productImage: string[];
   productName: string;
   productCategory: string;

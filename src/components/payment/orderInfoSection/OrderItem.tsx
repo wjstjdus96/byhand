@@ -1,7 +1,8 @@
+import { IProductResData } from "../../../types/product";
 import { convertPriceUnit } from "../../../utils/convertPriceUnit";
 
 interface IOrderItem {
-  productInfo: any;
+  productInfo: IProductResData;
   selectedQuantity: number;
 }
 
@@ -11,7 +12,7 @@ const OrderItem = ({ productInfo, selectedQuantity }: IOrderItem) => {
   return (
     <div className="flex gap-3">
       <img
-        src={productInfo.productImage[0]}
+        src={productInfo.productThumbnail}
         className="object-cover w-24 aspect-square rounded-sm"
       />
       <div className="flex flex-col gap-1 w-full">

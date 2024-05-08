@@ -1,10 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { signupSchema } from "../../utils/validationSchema";
 import { useNavigate } from "react-router-dom";
-import { authReq, setUserReq } from "../../utils/dataSchema";
-import { auth } from "../../api/auth";
+import { signup } from "../../api/auth";
 import { setUser } from "../../api/user";
+import { signupSchema } from "../../utils/validationSchema";
 
 export interface ISignupData {
   email: string;
@@ -27,22 +26,23 @@ export const useSignup = () => {
 
   const onSubmitHandler: SubmitHandler<ISignupData> = (data) => {
     try {
-      const sinupReq = authReq(data);
-      const userReq = setUserReq(data);
+      const sinupReq = {
+        email: data.email,
+        password: data.password,
+      };
 
-      auth("signUp", sinupReq)
-        .then(async (res) => {
-          if (res.status == 200) {
-            setUser(res.data.localId, userReq);
-            navigate("/login");
-          }
-        })
-        .catch((e) => {
-          const errorMsg = e.response.data.error.message;
-          if (errorMsg == "EMAIL_EXISTS") {
-            alert("해당 이메일 주소는 이미 다른 계정에서 사용 중입니다.");
-          }
-        });
+      const userReq = {
+        userName: data.nickname,
+        isSeller: data.authority == "seller",
+        userEmail: data.email,
+      };
+
+      signup({ req: sinupReq }).then((res) => {
+        if (res) {
+          setUser(res.user.uid, userReq);
+          navigate("/login");
+        }
+      });
     } catch (e: any) {
       alert(e.response.data);
     }

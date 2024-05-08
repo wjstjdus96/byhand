@@ -1,14 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { getSessionItem } from "../../utils/handleSession";
+import { useUserStore } from "../../store/userStore";
 import { ICheckedItem } from "../useCheckboxSelection";
-
-export interface IItemsToBuy {
-  itemId: string;
-  itemCount: number;
-}
+import { IOrderItem } from "../../types/order";
 
 interface IUsePaymentRedirect {
-  itemsToBuy: ICheckedItem[] | IItemsToBuy[];
+  itemsToBuy: ICheckedItem[] | IOrderItem[];
   totalPrice: number;
   isCartItems: boolean;
 }
@@ -18,7 +14,7 @@ export const usePaymentRedirect = ({
   totalPrice,
   isCartItems,
 }: IUsePaymentRedirect) => {
-  const userId = getSessionItem("userId");
+  const { user } = useUserStore();
   const navigate = useNavigate();
   const onClickPurchase = () => {
     if (itemsToBuy.length == 0) {
@@ -29,7 +25,7 @@ export const usePaymentRedirect = ({
       alert("수량을 선택해주세요");
       return;
     }
-    navigate(`/payment/${userId}`, {
+    navigate(`/payment/${user?.uid}`, {
       state: { orderedItems: itemsToBuy, totalPrice, isCartItems },
     });
   };

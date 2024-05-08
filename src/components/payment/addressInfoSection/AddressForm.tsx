@@ -2,10 +2,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAddress } from "../../../hooks/payment/useAddress";
-import { IAddressInfo } from "../../../pages/Payment";
 import { shippingAddressSchema } from "../../../utils/validationSchema";
 import { TextInput } from "../../common/form/TextInput";
 import { Button } from "../../ui/button";
+import { IAddressFormData, IAddressInfo } from "../../../types/order";
 
 interface IAddressForm {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,13 +13,6 @@ interface IAddressForm {
   setAddressInfo: React.Dispatch<
     React.SetStateAction<IAddressInfo | undefined>
   >;
-}
-
-export interface IAddressFormData {
-  recipientName: string;
-  recipientPhone: string;
-  deliveryAddress: string;
-  deliveryPostcode: string;
 }
 
 const AddressForm = ({
