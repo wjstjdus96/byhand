@@ -1,27 +1,70 @@
-import { useInfiniteScroll } from "../../../hooks/useInfiniteScroll";
-import { getSessionItem } from "../../../utils/handleSession";
+import { useProductDeletion } from "../../../hooks/seller/useProductDeletion";
+import { useSellerProducts } from "../../../hooks/seller/useSellerProducts";
+import { useCheckboxSelection } from "../../../hooks/useCheckboxSelection";
+import Loading from "../../common/Loading";
+import Spinner from "../../common/Spinner";
 import ProductBoardHead from "../../common/productBoard/ProductBoardHead";
 import ProductBoardItem from "../../common/productBoard/ProductBoardItem";
 import { Separator } from "../../ui/separator";
+import AdminBoardDeleteBtn from "./AdminBoardDeleteBtn";
+import AdminBoardEditBtn from "./AdminBoardEditBtn";
 
 const AdminBoard = () => {
-  const uid = getSessionItem("userId");
-  const { ref: lastItemRef, products } = useInfiniteScroll({ uid: uid! });
+  const {
+    ref: lastItemRef,
+    products,
+    isFetchingNextPage,
+    isLoading,
+  } = useSellerProducts();
+  const { checkedItems, handleSingleCheck, handleAllCheck, handleInitItems } =
+    useCheckboxSelection({
+      allItems: products
+        ? products.map((item) => ({
+            itemId: item.id,
+          }))
+        : [],
+    });
+  const { onClickItemDelete, onClickCheckedItemsDelte } = useProductDeletion({
+    handleInitItems,
+  });
 
   return (
-    <div>
-      <ProductBoardHead totLength={products?.length} />
-      <Separator className="my-5" />
-      <div className="flex flex-col gap-3">
-        {products &&
-          products.map((item) => (
-            <ProductBoardItem
-              item={item}
-              isSellerPage={true}
-              ref={lastItemRef}
-            />
-          ))}
-      </div>
+    <div className="flex flex-col">
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <ProductBoardHead
+            totLength={products?.length}
+            size="medium"
+            allCheckHandler={handleAllCheck}
+            checkedItems={checkedItems}
+            deleteCheckedItemsHandler={() =>
+              onClickCheckedItemsDelte(checkedItems)
+            }
+          />
+          <Separator className="my-5" />
+          <div className="flex flex-col gap-3">
+            {products &&
+              products.map((item) => (
+                <ProductBoardItem
+                  item={item}
+                  ref={lastItemRef}
+                  checkHandler={handleSingleCheck}
+                  checkedItems={checkedItems}
+                >
+                  <div className="flex gap-1">
+                    <AdminBoardEditBtn productId={item.id} />
+                    <AdminBoardDeleteBtn
+                      deleteHandler={() => onClickItemDelete(item.id)}
+                    />
+                  </div>
+                </ProductBoardItem>
+              ))}
+            {isFetchingNextPage && <Spinner size="sm" />}
+          </div>
+        </>
+      )}
     </div>
   );
 };

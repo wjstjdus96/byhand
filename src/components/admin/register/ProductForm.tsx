@@ -1,75 +1,42 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { getOneProduct } from "../../../api/product";
 import { CATEGORY_TYPE } from "../../../consts/data";
+import { useInitialFormValues } from "../../../hooks/form/useInitialFormValues";
+import { IProductFormData } from "../../../types/product";
 import { productRegisterSchema } from "../../../utils/validationSchema";
+import Loading from "../../common/Loading";
 import ImageInput from "../../common/form/ImageInput";
 import SelectInput from "../../common/form/SelectInput";
 import TextArea from "../../common/form/TextArea";
 import { TextInput } from "../../common/form/TextInput";
 import { Button } from "../../ui/button";
 
-export interface IRegisterFormData {
-  productImage: any[];
-  productName: string;
-  productCategory: string;
-  productPrice: number;
-  productQuantity: number;
-  productDescription: string;
-}
-
-export interface IProductData {
-  productImage: string[];
-  productName: string;
-  productCategory: string;
-  productPrice: number;
-  productQuantity: number;
-  productDescription: string;
-  sellerId?: string;
-  createdAt?: any;
-  updatedAt: any;
-}
-
 interface IProductForm {
   buttonName: string;
-  onSubmitHandler: SubmitHandler<IRegisterFormData>;
-  isEdit?: string;
+  onSubmitHandler: SubmitHandler<IProductFormData>;
+  editedProductId?: string;
   isSubmitLoading: boolean;
 }
 
 const ProductForm = ({
   buttonName,
   onSubmitHandler,
-  isEdit,
+  editedProductId,
   isSubmitLoading,
 }: IProductForm) => {
-  const [originalImages, setOriginalImages] = useState<any[]>([]);
+  const [originalImages, setOriginalImages] = useState<(Blob | string)[]>([]);
   const {
     register,
     handleSubmit,
     setValue,
     control,
     formState: { errors },
-  } = useForm<IRegisterFormData>({
+  } = useForm<IProductFormData>({
     resolver: zodResolver(productRegisterSchema),
   });
 
-  useEffect(() => {
-    if (isEdit) {
-      const setForm = async () => {
-        const existingData = await getOneProduct(isEdit);
-
-        setValue("productName", existingData!.productName);
-        setValue("productCategory", existingData!.productCategory);
-        setValue("productPrice", existingData!.productPrice);
-        setValue("productQuantity", existingData!.productQuantity);
-        setValue("productDescription", existingData!.productDescription);
-        setOriginalImages(existingData!.productImage);
-      };
-      setForm();
-    }
-  }, [isEdit]);
+  useInitialFormValues({ setValue, setOriginalImages, editedProductId });
 
   return (
     <form
@@ -124,7 +91,7 @@ const ProductForm = ({
         errorMsg={errors.productDescription?.message}
       />
       <Button type="submit">{buttonName}</Button>
-      {isSubmitLoading && <div>로딩중~~</div>}
+      {isSubmitLoading && <Loading />}
     </form>
   );
 };

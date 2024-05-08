@@ -7,13 +7,16 @@ interface IAdminBoardEditBtn {
 
 const AdminBoardEditBtn = ({ productId }: IAdminBoardEditBtn) => {
   const navigate = useNavigate();
-
   const onClickEdit = () => {
     navigate(`product/${productId}/edit`);
   };
 
   return (
-    <Button onClick={onClickEdit} className="p-2 h-6 text-xs font-normal">
+    <Button
+      variant="outline"
+      onClick={onClickEdit}
+      className="p-2 h-6 text-xs font-normal"
+    >
       수정
     </Button>
   );

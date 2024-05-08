@@ -12,7 +12,7 @@ function ProductRegister() {
         <h2 className="text-xl font-bold mb-6">
           {isEdit ? "상품 수정" : "상품 등록"}
         </h2>
-        {isEdit ? <EditForm isEdit={isEdit} /> : <RegisterForm />}
+        {isEdit ? <EditForm editedProductId={isEdit} /> : <RegisterForm />}
       </div>
     </Layout>
   );

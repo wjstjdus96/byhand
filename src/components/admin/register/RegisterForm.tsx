@@ -1,38 +1,8 @@
-import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
-import { SubmitHandler } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { getImageUrl } from "../../../api/image";
-import { registerProduct } from "../../../api/product";
-import { registerReq } from "../../../utils/dataSchema";
-import { getSessionItem } from "../../../utils/handleSession";
-import { toast } from "../../ui/use-toast";
-import ProductForm, { IProductData, IRegisterFormData } from "./ProductForm";
+import { useRegisterHandler } from "../../../hooks/form/useRegisterHandler";
+import ProductForm from "./ProductForm";
 
 const RegisterForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-
-  const registerMutation = useMutation({
-    mutationFn: (doc: IProductData) => registerProduct({ req: doc }),
-  });
-
-  const onRegisterHandler: SubmitHandler<IRegisterFormData> = async (data) => {
-    setIsLoading(true);
-
-    const imageUrl = await getImageUrl(data.productImage);
-    const doc = registerReq(data, imageUrl);
-
-    registerMutation.mutate(doc, {
-      onSuccess: () => {
-        setIsLoading(false);
-        toast({
-          description: "상품이 정상적으로 등록되었습니다",
-        });
-        navigate(`/admin/${getSessionItem("userId")}`);
-      },
-    });
-  };
+  const { onRegisterHandler, isLoading } = useRegisterHandler();
 
   return (
     <ProductForm

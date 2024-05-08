@@ -39,9 +39,27 @@ export const productRegisterSchema = z.object({
     .min(1, { message: "상품 이미지를 첨부해주세요" }),
   productName: z.string().min(1, { message: "상품 이름을 입력해주세요" }),
   productCategory: z.string({ required_error: "카테고리를 선택해주세요" }),
-  productPrice: z.string().min(1, { message: "상품 가격을 입력해주세요" }),
-  productQuantity: z.string().min(1, { message: "상품 수량을 입력해주세요" }),
+  productPrice: z
+    .union([z.string(), z.number()])
+    .refine((value) => value !== null && value !== undefined && value !== "", {
+      message: "상품 가격을 입력해주세요",
+    }),
+  productQuantity: z
+    .union([z.string(), z.number()])
+    .refine((value) => value !== null && value !== undefined && value !== "", {
+      message: "상품 수량을 입력해주세요",
+    }),
   productDescription: z
     .string()
     .min(1, { message: "상품 설명을 입력해주세요" }),
+});
+
+export const shippingAddressSchema = z.object({
+  recipientName: z.string().min(1, { message: "수령인 이름을 입력해주세요" }),
+  recipientPhone: z
+    .string()
+    .min(1, { message: "수령인 전화번호을 입력해주세요" })
+    .regex(/^\d+$/, { message: "유효한 전화번호를 입력해주세요" }),
+  deliveryAddress: z.string().min(1, { message: "배송지 주소를 입력해주세요" }),
+  deliveryPostcode: z.string().min(1, { message: "우편번호를 입력해주세요" }),
 });
