@@ -35,7 +35,8 @@ export const useFilteredResults = ({
         isInfiniteScroll: true,
       }),
     initialPageParam: null,
-    getNextPageParam: (querySnapShot) => {
+
+    getNextPageParam: (querySnapShot: any) => {
       if (querySnapShot?.size < limitNum) return null;
       else return querySnapShot?.docs[querySnapShot.docs.length - 1];
     },
@@ -45,7 +46,7 @@ export const useFilteredResults = ({
   const products = useMemo(() => {
     if (querySnap) {
       return querySnap.pages.flatMap((page) =>
-        page!.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+        page!.docs.map((doc: any) => ({ id: doc.id, ...doc.data() }))
       );
     }
   }, [querySnap]);

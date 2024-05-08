@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { FieldValue, serverTimestamp } from "firebase/firestore";
+import { serverTimestamp } from "firebase/firestore";
 import { registerOrder } from "../../api/product";
 import { useUserStore } from "../../store/userStore";
 import { IOrderItem, IOrderReqData } from "../../types/order";
