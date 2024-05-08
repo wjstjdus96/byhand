@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { useCartProductStore } from "../../store/cartStore";
+import { ICartProductData } from "../../types/cart";
 import { IProductResData } from "../../types/product";
 import { ICheckedItem } from "../useCheckboxSelection";
-import { ICartProductData } from "../../types/cart";
 
 interface IUseCheckedTotalPrice {
   products: IProductResData[] | undefined;

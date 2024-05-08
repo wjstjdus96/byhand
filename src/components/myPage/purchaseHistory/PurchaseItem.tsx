@@ -1,10 +1,9 @@
-import { useEffect } from "react";
 import { useOrderCancel } from "../../../hooks/myPage.ts/useOrderCancel";
 import { useProductDetail } from "../../../hooks/productDetails.tsx/useProductDetail";
+import { IOrderedProduct } from "../../../types/order";
 import AlertDialogBox from "../../common/AlertDialogBox";
 import { Badge } from "../../ui/badge";
 import { Button } from "../../ui/button";
-import { IOrderedProduct } from "../../../types/order";
 
 interface IPurchaseItem {
   historyItems: IOrderedProduct[];
