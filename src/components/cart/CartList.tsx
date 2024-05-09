@@ -2,7 +2,7 @@ import { RefetchOptions } from "@tanstack/react-query";
 import { ICheckedItem } from "../../hooks/useCheckboxSelection";
 import { useCartProductStore } from "../../store/cartStore";
 import { IProductResData } from "../../types/product";
-import ProductBoardHead from "../common/productBoard/ProductBoardHead";
+import ProductListHead from "../common/product/productList/ProductListHead";
 import { Separator } from "../ui/separator";
 import CartListItem from "./CartListItem";
 
@@ -37,7 +37,7 @@ const CartList = ({
     <div className="h-full overflow-y-hidden">
       {products.length != 0 ? (
         <>
-          <ProductBoardHead
+          <ProductListHead
             totLength={products.length}
             size="small"
             allCheckHandler={allCheckHandler}

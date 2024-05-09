@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { IProductResData } from "../../types/product";
-import ProductGridItem from "../common/product/ProductGridItem";
+import ProductGridItem from "../common/product/productGrid/ProductGridItem";
 
 interface IProductsBoard {
   resultData: IProductResData[];

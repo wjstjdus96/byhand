@@ -1,8 +1,8 @@
-import { ICheckedItem } from "../../../hooks/useCheckboxSelection";
-import { Checkbox } from "../../ui/checkbox";
-import AlertDialogBox from "../AlertDialogBox";
+import { ICheckedItem } from "../../../../hooks/useCheckboxSelection";
+import { Checkbox } from "../../../ui/checkbox";
+import AlertDialogBox from "../../AlertDialogBox";
 
-interface IProductBoardHead {
+interface IProductListHead {
   totLength?: number;
   size: "small" | "medium";
   allCheckHandler: (isCheck: boolean) => void;
@@ -10,13 +10,13 @@ interface IProductBoardHead {
   deleteCheckedItemsHandler: () => void;
 }
 
-const ProductBoardHead = ({
+const ProductListHead = ({
   totLength,
   size = "medium",
   allCheckHandler,
   checkedItems,
   deleteCheckedItemsHandler,
-}: IProductBoardHead) => {
+}: IProductListHead) => {
   const paddingSize = {
     small: "p-2  mb-1",
     medium: "p-0  mb-2",
@@ -45,4 +45,4 @@ const ProductBoardHead = ({
   );
 };
 
-export default ProductBoardHead;
+export default ProductListHead;

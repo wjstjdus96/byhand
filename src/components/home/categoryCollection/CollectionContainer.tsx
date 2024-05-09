@@ -1,7 +1,7 @@
 import { useCollection } from "../../../hooks/home/useCollection";
 import { IProductResData } from "../../../types/product";
-import ProductGridItem from "../../common/product/ProductGridItem";
-import ProductGridItemSkeleton from "../../common/product/ProductGridItemSkeleton";
+import ProductGridItem from "../../common/product/productGrid/ProductGridItem";
+import ProductGridItemSkeleton from "../../common/product/productGrid/ProductGridItemSkeleton";
 import Collection from "./Collection";
 
 interface ICollectionContainer {

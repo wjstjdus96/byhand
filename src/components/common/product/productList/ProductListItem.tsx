@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
-import { ICheckedItem } from "../../../hooks/useCheckboxSelection";
-import { convertPriceUnit } from "../../../utils/convertPriceUnit";
-import { Checkbox } from "../../ui/checkbox";
-import { IProductResData } from "../../../types/product";
+import { ICheckedItem } from "../../../../hooks/useCheckboxSelection";
+import { convertPriceUnit } from "../../../../utils/convertPriceUnit";
+import { Checkbox } from "../../../ui/checkbox";
+import { IProductResData } from "../../../../types/product";
 
 interface IProductBoardItem {
   item: IProductResData;
@@ -44,7 +44,7 @@ const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
           {isCart ? (
             <>
               <span className={`${isCart ? "text-[11px]" : "text-sm"}`}>
-                {convertPriceUnit(item.productPrice)}원 · 남은수량:{" "}
+                {convertPriceUnit(item.productPrice)}원 · 남은수량:
                 {item.productQuantity}개
               </span>
               {children}

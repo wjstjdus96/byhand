@@ -3,8 +3,8 @@ import { useSellerProducts } from "../../../hooks/seller/useSellerProducts";
 import { useCheckboxSelection } from "../../../hooks/useCheckboxSelection";
 import Loading from "../../common/Loading";
 import Spinner from "../../common/Spinner";
-import ProductBoardHead from "../../common/productBoard/ProductBoardHead";
-import ProductBoardItem from "../../common/productBoard/ProductBoardItem";
+import ProductListHead from "../../common/product/productList/ProductListHead";
+import ProductListItem from "../../common/product/productList/ProductListItem";
 import { Separator } from "../../ui/separator";
 import AdminBoardDeleteBtn from "./AdminBoardDeleteBtn";
 import AdminBoardEditBtn from "./AdminBoardEditBtn";
@@ -34,7 +34,7 @@ const AdminBoard = () => {
         <Loading />
       ) : (
         <>
-          <ProductBoardHead
+          <ProductListHead
             totLength={products?.length}
             size="medium"
             allCheckHandler={handleAllCheck}
@@ -47,7 +47,7 @@ const AdminBoard = () => {
           <div className="flex flex-col gap-3">
             {products &&
               products.map((item) => (
-                <ProductBoardItem
+                <ProductListItem
                   item={item}
                   ref={lastItemRef}
                   checkHandler={handleSingleCheck}
@@ -59,7 +59,7 @@ const AdminBoard = () => {
                       deleteHandler={() => onClickItemDelete(item.id)}
                     />
                   </div>
-                </ProductBoardItem>
+                </ProductListItem>
               ))}
             {isFetchingNextPage && <Spinner size="sm" />}
           </div>
