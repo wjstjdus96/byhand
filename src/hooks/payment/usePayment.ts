@@ -1,32 +1,30 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { queryClient } from "../../App";
 import { IUserData } from "../../api/user";
 import { SHIPPING_FEE } from "../../pages/Payment";
 import { RequestPayParams, RequestPayResponse } from "../../types/imp";
+import { IAddressInfo, IPaymentState } from "../../types/order";
 import { useCartDeletion } from "../cart/useCartDeletion";
-import { useReduceProductQuantity } from "./useReduceProductQuantity";
-import { queryClient } from "../../App";
-import { IAddressInfo, IOrderItem } from "../../types/order";
 import { useAddOrder } from "./useAddOrder";
+import { useReduceProductQuantity } from "./useReduceProductQuantity";
 
 interface IUsePayment {
   addressInfo: IAddressInfo | undefined;
   buyerInfo: IUserData | undefined;
-  orderedItems: IOrderItem[];
-  orderedTotalPrice: number;
-  isCartItems: boolean;
+  paymentState: IPaymentState;
 }
 
 export const usePayment = ({
   addressInfo,
   buyerInfo,
-  orderedItems,
-  orderedTotalPrice,
-  isCartItems,
+  paymentState,
 }: IUsePayment) => {
   const [isLoading, setIsLoading] = useState(false);
   const { AddOrderToDB } = useAddOrder();
-  const { reduceProductsQuantity } = useReduceProductQuantity({ orderedItems });
+  const { reduceProductsQuantity } = useReduceProductQuantity({
+    orderedItems: paymentState.orderedItems,
+  });
   const { deleteCartItems } = useCartDeletion();
   const navigate = useNavigate();
 
@@ -49,7 +47,7 @@ export const usePayment = ({
       pg: "nice.iamport02m",
       pay_method: "card",
       merchant_uid: `mid_${new Date().getTime()}`,
-      amount: orderedTotalPrice + SHIPPING_FEE,
+      amount: paymentState.orderedTotalPrice + SHIPPING_FEE,
       name: "BYHAND 상품 결제",
       buyer_name: buyerInfo.userName,
       buyer_email: buyerInfo.userEmail,
@@ -62,13 +60,18 @@ export const usePayment = ({
       const { success, error_msg } = response;
       if (success) {
         setIsLoading(true);
-        if (isCartItems) {
+        if (paymentState.isCartItems) {
           queryClient.invalidateQueries({ queryKey: ["cart"] }).then(() => {
-            deleteCartItems(orderedItems);
+            deleteCartItems(paymentState.orderedItems);
           });
         }
-        await AddOrderToDB({ orderedItems, orderedTotalPrice });
-        await reduceProductsQuantity({ orderedItems });
+        await AddOrderToDB({
+          orderedItems: paymentState.orderedItems,
+          orderedTotalPrice: paymentState.orderedTotalPrice,
+        });
+        await reduceProductsQuantity({
+          orderedItems: paymentState.orderedItems,
+        });
 
         setIsLoading(false);
         alert("결제 성공");

@@ -6,7 +6,6 @@ export const useProductDetail = ({ productId }: { productId: string }) => {
     queryKey: ["product", productId],
     queryFn: () => getOneProduct(productId),
     refetchOnWindowFocus: false,
-    staleTime: Infinity,
   });
 
   return { data, isLoading };

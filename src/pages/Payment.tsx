@@ -24,10 +24,9 @@ const Payment = () => {
   const { onClickPayment, isLoading: isPaymentLoading } = usePayment({
     addressInfo,
     buyerInfo,
-    orderedItems: state.orderedItems,
-    orderedTotalPrice: state.totalPrice,
-    isCartItems: state.isCartItems,
+    paymentState: state,
   });
+
   const [isDataSetting, setIsDataSetting] = useState(true);
 
   useEffect(() => {

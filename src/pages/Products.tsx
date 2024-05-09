@@ -37,8 +37,8 @@ function Products() {
           />
         </div>
         {isLoading && <ProductsBoardSkeleton />}
-        {products && <ProductsBoard ref={ref} resultData={products} />}
         {isFetchingNextPage && <Spinner size="sm" />}
+        {products && <ProductsBoard ref={ref} resultData={products} />}
       </div>
     </Layout>
   );

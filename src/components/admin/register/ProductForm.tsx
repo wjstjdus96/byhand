@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { getOneProduct } from "../../../api/product";
 import { CATEGORY_TYPE } from "../../../consts/data";
-import { useInitialFormValues } from "../../../hooks/form/useInitialFormValues";
 import { IProductFormData } from "../../../types/product";
 import { productRegisterSchema } from "../../../utils/validationSchema";
 import Loading from "../../common/Loading";
@@ -36,7 +36,21 @@ const ProductForm = ({
     resolver: zodResolver(productRegisterSchema),
   });
 
-  useInitialFormValues({ setValue, setOriginalImages, editedProductId });
+  useEffect(() => {
+    if (editedProductId) {
+      const setForm = async () => {
+        const existingData = await getOneProduct(editedProductId);
+
+        setValue("productName", existingData!.productName);
+        setValue("productCategory", existingData!.productCategory);
+        setValue("productPrice", existingData!.productPrice);
+        setValue("productQuantity", existingData!.productQuantity);
+        setValue("productDescription", existingData!.productDescription);
+        setOriginalImages(existingData!.productImage);
+      };
+      setForm();
+    }
+  }, [editedProductId]);
 
   return (
     <form
