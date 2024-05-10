@@ -43,9 +43,17 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@types/babel__core": "^7.20.5",
+    "@types/graceful-fs": "^4.1.9",
+    "@types/istanbul-lib-coverage": "^2.0.6",
+    "@types/istanbul-lib-report": "^3.0.3",
+    "@types/istanbul-reports": "^3.0.4",
     "@types/node": "^20.12.7",
+    "@types/prettier": "^3.0.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "@types/stack-utils": "^2.0.3",
+    "@types/yargs": "^17.0.32",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
