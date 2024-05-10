@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Loading from "../components/common/Loading";
 import AddressInfoSection from "../components/payment/addressInfoSection/AddressInfoSection";
@@ -8,8 +8,8 @@ import TotalPriceSection from "../components/payment/totalPriceSection/TotalPric
 import { Button } from "../components/ui/button";
 import { usePayment } from "../hooks/payment/usePayment";
 import { useProductsByOrderIds } from "../hooks/payment/useProductsByOrderIds";
-import { useUserInfo } from "../hooks/useUserInfo";
 import Layout from "../layout/Layout";
+import { useUserStore } from "../store/userStore";
 import { IAddressInfo, IOrderItem } from "../types/order";
 
 export const SHIPPING_FEE = 2500;
@@ -17,7 +17,7 @@ export const SHIPPING_FEE = 2500;
 const Payment = () => {
   const { state } = useLocation();
   const [addressInfo, setAddressInfo] = useState<IAddressInfo | undefined>();
-  const { userInfo: buyerInfo, isuserInfoLoading } = useUserInfo();
+  const { user: buyerInfo } = useUserStore();
   const { orderProducts, isOrderProductsLoading } = useProductsByOrderIds({
     orderItemsId: state.orderedItems.map((item: IOrderItem) => item.itemId),
   });
@@ -26,15 +26,6 @@ const Payment = () => {
     buyerInfo,
     paymentState: state,
   });
-
-  const [isDataSetting, setIsDataSetting] = useState(true);
-
-  useEffect(() => {
-    const loadingVal = isuserInfoLoading || isOrderProductsLoading;
-    if (!loadingVal) {
-      setIsDataSetting(loadingVal);
-    }
-  }, [isuserInfoLoading, isOrderProductsLoading]);
 
   return (
     <Layout>
@@ -58,7 +49,7 @@ const Payment = () => {
           </div>
         </div>
       </div>
-      {isDataSetting && <Loading />}
+      {isOrderProductsLoading && <Loading />}
       {isPaymentLoading && <Loading />}
     </Layout>
   );

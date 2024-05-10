@@ -4,7 +4,7 @@ import { convertPriceUnit } from "../../../../utils/convertPriceUnit";
 import { Checkbox } from "../../../ui/checkbox";
 import { IProductResData } from "../../../../types/product";
 
-interface IProductBoardItem {
+interface IProductListItem {
   item: IProductResData;
   children: React.ReactNode;
   checkHandler: (isCheck: boolean, currentItem: ICheckedItem) => void;
@@ -13,7 +13,7 @@ interface IProductBoardItem {
   isCart?: boolean;
 }
 
-const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
+const ProductListItem = forwardRef<HTMLDivElement, IProductListItem>(
   (
     { item, children, checkHandler, checkedItems, selectedCnt, isCart },
     ref
@@ -66,4 +66,4 @@ const ProductBoardItem = forwardRef<HTMLDivElement, IProductBoardItem>(
   }
 );
 
-export default ProductBoardItem;
+export default ProductListItem;

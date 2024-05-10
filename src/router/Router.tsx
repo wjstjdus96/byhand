@@ -32,6 +32,10 @@ const Router = () => {
           <Route element={<PrivateRouter allowed={["seller"]} />}>
             <Route path="/admin/:sellerId" element={<ProductManagement />} />
             <Route
+              path="/admin/:sellerId/product/:productId"
+              element={<ProductDetail />}
+            />
+            <Route
               path="/admin/:sellerId/register"
               element={<ProductRegister />}
             />

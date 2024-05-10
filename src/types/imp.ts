@@ -215,7 +215,7 @@ export interface RequestPayParams extends RequestPayAdditionalParams {
   /** ### 결제창 언어 설정 (지원되지 않은 일부 PG사 존재) */
   language?: "en" | "ko";
   /** ### 주문자명 */
-  buyer_name?: string;
+  buyer_name: string | null;
   /**
    * ### 주문자 연락처
    * - 일부 PG사에서 해당 필드 누락시 오류 발생
@@ -225,7 +225,7 @@ export interface RequestPayParams extends RequestPayAdditionalParams {
    * ### 주문자 이메일
    * - 일부 PG사에서 해당 필드 누락시 오류 발생(페이먼트월)
    */
-  buyer_email?: string;
+  buyer_email: string | null;
   /**
    * ### 주문자 주소
    */

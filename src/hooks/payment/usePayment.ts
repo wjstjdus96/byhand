@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { queryClient } from "../../App";
-import { IUserData } from "../../api/user";
 import { SHIPPING_FEE } from "../../pages/Payment";
+import { IUser } from "../../store/userStore";
 import { RequestPayParams, RequestPayResponse } from "../../types/imp";
 import { IAddressInfo, IPaymentState } from "../../types/order";
 import { useCartDeletion } from "../cart/useCartDeletion";
@@ -11,7 +11,7 @@ import { useReduceProductQuantity } from "./useReduceProductQuantity";
 
 interface IUsePayment {
   addressInfo: IAddressInfo | undefined;
-  buyerInfo: IUserData | undefined;
+  buyerInfo: IUser | null;
   paymentState: IPaymentState;
 }
 

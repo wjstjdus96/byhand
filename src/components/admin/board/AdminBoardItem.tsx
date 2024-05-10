@@ -1,8 +1,9 @@
-import AdminBoardEditBtn from "./AdminBoardEditBtn";
-import ProductListItem from "../../common/product/productList/ProductListItem";
-import AdminBoardDeleteBtn from "./AdminBoardDeleteBtn";
-import { IProductResData } from "../../../types/product";
+import { useNavigate } from "react-router-dom";
 import { ICheckedItem } from "../../../hooks/useCheckboxSelection";
+import { IProductResData } from "../../../types/product";
+import ProductListItem from "../../common/product/productList/ProductListItem";
+import AdminBoardBtn from "./AdminBoardBtn";
+import AdminBoardDeleteBtn from "./AdminBoardDeleteBtn";
 
 interface IAdminBoardItem {
   item: IProductResData;
@@ -19,6 +20,16 @@ const AdminBoardItem = ({
   checkedItems,
   handleItemDelete,
 }: IAdminBoardItem) => {
+  const navigate = useNavigate();
+
+  const onClickPreview = () => {
+    navigate(`product/${item.id}`);
+  };
+
+  const onClickEdit = () => {
+    navigate(`product/${item.id}/edit`);
+  };
+
   return (
     <ProductListItem
       item={item}
@@ -27,7 +38,8 @@ const AdminBoardItem = ({
       checkedItems={checkedItems}
     >
       <div className="flex gap-1">
-        <AdminBoardEditBtn productId={item.id} />
+        <AdminBoardBtn name="미리보기" onClickHandler={onClickPreview} />
+        <AdminBoardBtn name="수정" onClickHandler={onClickEdit} />
         <AdminBoardDeleteBtn deleteHandler={() => handleItemDelete(item.id)} />
       </div>
     </ProductListItem>

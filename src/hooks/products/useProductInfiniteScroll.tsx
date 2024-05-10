@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { getProducts } from "../../api/product";
-import { useInfiniteScroll } from "../useInfiniteScroll";
+import { useInfiniteScroll } from "./useInfiniteScroll";
 
 interface IUseProductInfiniteScroll {
   keyword: string;
