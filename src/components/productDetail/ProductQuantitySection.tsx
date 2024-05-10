@@ -7,6 +7,7 @@ import QuantityInput from "../common/form/QuantityInput";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { usePaymentRedirect } from "../../hooks/payment/usePaymentRedirect";
+import React from "react";
 
 interface IProductQuantitySection {
   quantity: number;
@@ -68,4 +69,4 @@ const ProductQuantitySection = ({
   );
 };
 
-export default ProductQuantitySection;
+export default React.memo(ProductQuantitySection);

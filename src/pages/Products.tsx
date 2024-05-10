@@ -1,13 +1,13 @@
 import { useState } from "react";
+import Spinner from "../components/common/Spinner";
 import CategorySelector from "../components/products/CategorySelector";
 import ProductsBoard from "../components/products/ProductsBoard";
+import ProductsBoardSkeleton from "../components/products/ProductsBoardSkeleton";
 import SearchBar from "../components/products/SearchBar";
 import SortSelector from "../components/products/SortSelector";
+import { useCategoryType } from "../hooks/products/useCategoryType";
 import { useFilteredResults } from "../hooks/products/useFilteredResults";
 import Layout from "../layout/Layout";
-import { useCategoryType } from "../hooks/products/useCategoryType";
-import Spinner from "../components/common/Spinner";
-import ProductsBoardSkeleton from "../components/products/ProductsBoardSkeleton";
 
 function Products() {
   const [keyword, setKeyword] = useState("");
@@ -17,10 +17,8 @@ function Products() {
     keyword,
     category: selectedCategory,
     sort: selectedSort,
-    limitNum: 12,
+    limitNum: 15,
   });
-
-  console.log(products);
 
   return (
     <Layout>
