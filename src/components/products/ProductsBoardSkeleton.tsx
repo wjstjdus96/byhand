@@ -1,4 +1,4 @@
-import ProductGridItemSkeleton from "../common/product/ProductGridItemSkeleton";
+import ProductGridItemSkeleton from "../common/product/productGrid/ProductGridItemSkeleton";
 
 const ProductsBoardSkeleton = () => {
   const ITEMS_NUM = new Array(12).fill(0);

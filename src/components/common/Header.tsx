@@ -8,8 +8,9 @@ import CartContainer from "../cart/CartContainer";
 import { useCartProductStore } from "../../store/cartStore";
 import { useAuthority } from "../../hooks/useAuthority";
 import { useUserStore } from "../../store/userStore";
+import React, { useCallback } from "react";
 
-const Header = () => {
+const Header = React.memo(() => {
   const { isVisible } = useHeaderVisibility();
   const navigate = useNavigate();
   const { auth } = useAuthority();
@@ -19,6 +20,10 @@ const Header = () => {
     navigate(`/${endpoint ? endpoint : ""}`);
   };
   const { cartItems } = useCartProductStore();
+
+  const getCartQuantity = useCallback(() => {
+    return Object.keys(cartItems).length;
+  }, [Object.keys(cartItems).length]);
 
   const header_style = `fixed top-0 left-0 z-10 w-full h-12 py-2 px-10 flex items-center justify-between bg-white shadow-md transition-transform duration-300 ${
     isVisible ? "translate-y-0" : "-translate-y-full"
@@ -60,7 +65,7 @@ const Header = () => {
                 <div className="relative">
                   <MdShoppingCart size={28} />
                   <span className="absolute bottom-[-5px] right-[-8px] w-5 h-5 flex items-center justify-center text-xs rounded-full bg-[#312fd0] text-white">
-                    {Object.keys(cartItems).length}
+                    {getCartQuantity()}
                   </span>
                 </div>
               </CartContainer>
@@ -81,6 +86,6 @@ const Header = () => {
       </ul>
     </header>
   );
-};
+});
 
 export default Header;

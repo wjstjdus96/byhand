@@ -23,7 +23,9 @@ export const useQuantitySelection = ({
     setSelectedQuantity((prev) => prev + 1);
   };
 
-  const isMinusDisabled = selectedQuantity == 0;
+  const isMinusDisabled = cartItemId
+    ? selectedQuantity == 1
+    : selectedQuantity == 0;
   const isPlusDisabled = selectedQuantity == maxQuantity;
 
   useEffect(() => {

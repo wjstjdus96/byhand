@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Custom404 from "../pages/error/404";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import MyPage from "../pages/MyPage";
@@ -38,6 +39,7 @@ const Router = () => {
           <Route path="/mypage/:memberId" element={<MyPage />} />
           <Route path="/payment/:buyerId" element={<Payment />} />
         </Route>
+        <Route path="/*" element={<Custom404 />} />
       </Routes>
     </BrowserRouter>
   );

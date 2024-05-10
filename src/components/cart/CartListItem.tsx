@@ -3,7 +3,7 @@ import { ICheckedItem } from "../../hooks/useCheckboxSelection";
 import { IProductResData } from "../../types/product";
 import { convertPriceUnit } from "../../utils/convertPriceUnit";
 import QuantityInput from "../common/form/QuantityInput";
-import ProductBoardItem from "../common/productBoard/ProductBoardItem";
+import ProductListItem from "../common/product/productList/ProductListItem";
 
 interface ICartListItem {
   product: IProductResData;
@@ -32,7 +32,7 @@ const CartListItem = ({
   let itemTotalPrice = selectedQuantity * product.productPrice;
 
   return (
-    <ProductBoardItem
+    <ProductListItem
       item={product}
       checkHandler={singleCheckHandler}
       checkedItems={checkedItems}
@@ -50,7 +50,7 @@ const CartListItem = ({
         />
         <p className="text-xs">총 합계: {convertPriceUnit(itemTotalPrice)}원</p>
       </div>
-    </ProductBoardItem>
+    </ProductListItem>
   );
 };
 

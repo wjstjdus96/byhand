@@ -14,7 +14,6 @@ export const useCheckedTotalPrice = ({
   checkedItems,
   cartItems,
 }: IUseCheckedTotalPrice) => {
-  // const { cartItems } = useCartProductStore();
   const [checkedItemsTotalPrice, setCheckedItemsTotalPrice] =
     useState<number>(0);
 

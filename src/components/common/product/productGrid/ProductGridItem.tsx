@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { convertPriceUnit } from "../../../utils/convertPriceUnit";
-import { IProductResData } from "../../../types/product";
+import { convertPriceUnit } from "../../../../utils/convertPriceUnit";
+import { IProductResData } from "../../../../types/product";
 
 interface IProductGridItem {
   data: IProductResData;
-  lastItemRef?: React.ForwardedRef<HTMLDivElement>;
+  lastItemRef: React.ForwardedRef<HTMLDivElement>;
 }
 
 const ProductGridItem = ({ data, lastItemRef }: IProductGridItem) => {

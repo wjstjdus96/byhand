@@ -22,7 +22,7 @@ export const useProductsByCartIds = ({ cartItems }: IUseProductByCartIds) => {
 
   useEffect(() => {
     refetch();
-  }, [cartItems]);
+  }, [cartItems.length]);
 
   return { products, isLoading, refetch };
 };

@@ -1,12 +1,13 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Loading from "../components/common/Loading";
 import ProductDescription from "../components/productDetail/ProductDescription";
 import ProductImageCarousel from "../components/productDetail/ProductImageCarousel";
-import ProductInfoSection from "../components/productDetail/ProductInfoSection";
+import ProductQuantitySection from "../components/productDetail/ProductQuantitySection";
 import { Separator } from "../components/ui/separator";
 import { useProductDetail } from "../hooks/productDetails.tsx/useProductDetail";
 import Layout from "../layout/Layout";
-import Loading from "../components/common/Loading";
-import { useEffect } from "react";
+import { convertPriceUnit } from "../utils/convertPriceUnit";
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -26,7 +27,17 @@ function ProductDetail() {
           <>
             <div className="grid grid-cols-2 gap-12">
               <ProductImageCarousel images={data.productImage} />
-              <ProductInfoSection data={data} />
+              <div className="w-full aspect-square">
+                <p className="mb-3">{data.productCategory}</p>
+                <h2 className=" text-2xl font-semibold">{data.productName}</h2>
+                <h2 className="my-10 text-xl">
+                  {convertPriceUnit(data.productPrice)}원
+                </h2>
+                <ProductQuantitySection
+                  quantity={data.productQuantity}
+                  price={data.productPrice}
+                />
+              </div>
             </div>
             <Separator />
             <ProductDescription description={data.productDescription} />

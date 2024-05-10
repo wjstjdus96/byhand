@@ -3,11 +3,9 @@ import { useSellerProducts } from "../../../hooks/seller/useSellerProducts";
 import { useCheckboxSelection } from "../../../hooks/useCheckboxSelection";
 import Loading from "../../common/Loading";
 import Spinner from "../../common/Spinner";
-import ProductBoardHead from "../../common/productBoard/ProductBoardHead";
-import ProductBoardItem from "../../common/productBoard/ProductBoardItem";
+import ProductListHead from "../../common/product/productList/ProductListHead";
 import { Separator } from "../../ui/separator";
-import AdminBoardDeleteBtn from "./AdminBoardDeleteBtn";
-import AdminBoardEditBtn from "./AdminBoardEditBtn";
+import AdminBoardItem from "./AdminBoardItem";
 
 const AdminBoard = () => {
   const {
@@ -16,13 +14,14 @@ const AdminBoard = () => {
     isFetchingNextPage,
     isLoading,
   } = useSellerProducts();
+  const allItems = products
+    ? products.map((item) => ({
+        itemId: item.id,
+      }))
+    : [];
   const { checkedItems, handleSingleCheck, handleAllCheck, handleInitItems } =
     useCheckboxSelection({
-      allItems: products
-        ? products.map((item) => ({
-            itemId: item.id,
-          }))
-        : [],
+      allItems,
     });
   const { onClickItemDelete, onClickCheckedItemsDelte } = useProductDeletion({
     handleInitItems,
@@ -34,7 +33,7 @@ const AdminBoard = () => {
         <Loading />
       ) : (
         <>
-          <ProductBoardHead
+          <ProductListHead
             totLength={products?.length}
             size="medium"
             allCheckHandler={handleAllCheck}
@@ -47,19 +46,13 @@ const AdminBoard = () => {
           <div className="flex flex-col gap-3">
             {products &&
               products.map((item) => (
-                <ProductBoardItem
+                <AdminBoardItem
                   item={item}
-                  ref={lastItemRef}
-                  checkHandler={handleSingleCheck}
+                  lastItemRef={lastItemRef}
+                  handleSingleCheck={handleSingleCheck}
                   checkedItems={checkedItems}
-                >
-                  <div className="flex gap-1">
-                    <AdminBoardEditBtn productId={item.id} />
-                    <AdminBoardDeleteBtn
-                      deleteHandler={() => onClickItemDelete(item.id)}
-                    />
-                  </div>
-                </ProductBoardItem>
+                  handleItemDelete={onClickItemDelete}
+                />
               ))}
             {isFetchingNextPage && <Spinner size="sm" />}
           </div>
