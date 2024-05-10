@@ -1,5 +1,5 @@
 import { useOrderCancel } from "../../../hooks/myPage.ts/useOrderCancel";
-import { useProductDetail } from "../../../hooks/productDetail.tsx/useProductDetail";
+import { useProductDetail } from "../../../hooks/productDetails.tsx/useProductDetail";
 import { IOrderedProduct } from "../../../types/order";
 import AlertDialogBox from "../../common/AlertDialogBox";
 import { Badge } from "../../ui/badge";

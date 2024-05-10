@@ -5,7 +5,7 @@ import ProductDescription from "../components/productDetail/ProductDescription";
 import ProductImageCarousel from "../components/productDetail/ProductImageCarousel";
 import ProductQuantitySection from "../components/productDetail/ProductQuantitySection";
 import { Separator } from "../components/ui/separator";
-import { useProductDetail } from "../hooks/productDetail.tsx/useProductDetail";
+import { useProductDetail } from "../hooks/productDetails.tsx/useProductDetail";
 import Layout from "../layout/Layout";
 import { convertPriceUnit } from "../utils/convertPriceUnit";
 
