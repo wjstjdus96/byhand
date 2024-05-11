@@ -8,6 +8,7 @@ import SortSelector from "../components/products/SortSelector";
 import { useCategoryType } from "../hooks/products/useCategoryType";
 import { useProducts } from "../hooks/products/useProducts";
 import Layout from "../layout/Layout";
+import Meta from "../components/common/Meta";
 
 function Products() {
   const [keyword, setKeyword] = useState("");
@@ -22,6 +23,7 @@ function Products() {
 
   return (
     <Layout>
+      <Meta page="products" />
       <div className="px-10 py-24 min-h-[75vh]">
         <div className="flex flex-col items-center mb-6">
           <SearchBar keyword={keyword} setKeyword={setKeyword} />
