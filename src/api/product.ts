@@ -88,7 +88,7 @@ export const getProducts = async ({
 
     const sortType: [string, OrderByDirection] = sort.split("-") as [
       string,
-      OrderByDirection
+      OrderByDirection,
     ];
 
     if (sort) {

@@ -3,25 +3,24 @@ import { useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import { getProducts } from "../../api/product";
 
-interface IUseFilteredResults {
+interface IUseProducts {
   keyword: string;
   category: string;
   sort: string;
   limitNum: number;
 }
 
-export const useFilteredResults = ({
+export const useProducts = ({
   keyword,
   category,
   sort,
   limitNum,
-}: IUseFilteredResults) => {
+}: IUseProducts) => {
   const { ref, inView } = useInView();
   const {
     data: querySnap,
     fetchNextPage,
     isFetchingNextPage,
-    refetch,
     isLoading,
   } = useInfiniteQuery({
     queryKey: ["products", category, keyword, sort],
@@ -49,10 +48,6 @@ export const useFilteredResults = ({
       );
     }
   }, [querySnap]);
-
-  useEffect(() => {
-    refetch();
-  }, [keyword, category, sort]);
 
   useEffect(() => {
     if (inView && !isFetchingNextPage) {

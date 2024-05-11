@@ -6,14 +6,14 @@ import ProductsBoardSkeleton from "../components/products/ProductsBoardSkeleton"
 import SearchBar from "../components/products/SearchBar";
 import SortSelector from "../components/products/SortSelector";
 import { useCategoryType } from "../hooks/products/useCategoryType";
-import { useFilteredResults } from "../hooks/products/useFilteredResults";
+import { useProducts } from "../hooks/products/useProducts";
 import Layout from "../layout/Layout";
 
 function Products() {
   const [keyword, setKeyword] = useState("");
   const { selectedCategory, setCategoryParams } = useCategoryType();
   const [selectedSort, setSelectedSort] = useState("createdAt-desc");
-  const { products, ref, isFetchingNextPage, isLoading } = useFilteredResults({
+  const { products, ref, isFetchingNextPage, isLoading } = useProducts({
     keyword,
     category: selectedCategory,
     sort: selectedSort,
