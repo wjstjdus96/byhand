@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { getOneProduct } from "../../../api/product";
-import { CATEGORY_TYPE } from "../../../consts/data";
+import { CATEGORY_TYPE } from "../../../consts/product";
 import { IProductFormData } from "../../../types/product";
 import { productRegisterSchema } from "../../../utils/validationSchema";
 import Loading from "../../common/Loading";

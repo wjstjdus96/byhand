@@ -9,22 +9,12 @@ interface IProductGridItem {
 }
 
 const ProductGridItem = ({ data, lastItemRef }: IProductGridItem) => {
-  const { handlePrefetchProduct } = usePrefetchProduct({ productId: data.id });
+  const { handleMouseEnter, handleMouseLeave } = usePrefetchProduct({
+    productId: data.id,
+  });
   const navigate = useNavigate();
-
   const onClickItem = () => {
     navigate(`/products/${data.id}`);
-  };
-
-  let prefetchTimer: ReturnType<typeof setTimeout> | null = null;
-  const handleMouseEnter = () => {
-    prefetchTimer = setTimeout(handlePrefetchProduct, 400);
-  };
-  const handleMouseLeave = () => {
-    if (prefetchTimer) {
-      clearTimeout(prefetchTimer);
-      prefetchTimer = null;
-    }
   };
 
   return (

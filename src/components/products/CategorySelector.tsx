@@ -1,4 +1,4 @@
-import { CATEGORY_TYPE_INCLUDING_TOTAL } from "../../consts/data";
+import { CATEGORY_TYPE_INCLUDING_TOTAL } from "../../consts/product";
 
 interface ICategorySelector {
   selectedCategory: string;

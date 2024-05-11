@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import Header from "../components/common/Header";
-import SignupForm from "../components/auth/signup/SignupForm";
 import CheckOtherWay from "../components/auth/CheckOtherWay";
+import SignupForm from "../components/auth/signup/SignupForm";
+import AuthLayout from "../layout/AuthLayout";
 
 function Signup() {
   const navigate = useNavigate();
@@ -11,14 +11,11 @@ function Signup() {
   };
 
   return (
-    <div>
-      <Header />
-      <div className="flex flex-col justify-center items-center h-[90vh] gap-6 pt-28">
-        <h2 className="font-bold text-3xl">회원가입</h2>
-        <SignupForm />
-        <CheckOtherWay type="signup" onClick={onClickLogin} />
-      </div>
-    </div>
+    <AuthLayout>
+      <h2 className="font-bold text-3xl">회원가입</h2>
+      <SignupForm />
+      <CheckOtherWay type="signup" onClick={onClickLogin} />
+    </AuthLayout>
   );
 }
 

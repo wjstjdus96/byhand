@@ -1,4 +1,4 @@
-import { SORT_TYPE } from "../../consts/data";
+import { SORT_TYPE } from "../../consts/product";
 import Selector from "../common/form/Selector";
 
 interface ISortSelector {
