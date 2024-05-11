@@ -1,16 +1,16 @@
 import {
-  doc,
-  setDoc,
-  getDoc,
-  query,
   collection,
-  where,
-  orderBy,
+  doc,
+  getDoc,
   getDocs,
+  orderBy,
+  query,
+  setDoc,
   updateDoc,
+  where,
 } from "firebase/firestore";
-import { db } from "./firebase";
 import { IOrderReqData, IOrderResData, IOrderedProduct } from "../types/order";
+import { db } from "./firebase";
 
 export interface IUserData {
   userName: string;

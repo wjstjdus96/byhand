@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import PrivateRouter from "./PrivateRouter";
 import Loading from "../components/common/Loading";
+import { ErrorBoundary } from "react-error-boundary";
 
 const Login = lazy(() => import("../pages/Login"));
 const Home = lazy(() => import("../pages/Home"));

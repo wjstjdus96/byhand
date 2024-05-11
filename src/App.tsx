@@ -4,7 +4,13 @@ import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "./pages/error/ErrorFallback";
 import { HelmetProvider } from "react-helmet-async";
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      throwOnError: true,
+    },
+  },
+});
 
 function App() {
   return (
