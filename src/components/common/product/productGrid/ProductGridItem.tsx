@@ -1,20 +1,40 @@
 import { useNavigate } from "react-router-dom";
-import { convertPriceUnit } from "../../../../utils/convertPriceUnit";
+import { usePrefetchProduct } from "../../../../hooks/productDetails.tsx/usePrefetchProduct";
 import { IProductResData } from "../../../../types/product";
+import { convertPriceUnit } from "../../../../utils/convertPriceUnit";
 
 interface IProductGridItem {
   data: IProductResData;
-  lastItemRef: React.ForwardedRef<HTMLDivElement>;
+  lastItemRef?: React.ForwardedRef<HTMLDivElement>;
 }
 
 const ProductGridItem = ({ data, lastItemRef }: IProductGridItem) => {
+  const { handlePrefetchProduct } = usePrefetchProduct({ productId: data.id });
   const navigate = useNavigate();
+
   const onClickItem = () => {
     navigate(`/products/${data.id}`);
   };
 
+  let prefetchTimer: ReturnType<typeof setTimeout> | null = null;
+  const handleMouseEnter = () => {
+    prefetchTimer = setTimeout(handlePrefetchProduct, 400);
+  };
+  const handleMouseLeave = () => {
+    if (prefetchTimer) {
+      clearTimeout(prefetchTimer);
+      prefetchTimer = null;
+    }
+  };
+
   return (
-    <div onClick={onClickItem} ref={lastItemRef} className="cursor-pointer">
+    <div
+      onClick={onClickItem}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      ref={lastItemRef}
+      className="cursor-pointer"
+    >
       <div className="flex w-full aspect-square overflow-hidden">
         <img
           src={data.productThumbnail}

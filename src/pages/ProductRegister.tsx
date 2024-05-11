@@ -2,9 +2,14 @@ import { useParams } from "react-router-dom";
 import RegisterForm from "../components/admin/register/RegisterForm";
 import Layout from "../layout/Layout";
 import EditForm from "../components/admin/register/EditForm";
+import { useEffect } from "react";
 
 function ProductRegister() {
   const { productId: isEdit } = useParams();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Layout>

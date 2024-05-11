@@ -8,9 +8,10 @@ import { Separator } from "../components/ui/separator";
 import { useProductDetail } from "../hooks/productDetails.tsx/useProductDetail";
 import Layout from "../layout/Layout";
 import { convertPriceUnit } from "../utils/convertPriceUnit";
+import Meta from "../components/common/Meta";
 
 function ProductDetail() {
-  const { productId } = useParams();
+  const { productId, sellerId } = useParams();
   const { data, isLoading } = useProductDetail({
     productId: productId ? productId : "",
   });
@@ -21,6 +22,7 @@ function ProductDetail() {
 
   return (
     <Layout>
+      <Meta page="detail" product={data} />
       <div className="py-24 px-52 min-h-[75vh]">
         {isLoading && <Loading />}
         {data && (
@@ -33,10 +35,12 @@ function ProductDetail() {
                 <h2 className="my-10 text-xl">
                   {convertPriceUnit(data.productPrice)}원
                 </h2>
-                <ProductQuantitySection
-                  quantity={data.productQuantity}
-                  price={data.productPrice}
-                />
+                {!sellerId && (
+                  <ProductQuantitySection
+                    quantity={data.productQuantity}
+                    price={data.productPrice}
+                  />
+                )}
               </div>
             </div>
             <Separator />

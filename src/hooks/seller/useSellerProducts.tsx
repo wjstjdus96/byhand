@@ -6,6 +6,7 @@ import { useUserStore } from "../../store/userStore";
 import { IProductRegisterReqData } from "../../types/product";
 
 export const useSellerProducts = () => {
+  const LIMIT_NUM = 20;
   const { user } = useUserStore();
   const { ref, inView } = useInView();
   const {
@@ -16,10 +17,10 @@ export const useSellerProducts = () => {
   } = useInfiniteQuery({
     queryKey: ["sellProduct", user?.uid],
     queryFn: ({ pageParam }: { pageParam: any }) =>
-      getSellerProducts(user?.uid!, 20, pageParam),
+      getSellerProducts(user?.uid!, LIMIT_NUM, pageParam),
     initialPageParam: null,
     getNextPageParam: (querySnapshot) => {
-      if (querySnapshot.size < 10) return null;
+      if (querySnapshot.size < LIMIT_NUM) return null;
       else return querySnapshot.docs[querySnapshot.docs.length - 1];
     },
     refetchOnWindowFocus: false,
