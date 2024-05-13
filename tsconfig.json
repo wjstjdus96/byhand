@@ -18,12 +18,18 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /*test*/
+    "types": ["...", "@types/jest"],
+    "esModuleInterop": true
   },
   "include": [
     "src",
     "src/api/firebase.ts",
-    "src/components/payment/addressInfoSection/AddressModal.tsx"
+    "src/components/payment/addressInfoSection/AddressModal.tsx",
+    "jest.config.ts",
+    "jest.setup.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
