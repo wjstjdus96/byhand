@@ -1,17 +1,17 @@
 import { toast } from "../../components/ui/use-toast";
 import { useCartProductStore } from "../../store/cartStore";
 
-interface IUseCartAddProduct {
+interface IUseAddCartItem {
   cartItemId: string;
   cartItemCount: number;
   maxQuantity: number;
 }
 
-export const useCartAddProduct = ({
+export const useAddCartItem = ({
   cartItemId,
   cartItemCount,
   maxQuantity,
-}: IUseCartAddProduct) => {
+}: IUseAddCartItem) => {
   const { addCartItem, findCartItem } = useCartProductStore();
 
   const checkIsNoting = () => {

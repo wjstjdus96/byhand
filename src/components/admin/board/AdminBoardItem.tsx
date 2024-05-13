@@ -4,13 +4,13 @@ import { IProductResData } from "../../../types/product";
 import ProductListItem from "../../common/product/productList/ProductListItem";
 import AdminBoardBtn from "./AdminBoardBtn";
 import AdminBoardDeleteBtn from "./AdminBoardDeleteBtn";
+import { useProductDeletion } from "../../../hooks/seller/useProductDeletion";
 
 interface IAdminBoardItem {
   item: IProductResData;
   lastItemRef: (node?: Element | null | undefined) => void;
   handleSingleCheck: (isCheck: boolean, currentItem: ICheckedItem) => void;
   checkedItems: ICheckedItem[];
-  handleItemDelete: (productId: string) => void;
 }
 
 const AdminBoardItem = ({
@@ -18,8 +18,8 @@ const AdminBoardItem = ({
   lastItemRef,
   handleSingleCheck,
   checkedItems,
-  handleItemDelete,
 }: IAdminBoardItem) => {
+  const { onClickItemDelete } = useProductDeletion({});
   const navigate = useNavigate();
 
   const onClickPreview = () => {
@@ -40,7 +40,7 @@ const AdminBoardItem = ({
       <div className="flex gap-1">
         <AdminBoardBtn name="미리보기" onClickHandler={onClickPreview} />
         <AdminBoardBtn name="수정" onClickHandler={onClickEdit} />
-        <AdminBoardDeleteBtn deleteHandler={() => handleItemDelete(item.id)} />
+        <AdminBoardDeleteBtn deleteHandler={() => onClickItemDelete(item.id)} />
       </div>
     </ProductListItem>
   );

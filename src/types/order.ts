@@ -42,6 +42,6 @@ export interface IOrderItem {
 
 export interface IPaymentState {
   orderedItems: IOrderItem[];
-  orderedTotalPrice: number;
+  totalPrice: number;
   isCartItems?: boolean;
 }

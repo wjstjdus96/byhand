@@ -1,15 +1,25 @@
+import { useProductsByOrderIds } from "../../../hooks/payment/useProductsByOrderIds";
 import { ICheckedItem } from "../../../hooks/useCheckboxSelection";
 import { IOrderItem } from "../../../types/order";
-import { IProductResData } from "../../../types/product";
+import Loading from "../../common/Loading";
 import PaymentSection from "../PaymentSection";
 import OrderItem from "./OrderItem";
 
 interface IOrderInfoSection {
   orderItems: ICheckedItem[] | IOrderItem[];
-  orderProducts: IProductResData[] | undefined;
 }
 
-const OrderInfoSection = ({ orderItems, orderProducts }: IOrderInfoSection) => {
+const OrderInfoSection = ({ orderItems }: IOrderInfoSection) => {
+  const { orderProducts, isOrderProductsLoading } = useProductsByOrderIds({
+    orderItemsId: orderItems.map(
+      (item: IOrderItem | ICheckedItem) => item.itemId
+    ),
+  });
+
+  if (isOrderProductsLoading) {
+    return <Loading />;
+  }
+
   return (
     <PaymentSection sectionTitle="주문 상품 정보">
       <div className="flex flex-col gap-3">

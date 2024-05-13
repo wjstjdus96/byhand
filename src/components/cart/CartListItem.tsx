@@ -18,13 +18,7 @@ const CartListItem = ({
   singleCheckHandler,
   checkedItems,
 }: ICartListItem) => {
-  const {
-    selectedQuantity,
-    onClickMinus,
-    onClickPlus,
-    isMinusDisabled,
-    isPlusDisabled,
-  } = useQuantitySelection({
+  const { selectedQuantity, quantityHandler } = useQuantitySelection({
     maxQuantity: product.productQuantity,
     initialCnt: selectedCnt,
     cartItemId: product.id,
@@ -42,10 +36,7 @@ const CartListItem = ({
       <div className="flex gap-1 justify-between items-center">
         <QuantityInput
           selectedQuantity={selectedQuantity}
-          onClickMinus={onClickMinus}
-          onClickPlus={onClickPlus}
-          isMinusDisabled={isMinusDisabled}
-          isPlusDisabled={isPlusDisabled}
+          quantityHandler={quantityHandler}
           size="small"
         />
         <p className="text-xs">총 합계: {convertPriceUnit(itemTotalPrice)}원</p>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { queryClient } from "../../App";
 import { SHIPPING_FEE } from "../../pages/Payment";
-import { IUser } from "../../store/userStore";
+import { useUserStore } from "../../store/userStore";
 import { RequestPayParams, RequestPayResponse } from "../../types/imp";
 import { IAddressInfo, IPaymentState } from "../../types/order";
 import { useCartDeletion } from "../cart/useCartDeletion";
@@ -11,16 +11,12 @@ import { useReduceProductQuantity } from "./useReduceProductQuantity";
 
 interface IUsePayment {
   addressInfo: IAddressInfo | undefined;
-  buyerInfo: IUser | null;
   paymentState: IPaymentState;
 }
 
-export const usePayment = ({
-  addressInfo,
-  buyerInfo,
-  paymentState,
-}: IUsePayment) => {
+export const usePayment = ({ addressInfo, paymentState }: IUsePayment) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { user: buyerInfo } = useUserStore();
   const { AddOrderToDB } = useAddOrder();
   const { reduceProductsQuantity } = useReduceProductQuantity({
     orderedItems: paymentState.orderedItems,
@@ -47,7 +43,7 @@ export const usePayment = ({
       pg: "nice.iamport02m",
       pay_method: "card",
       merchant_uid: `mid_${new Date().getTime()}`,
-      amount: paymentState.orderedTotalPrice + SHIPPING_FEE,
+      amount: paymentState.totalPrice + SHIPPING_FEE,
       name: "BYHAND 상품 결제",
       buyer_name: buyerInfo.userName,
       buyer_email: buyerInfo.userEmail,
@@ -67,7 +63,7 @@ export const usePayment = ({
         }
         await AddOrderToDB({
           orderedItems: paymentState.orderedItems,
-          orderedTotalPrice: paymentState.orderedTotalPrice,
+          orderedTotalPrice: paymentState.totalPrice,
         });
         await reduceProductsQuantity({
           orderedItems: paymentState.orderedItems,

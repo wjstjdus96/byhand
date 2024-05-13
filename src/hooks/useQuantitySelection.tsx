@@ -34,11 +34,15 @@ export const useQuantitySelection = ({
     }
   }, [selectedQuantity]);
 
-  return {
-    selectedQuantity,
+  const quantityHandler = {
     onClickMinus,
     onClickPlus,
     isMinusDisabled,
     isPlusDisabled,
+  };
+
+  return {
+    selectedQuantity,
+    quantityHandler,
   };
 };

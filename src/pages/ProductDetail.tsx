@@ -20,11 +20,14 @@ function ProductDetail() {
     window.scrollTo(0, 0);
   }, []);
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <Layout>
       <Meta page="detail" product={data} />
       <div className="py-24 px-52 min-h-[75vh]">
-        {isLoading && <Loading />}
         {data && (
           <>
             <div className="grid grid-cols-2 gap-12">

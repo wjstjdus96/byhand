@@ -1,21 +1,22 @@
 import { FaMinus } from "@react-icons/all-files/fa/FaMinus";
 import { FaPlus } from "@react-icons/all-files/fa/FaPlus";
 
-interface IQuantityInput {
-  selectedQuantity: number;
+interface IQuantityHandler {
   onClickMinus: () => void;
   onClickPlus: () => void;
   isMinusDisabled: boolean;
   isPlusDisabled: boolean;
+}
+
+interface IQuantityInput {
+  selectedQuantity: number;
+  quantityHandler: IQuantityHandler;
   size: "small" | "medium";
 }
 
 const QuantityInput = ({
   selectedQuantity,
-  onClickMinus,
-  onClickPlus,
-  isMinusDisabled,
-  isPlusDisabled,
+  quantityHandler,
   size,
 }: IQuantityInput) => {
   const buttonSize = {
@@ -32,8 +33,8 @@ const QuantityInput = ({
     <div className="flex">
       <button
         className={`${buttonSize} rounded-l-sm border-solid border border-gray-300 text-gray-300 disabled:bg-gray-300 disabled:text-white`}
-        onClick={onClickMinus}
-        disabled={isMinusDisabled}
+        onClick={quantityHandler.onClickMinus}
+        disabled={quantityHandler.isMinusDisabled}
       >
         <FaMinus />
       </button>
@@ -44,8 +45,8 @@ const QuantityInput = ({
       </div>
       <button
         className={`${buttonSize} rounded-r-sm border-solid border border-gray-300 text-gray-300 disabled:bg-gray-300 disabled:text-white`}
-        onClick={onClickPlus}
-        disabled={isPlusDisabled}
+        onClick={quantityHandler.onClickPlus}
+        disabled={quantityHandler.isPlusDisabled}
       >
         <FaPlus />
       </button>
