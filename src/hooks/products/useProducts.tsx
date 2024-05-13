@@ -29,6 +29,7 @@ export const useProducts = ({ keyword, category, sort }: IUseProducts) => {
         isInfiniteScroll: true,
       }),
     initialPageParam: null,
+
     getNextPageParam: (querySnapShot: any) => {
       if (querySnapShot?.size < LIMIT_NUM) return null;
       else return querySnapShot?.docs[querySnapShot.docs.length - 1];
