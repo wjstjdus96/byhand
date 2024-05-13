@@ -1,14 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { getProductsByProductsId } from "../../api/product";
+import { useCartProductStore } from "../../store/cartStore";
 import { useUserStore } from "../../store/userStore";
-import { ICartProductData } from "../../types/cart";
 
-interface IUseProductByCartIds {
-  cartItems: ICartProductData;
-}
-
-export const useProductsByCartIds = ({ cartItems }: IUseProductByCartIds) => {
+export const useProductsByCartIds = () => {
+  const { cartItems } = useCartProductStore();
   const { user } = useUserStore();
   const {
     data: products,
@@ -22,7 +19,7 @@ export const useProductsByCartIds = ({ cartItems }: IUseProductByCartIds) => {
 
   useEffect(() => {
     refetch();
-  }, [cartItems.length]);
+  }, [Object.keys(cartItems).length]);
 
   return { products, isLoading, refetch };
 };

@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import { ICartProductData } from "../../types/cart";
+import { useCartProductStore } from "../../store/cartStore";
 import { IProductResData } from "../../types/product";
 import { ICheckedItem } from "../useCheckboxSelection";
 
 interface IUseCheckedTotalPrice {
   products: IProductResData[] | undefined;
   checkedItems: ICheckedItem[];
-  cartItems: ICartProductData;
 }
 
 export const useCheckedTotalPrice = ({
   products,
   checkedItems,
-  cartItems,
 }: IUseCheckedTotalPrice) => {
+  const { cartItems } = useCartProductStore();
   const [checkedItemsTotalPrice, setCheckedItemsTotalPrice] =
     useState<number>(0);
 
