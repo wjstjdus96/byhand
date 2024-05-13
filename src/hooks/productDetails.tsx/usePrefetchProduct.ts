@@ -14,5 +14,18 @@ export const usePrefetchProduct = ({ productId }: IUsePrefetchProduct) => {
     });
   };
 
-  return { handlePrefetchProduct };
+  let prefetchTimer: ReturnType<typeof setTimeout> | null = null;
+
+  const handleMouseEnter = () => {
+    prefetchTimer = setTimeout(handlePrefetchProduct, 400);
+  };
+
+  const handleMouseLeave = () => {
+    if (prefetchTimer) {
+      clearTimeout(prefetchTimer);
+      prefetchTimer = null;
+    }
+  };
+
+  return { handleMouseEnter, handleMouseLeave };
 };

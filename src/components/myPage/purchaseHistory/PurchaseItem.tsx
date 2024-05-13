@@ -15,6 +15,7 @@ const PurchaseItem = ({ itemIdx, historyId, historyItems }: IPurchaseItem) => {
   const { data: productDetail } = useProductDetail({
     productId: historyItems[itemIdx].orderProductId,
   });
+
   const { onClickCancelOrder } = useOrderCancel({
     historyItems,
     historyId,

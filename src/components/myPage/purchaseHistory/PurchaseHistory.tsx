@@ -5,22 +5,18 @@ import PurchaseHistoryItem from "./PurchaseHistoryItem";
 const PurchaseHistory = () => {
   const { data: historyItems, isLoading } = usePurchaseHistory();
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <div>
       <h5 className="text-lg font-semibold mb-3">구매내역</h5>
       <div className="flex flex-col gap-5 p-2 ">
-        {isLoading ? (
-          <Loading />
+        {historyItems && historyItems.length != 0 ? (
+          historyItems.map((item) => <PurchaseHistoryItem historyItem={item} />)
         ) : (
-          <>
-            {historyItems && historyItems.length != 0 ? (
-              historyItems.map((item) => (
-                <PurchaseHistoryItem historyItem={item} />
-              ))
-            ) : (
-              <span className="py-20 text-center">주문 내역이 없습니다</span>
-            )}
-          </>
+          <span className="py-20 text-center">주문 내역이 없습니다</span>
         )}
       </div>
     </div>

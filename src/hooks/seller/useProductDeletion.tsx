@@ -5,11 +5,13 @@ import { toast } from "../../components/ui/use-toast";
 import { useUserStore } from "../../store/userStore";
 import { ICheckedItem } from "../useCheckboxSelection";
 
+interface IUseProductDeletion {
+  handleInitItems?: () => void | undefined;
+}
+
 export const useProductDeletion = ({
   handleInitItems,
-}: {
-  handleInitItems: () => void;
-}) => {
+}: IUseProductDeletion) => {
   const { user } = useUserStore();
   const deleteMutation = useMutation({
     mutationFn: (productId: string) => deleteProduct(productId),
@@ -22,11 +24,12 @@ export const useProductDeletion = ({
           queryClient.invalidateQueries({
             queryKey: ["sellProduct", user.uid],
           });
+        toast({ description: "상품이 정상적으로 삭제되었습니다" });
       },
     });
   };
 
-  const onClickCheckedItemsDelte = async (checkedItems: ICheckedItem[]) => {
+  const onClickCheckedItemsDelete = async (checkedItems: ICheckedItem[]) => {
     const deletePromise = checkedItems.map((item) =>
       deleteMutation.mutateAsync(item.itemId)
     );
@@ -34,9 +37,9 @@ export const useProductDeletion = ({
 
     if (user?.uid)
       queryClient.invalidateQueries({ queryKey: ["sellProduct", user.uid] });
-    handleInitItems();
+    handleInitItems!();
     toast({ description: "선택하신 상품이 정상적으로 삭제되었습니다" });
   };
 
-  return { onClickItemDelete, onClickCheckedItemsDelte };
+  return { onClickItemDelete, onClickCheckedItemsDelete };
 };

@@ -7,15 +7,10 @@ interface IUseProducts {
   keyword: string;
   category: string;
   sort: string;
-  limitNum: number;
 }
 
-export const useProducts = ({
-  keyword,
-  category,
-  sort,
-  limitNum,
-}: IUseProducts) => {
+export const useProducts = ({ keyword, category, sort }: IUseProducts) => {
+  const LIMIT_NUM = 18;
   const { ref, inView } = useInView();
   const {
     data: querySnap,
@@ -30,12 +25,12 @@ export const useProducts = ({
         category,
         sort,
         pageParam,
-        limitNum,
+        limitNum: LIMIT_NUM,
         isInfiniteScroll: true,
       }),
     initialPageParam: null,
     getNextPageParam: (querySnapShot: any) => {
-      if (querySnapShot?.size < limitNum) return null;
+      if (querySnapShot?.size < LIMIT_NUM) return null;
       else return querySnapShot?.docs[querySnapShot.docs.length - 1];
     },
     refetchOnWindowFocus: false,

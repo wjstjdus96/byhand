@@ -18,7 +18,6 @@ function Products() {
     keyword,
     category: selectedCategory,
     sort: selectedSort,
-    limitNum: 15,
   });
 
   return (
@@ -36,9 +35,9 @@ function Products() {
             setSelectedSort={setSelectedSort}
           />
         </div>
+        {products && <ProductsBoard ref={ref} resultData={products} />}
         {isLoading && <ProductsBoardSkeleton />}
         {isFetchingNextPage && <Spinner size="sm" />}
-        {products && <ProductsBoard ref={ref} resultData={products} />}
       </div>
     </Layout>
   );

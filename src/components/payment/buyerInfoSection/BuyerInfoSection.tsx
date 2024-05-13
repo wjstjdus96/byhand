@@ -1,7 +1,9 @@
-import { IUser } from "../../../store/userStore";
+import { useUserStore } from "../../../store/userStore";
 import PaymentSection from "../PaymentSection";
 
-const BuyerInfoSection = ({ buyerInfo }: { buyerInfo: IUser | null }) => {
+const BuyerInfoSection = () => {
+  const { user: buyerInfo } = useUserStore();
+
   return (
     <PaymentSection sectionTitle="주문자 정보">
       {buyerInfo ? (

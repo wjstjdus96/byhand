@@ -22,18 +22,18 @@ export const useRegisterHandler = () => {
   const resizeFile = (file: File) =>
     new Promise((resolve) => {
       Resizer.imageFileResizer(
-        file, // Is the file of the image which will resized.
-        300, // Is the maxWidth of the resized new image.
-        300, // Is the maxHeight of the resized new image.
-        "WEBP", // Is the compressFormat of the resized new image.
-        100, // Is the quality of the resized new image.
-        0, // Is the degree of clockwise rotation to apply to uploaded image.
+        file,
+        300,
+        300,
+        "WEBP",
+        100,
+        0,
         (uri) => {
           resolve(uri);
-        }, // Is the callBack function of the resized new image URI.
-        "file", // Is the output type of the resized new image.
-        200, // Is the minWidth of the resized new image.
-        200 // Is the minHeight of the resized new image.
+        },
+        "file",
+        200,
+        200
       );
     });
 

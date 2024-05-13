@@ -23,7 +23,7 @@ const AdminBoard = () => {
     useCheckboxSelection({
       allItems,
     });
-  const { onClickItemDelete, onClickCheckedItemsDelte } = useProductDeletion({
+  const { onClickCheckedItemsDelete } = useProductDeletion({
     handleInitItems,
   });
 
@@ -39,7 +39,7 @@ const AdminBoard = () => {
             allCheckHandler={handleAllCheck}
             checkedItems={checkedItems}
             deleteCheckedItemsHandler={() =>
-              onClickCheckedItemsDelte(checkedItems)
+              onClickCheckedItemsDelete(checkedItems)
             }
           />
           <Separator className="my-5" />
@@ -51,7 +51,6 @@ const AdminBoard = () => {
                   lastItemRef={lastItemRef}
                   handleSingleCheck={handleSingleCheck}
                   checkedItems={checkedItems}
-                  handleItemDelete={onClickItemDelete}
                 />
               ))}
             {isFetchingNextPage && <Spinner size="sm" />}

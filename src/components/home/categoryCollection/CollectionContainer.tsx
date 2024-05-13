@@ -1,8 +1,8 @@
 import { useCollection } from "../../../hooks/home/useCollection";
 import { IProductResData } from "../../../types/product";
 import ProductGridItem from "../../common/product/productGrid/ProductGridItem";
-import ProductGridItemSkeleton from "../../common/product/productGrid/ProductGridItemSkeleton";
 import Collection from "./Collection";
+import CollectionSkeleton from "./CollectionSkeleton";
 
 interface ICollectionContainer {
   categoryType: string;
@@ -14,11 +14,13 @@ const CollectionContainer = ({
   categoryTitle,
 }: ICollectionContainer) => {
   const { data, isLoading } = useCollection({ category: categoryType });
-  const COLLECTION_NUM = new Array(6).fill(0);
+
+  if (isLoading) {
+    return <CollectionSkeleton />;
+  }
 
   return (
     <Collection title={categoryTitle} category={categoryType}>
-      {isLoading && COLLECTION_NUM.map((_) => <ProductGridItemSkeleton />)}
       {Array.isArray(data) &&
         data.map((item: IProductResData) => (
           <ProductGridItem key={item.id} data={item} />

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { signup } from "../../api/auth";
 import { setUser } from "../../api/user";
 import { signupSchema } from "../../utils/validationSchema";
+import { toast } from "../../components/ui/use-toast";
 
 export interface ISignupData {
   email: string;
@@ -24,7 +25,7 @@ export const useSignup = () => {
   });
   const navigate = useNavigate();
 
-  const onSubmitHandler: SubmitHandler<ISignupData> = (data) => {
+  const onSubmitHandler: SubmitHandler<ISignupData> = async (data) => {
     try {
       const sinupReq = {
         email: data.email,
@@ -37,14 +38,16 @@ export const useSignup = () => {
         userEmail: data.email,
       };
 
-      signup({ req: sinupReq }).then((res) => {
-        if (res) {
-          setUser(res.user.uid, userReq);
-          navigate("/login");
-        }
-      });
+      const res = await signup({ req: sinupReq });
+      setUser(res.user.uid, userReq);
+      toast({ description: "회원가입이 완료되었습니다" });
+      navigate("/login");
     } catch (e: any) {
-      alert(e.response.data);
+      if (e.code == "auth/email-already-in-use") {
+        alert("이미 사용 중인 이메일입니다.");
+      } else {
+        alert("회원가입에 실패하였습니다");
+      }
     }
   };
 

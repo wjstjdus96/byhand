@@ -7,7 +7,7 @@ interface IUseCollection {
 }
 
 export const useCollection = ({ category, limitNum = 6 }: IUseCollection) => {
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["collection", category],
     queryFn: () =>
       getProducts({
@@ -18,5 +18,5 @@ export const useCollection = ({ category, limitNum = 6 }: IUseCollection) => {
     refetchOnWindowFocus: false,
   });
 
-  return { data, isLoading, error };
+  return { data, isLoading };
 };

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useCartAddProduct } from "../../hooks/productDetails.tsx/useCartAddProduct";
+import { useAddCartItem } from "../../hooks/productDetails.tsx/useAddCartItem";
 import { useProductPrice } from "../../hooks/productDetails.tsx/useProductPrice";
 import { useQuantitySelection } from "../../hooks/useQuantitySelection";
 import { convertPriceUnit } from "../../utils/convertPriceUnit";
@@ -18,18 +18,12 @@ const ProductQuantitySection = ({
   quantity,
   price,
 }: IProductQuantitySection) => {
-  const {
-    selectedQuantity,
-    onClickMinus,
-    onClickPlus,
-    isMinusDisabled,
-    isPlusDisabled,
-  } = useQuantitySelection({
+  const { selectedQuantity, quantityHandler } = useQuantitySelection({
     maxQuantity: quantity,
     initialCnt: 0,
   });
   const { productId } = useParams();
-  const { onClickAddItem } = useCartAddProduct({
+  const { onClickAddItem } = useAddCartItem({
     cartItemId: productId!,
     cartItemCount: selectedQuantity,
     maxQuantity: quantity,
@@ -46,10 +40,7 @@ const ProductQuantitySection = ({
       <p>남은수량:{quantity}개</p>
       <QuantityInput
         selectedQuantity={selectedQuantity}
-        onClickMinus={onClickMinus}
-        onClickPlus={onClickPlus}
-        isMinusDisabled={isMinusDisabled}
-        isPlusDisabled={isPlusDisabled}
+        quantityHandler={quantityHandler}
         size="medium"
       />
       <Separator />

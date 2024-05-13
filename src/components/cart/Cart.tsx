@@ -7,18 +7,16 @@ import CartPayment from "./CartPayment";
 
 const Cart = () => {
   const { cartItems } = useCartProductStore();
-  const { checkedItems, handleSingleCheck, handleAllCheck, handleInitItems } =
-    useCheckboxSelection({
-      allItems: Object.entries(cartItems).map(([itemId, itemCount]) => ({
-        itemId,
-        itemCount,
-      })),
-    });
-  const { products, refetch } = useProductsByCartIds({ cartItems });
+  const { checkedItems, checkHandler } = useCheckboxSelection({
+    allItems: Object.entries(cartItems).map(([itemId, itemCount]) => ({
+      itemId,
+      itemCount,
+    })),
+  });
+  const { products } = useProductsByCartIds();
   const { checkedItemsTotalPrice } = useCheckedTotalPrice({
     checkedItems,
     products,
-    cartItems,
   });
 
   return (
@@ -31,10 +29,7 @@ const Cart = () => {
         <CartList
           products={products}
           checkedItems={checkedItems}
-          singleCheckHandler={handleSingleCheck}
-          allCheckHandler={handleAllCheck}
-          initCheckHandler={handleInitItems}
-          refetch={refetch}
+          checkHandler={checkHandler}
         />
       )}
     </div>
