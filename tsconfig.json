@@ -21,7 +21,7 @@
     "noFallthroughCasesInSwitch": true,
 
     /*test*/
-    "types": ["...", "@types/jest"],
+    "types": ["@types/jest"],
     "esModuleInterop": true
   },
   "include": [
@@ -29,7 +29,9 @@
     "src/api/firebase.ts",
     "src/components/payment/addressInfoSection/AddressModal.tsx",
     "jest.config.ts",
-    "jest.setup.ts"
+    "jest.setup.ts",
+    "__test__"
   ],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "plugins": ["babel-plugin-transform-import-meta"]
 }
