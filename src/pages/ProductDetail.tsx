@@ -32,12 +32,19 @@ function ProductDetail() {
           <>
             <div className="grid grid-cols-2 gap-12">
               <ProductImageCarousel images={data.productImage} />
-              <div className="w-full aspect-square">
-                <p className="mb-3">{data.productCategory}</p>
-                <h2 className=" text-2xl font-semibold">{data.productName}</h2>
-                <h2 className="my-10 text-xl">
-                  {convertPriceUnit(data.productPrice)}원
-                </h2>
+              <div className="w-full aspect-square flex flex-col justify-between py-1">
+                <div>
+                  <p className="mb-3 text-slate-400">{data.productCategory}</p>
+                  <h2 className=" text-2xl font-semibold">
+                    {data.productName}
+                  </h2>
+                  <div className="my-10 flex items-center gap-1">
+                    <h2 className=" text-2xl font-bold">
+                      {convertPriceUnit(data.productPrice)}
+                    </h2>
+                    <span className="text-md mt-1">원</span>
+                  </div>
+                </div>
                 {!sellerId && (
                   <ProductQuantitySection
                     quantity={data.productQuantity}
