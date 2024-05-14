@@ -13,7 +13,7 @@ const ProductsBoard = forwardRef<HTMLDivElement, IProductsBoard>(
         {resultData.length == 0 ? (
           <div className="py-24 text-center">상품이 없습니다</div>
         ) : (
-          <div className="grid grid-cols-6 gap-x-3 gap-y-6">
+          <div className="grid grid-cols-6 gap-x-3 gap-y-8">
             {resultData.map((item: IProductResData, idx: number) => (
               <ProductGridItem
                 data={item}

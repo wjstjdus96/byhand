@@ -1,12 +1,13 @@
 export const CATEGORY_TYPE = [
-  { value: "food", name: "식품" },
   {
     value: "fashion",
     name: "패션",
   },
+  { value: "food", name: "식품" },
+
   {
     value: "living",
-    name: "리빙",
+    name: "홈리빙",
   },
   {
     value: "beauty",
@@ -19,7 +20,7 @@ export const CATEGORY_TYPE = [
 ];
 
 export const HOME_COLLECTIONS = [
-  { type: "fashion", title: "Fashion - 의류" },
+  { type: "fashion", title: "Fashion - 패션" },
   { type: "food", title: "Food - 식품" },
   { type: "living", title: "Living - 홈리빙" },
   { type: "beauty", title: "Beauty - 뷰티" },

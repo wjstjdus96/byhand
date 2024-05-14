@@ -3,7 +3,7 @@ import CollectionContainer from "./CollectionContainer";
 
 const CategoryCollection = () => {
   return (
-    <div className="my-12 mx-20 flex flex-col gap-10 justify-center">
+    <div className="my-11 mx-20 flex flex-col gap-10 justify-center">
       {HOME_COLLECTIONS.map((category) => (
         <CollectionContainer
           categoryTitle={category.title}
