@@ -35,11 +35,13 @@ const QuantityInput = ({
         className={`${buttonSize} rounded-l-sm border-solid border border-gray-300 text-gray-300 disabled:bg-gray-300 disabled:text-white`}
         onClick={quantityHandler.onClickMinus}
         disabled={quantityHandler.isMinusDisabled}
+        data-testid="minus-button"
       >
         <FaMinus />
       </button>
       <div
         className={`${numberSize} border-y border-gray-300 flex items-center justify-center`}
+        data-testid="quantity-value"
       >
         {selectedQuantity}
       </div>
@@ -47,6 +49,7 @@ const QuantityInput = ({
         className={`${buttonSize} rounded-r-sm border-solid border border-gray-300 text-gray-300 disabled:bg-gray-300 disabled:text-white`}
         onClick={quantityHandler.onClickPlus}
         disabled={quantityHandler.isPlusDisabled}
+        data-testid="plus-button"
       >
         <FaPlus />
       </button>

@@ -40,8 +40,9 @@ const CartList = ({ checkedItems, checkHandler, products }: ICartList) => {
           />
           <Separator />
           <div className="h-full overflow-y-auto pb-20 pt-2 px-2">
-            {products.map((product) => (
+            {products.map((product, idx) => (
               <CartListItem
+                key={idx}
                 product={product}
                 selectedCnt={cartItems[product.id]}
                 singleCheckHandler={checkHandler.handleSingleCheck}
