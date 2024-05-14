@@ -64,6 +64,7 @@ const CheckBox = () => {
 
   return (
     <Checkbox
+      data-testid="checkbox"
       onCheckedChange={(checked) => {
         checkHandler(
           checked as boolean,
