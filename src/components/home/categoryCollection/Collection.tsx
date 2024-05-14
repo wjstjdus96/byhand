@@ -9,7 +9,7 @@ interface ICollection {
 const Collection = ({ children, title, category }: ICollection) => {
   return (
     <div>
-      <div className="flex justify-between mb-4">
+      <div className="flex justify-between mb-4 ">
         <h2 className="text-xl font-semibold">{title}</h2>
         <CollectionMoreBtn category={category} />
       </div>

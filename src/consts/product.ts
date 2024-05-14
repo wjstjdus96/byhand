@@ -19,10 +19,10 @@ export const CATEGORY_TYPE = [
 ];
 
 export const HOME_COLLECTIONS = [
-  { type: "fashion", title: "패션이 궁금하쇼?" },
-  { type: "food", title: "음식이 궁금하쇼?" },
-  { type: "living", title: "리빙이 궁금하쇼?" },
-  { type: "beauty", title: "뷰티가 궁금하쇼?" },
+  { type: "fashion", title: "Fashion - 의류" },
+  { type: "food", title: "Food - 식품" },
+  { type: "living", title: "Living - 홈리빙" },
+  { type: "beauty", title: "Beauty - 뷰티" },
 ];
 
 export const CATEGORY_TYPE_INCLUDING_TOTAL = [
