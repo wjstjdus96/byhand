@@ -29,12 +29,17 @@ const CartPayment = ({ checkedItems, checkedTotalPrice }: ICartPayment) => {
           원
         </p>
       </div>
-      <Button
-        className="bg-[#2c208c] hover:bg-[#271248]"
-        onClick={onClickPurchase}
-      >
-        구매하기
-      </Button>
+      <div>
+        <Button
+          className="bg-[#2c208c] hover:bg-[#271248] w-full"
+          onClick={onClickPurchase}
+        >
+          구매하기
+        </Button>
+        <p className="text-center text-xs mt-2 text-slate-500">
+          배송비 2500원은 별도입니다
+        </p>
+      </div>
     </div>
   );
 };

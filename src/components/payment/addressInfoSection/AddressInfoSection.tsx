@@ -17,11 +17,10 @@ const AddressInfoSection = ({
     <PaymentSection sectionTitle="배송 정보">
       {addressInfo && (
         <div className="flex flex-col gap-2 mb-5">
-          <p>
-            {addressInfo.recipientName} | {addressInfo.recipientPhone}
-          </p>
-          <p>{addressInfo.deliveryPostCode}</p>
-          <p>{addressInfo.deliveryAddress}</p>
+          <p>{addressInfo.recipientName}</p>
+          <p>{addressInfo.recipientPhone}</p>
+          <p className="text-sm">{addressInfo.deliveryPostCode}</p>
+          <p className="text-sm"> {addressInfo.deliveryAddress}</p>
         </div>
       )}
       <AddressModal setAddressInfo={setAddressInfo} addressInfo={addressInfo}>
