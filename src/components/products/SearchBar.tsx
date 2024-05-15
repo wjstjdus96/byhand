@@ -12,8 +12,12 @@ const SearchBar = ({ keyword, setKeyword }: ISearchBar) => {
   };
 
   return (
-    <div className="w-1/3 flex">
-      <Input value={keyword} onChange={onChangeKeyword} />
+    <div className="w-1/4 flex">
+      <Input
+        value={keyword}
+        onChange={onChangeKeyword}
+        placeholder="검색어를 입력하세요"
+      />
     </div>
   );
 };

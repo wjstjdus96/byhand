@@ -1,12 +1,13 @@
 export const CATEGORY_TYPE = [
-  { value: "food", name: "식품" },
   {
     value: "fashion",
     name: "패션",
   },
+  { value: "food", name: "식품" },
+
   {
     value: "living",
-    name: "리빙",
+    name: "홈리빙",
   },
   {
     value: "beauty",
@@ -19,10 +20,13 @@ export const CATEGORY_TYPE = [
 ];
 
 export const HOME_COLLECTIONS = [
-  { type: "fashion", title: "패션이 궁금하쇼?" },
-  { type: "food", title: "음식이 궁금하쇼?" },
-  { type: "living", title: "리빙이 궁금하쇼?" },
-  { type: "beauty", title: "뷰티가 궁금하쇼?" },
+  { type: "fashion", title: "다양한 스타일의 의류와 액세서리를 만나보세요!" },
+  { type: "food", title: "건강하고 맛있는 식품을 즐겨보세요!" },
+  {
+    type: "living",
+    title: "편안하고 스타일리시한 홈리빙 아이템을 만나보세요!",
+  },
+  { type: "beauty", title: "아름다움을 위한 다양한 뷰티 제품을 만나보세요!" },
 ];
 
 export const CATEGORY_TYPE_INCLUDING_TOTAL = [

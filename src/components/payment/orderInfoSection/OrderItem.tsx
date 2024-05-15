@@ -15,9 +15,9 @@ const OrderItem = ({ productInfo, selectedQuantity }: IOrderItem) => {
         src={productInfo.productThumbnail}
         className="object-cover w-24 aspect-square rounded-sm"
       />
-      <div className="flex flex-col gap-1 w-full">
+      <div className="flex flex-col gap-2 w-full">
         <span>{productInfo.productName}</span>
-        <div>
+        <div className="text-xs">
           <span className="text-sm">총 {selectedQuantity} 개</span>
           <span>｜</span>
           <span className="text-sm">{convertPriceUnit(totalPrice)}원</span>

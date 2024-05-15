@@ -32,11 +32,19 @@ const ProductGridItem = ({ data, lastItemRef }: IProductGridItem) => {
           className=" rounded-sm w-full h-full object-cover transition-transform transform hover:scale-[1.03]"
         />
       </div>
-      <div className="flex flex-col gap-2 py-2 px-1">
-        <p className="text-xs">{data.productCategory}</p>
-        <h4 className="text-md">{data.productName}</h4>
-        <h5 className="text-sm">{convertPriceUnit(data.productPrice)}원</h5>
-        <div className="flex justify-between text-[0.7rem]">
+      <div className="flex flex-col gap-2 py-3 px-1">
+        <div>
+          <p className="text-xs text-slate-400 mb-1">{data.productCategory}</p>
+          <h4 className="text-md">{data.productName}</h4>
+        </div>
+        <div className="flex items-center gap-[2px]">
+          <span className="text-md font-bold">
+            {convertPriceUnit(data.productPrice)}
+          </span>
+          <span className=" text-xs">원</span>
+        </div>
+
+        <div className="flex justify-between text-[0.7rem] text-slate-600">
           <p>남은수량 : {data.productQuantity}</p>
         </div>
       </div>

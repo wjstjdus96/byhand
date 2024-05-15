@@ -10,7 +10,7 @@ const CategorySelector = ({
   setCategoryParams,
 }: ICategorySelector) => {
   return (
-    <div className="flex gap-6 my-5">
+    <div className="flex gap-6 mt-8 mb-3">
       {CATEGORY_TYPE_INCLUDING_TOTAL.map((item) => (
         <span
           className={`text-sm font-semibold py-1 px-2 rounded-lg cursor-pointer ${

@@ -42,7 +42,7 @@ const AdminBoard = () => {
               onClickCheckedItemsDelete(checkedItems)
             }
           />
-          <Separator className="my-5" />
+          <Separator className="my-3" />
           <div className="flex flex-col gap-3">
             {products &&
               products.map((item) => (

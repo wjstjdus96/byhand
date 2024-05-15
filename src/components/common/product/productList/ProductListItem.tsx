@@ -78,10 +78,10 @@ const CheckBox = () => {
   );
 };
 
-const Image = ({ size }: { size: string }) => {
+const Image = ({ ...props }) => {
   const { item } = useProductListItem();
   return (
-    <div className={`w-${size} aspect-square`}>
+    <div {...props}>
       <img
         src={item.productThumbnail}
         className="object-cover w-full h-full rounded-sm"
