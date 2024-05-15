@@ -20,10 +20,13 @@ export const CATEGORY_TYPE = [
 ];
 
 export const HOME_COLLECTIONS = [
-  { type: "fashion", title: "Fashion - 패션" },
-  { type: "food", title: "Food - 식품" },
-  { type: "living", title: "Living - 홈리빙" },
-  { type: "beauty", title: "Beauty - 뷰티" },
+  { type: "fashion", title: "다양한 스타일의 의류와 액세서리를 만나보세요!" },
+  { type: "food", title: "건강하고 맛있는 식품을 즐겨보세요!" },
+  {
+    type: "living",
+    title: "편안하고 스타일리시한 홈리빙 아이템을 만나보세요!",
+  },
+  { type: "beauty", title: "아름다움을 위한 다양한 뷰티 제품을 만나보세요!" },
 ];
 
 export const CATEGORY_TYPE_INCLUDING_TOTAL = [

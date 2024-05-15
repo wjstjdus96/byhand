@@ -17,21 +17,31 @@ const ProductListHead = ({
   checkedItems,
   deleteCheckedItemsHandler,
 }: IProductListHead) => {
-  const paddingSize = {
+  const headPaddingSize = {
     small: "p-2  mb-1",
     medium: "p-0  mb-2",
   }[size];
 
+  const gapSize = {
+    small: "pl-3",
+    medium: "pl-5",
+  }[size];
+
+  const textSize = {
+    small: "text-xs self-center",
+    medium: "text-sm self-start",
+  }[size];
+
   return (
-    <div className={`flex items-center justify-between ${paddingSize}`}>
+    <div className={`flex items-center justify-between ${headPaddingSize}`}>
       <Checkbox
         onCheckedChange={allCheckHandler}
         checked={checkedItems.length == totLength}
       />
       {totLength && (
-        <div className="text-sm self-start pl-5 mr-auto">
+        <p className={`${gapSize} ${textSize} self-start mr-auto`}>
           전체선택 ({checkedItems.length}/{totLength})
-        </div>
+        </p>
       )}
       <AlertDialogBox
         title="선택하신 상품을 모두 삭제하시겠습니까?"
@@ -39,7 +49,9 @@ const ProductListHead = ({
         actionName="삭제"
         onClickAction={deleteCheckedItemsHandler}
       >
-        <div className="text-sm self-start cursor-pointer">선택삭제</div>
+        <div className={`${textSize} cursor-pointer hover:font-bold`}>
+          선택삭제
+        </div>
       </AlertDialogBox>
     </div>
   );

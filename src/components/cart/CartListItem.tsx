@@ -31,12 +31,12 @@ const CartListItem = ({
       checkHandler={singleCheckHandler}
       checkedItems={checkedItems}
       selectedCnt={selectedCnt}
-      gapSize="2"
+      gapSize="3"
     >
       <ListItem.CheckBox />
-      <ListItem.Image size="32" />
+      <ListItem.Image className={`w-32 aspect-square`} />
       <div className="flex flex-col gap-1 justify-between w-full py-1">
-        <ListItem.Name className="text-sm" />
+        <ListItem.Name className="text-[13px]" />
         <span className="flex gap-3 items-center">
           <ListItem.Price className="text-[10px]" />
           <ListItem.LeftQuantity className="text-[10px]" />

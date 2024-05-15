@@ -38,7 +38,7 @@ function ProductDetail() {
                   <h2 className=" text-2xl font-semibold">
                     {data.productName}
                   </h2>
-                  <div className="my-10 flex items-center gap-1">
+                  <div className="my-10 flex items-end gap-1">
                     <h2 className=" text-2xl font-bold">
                       {convertPriceUnit(data.productPrice)}
                     </h2>

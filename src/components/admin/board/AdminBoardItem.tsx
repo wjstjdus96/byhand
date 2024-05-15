@@ -39,7 +39,7 @@ const AdminBoardItem = ({
       gapSize="5"
     >
       <ListItem.CheckBox />
-      <ListItem.Image size="28" />
+      <ListItem.Image className={`w-28 aspect-square`} />
       <div className="flex flex-col gap-1 justify-between w-full py-1">
         <ListItem.Name />
         <ListItem.Price className="text-sm" />

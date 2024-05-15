@@ -9,7 +9,7 @@ export const useLogout = () => {
   const logout = async () => {
     try {
       setUser(null);
-      toast({ description: "로그아웃이 완료되었습니다." });
+      toast({ description: "로그아웃이 완료되었습니다.", duration: 700 });
       navigate("/");
     } catch (e) {}
   };
