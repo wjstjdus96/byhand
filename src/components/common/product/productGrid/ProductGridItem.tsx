@@ -34,8 +34,8 @@ const ProductGridItem = ({ data, lastItemRef }: IProductGridItem) => {
       </div>
       <div className="flex flex-col gap-2 py-3 px-1">
         <div>
-          <p className="text-xs text-slate-400 mb-1">{data.productCategory}</p>
-          <h4 className="text-md">{data.productName}</h4>
+          <p className="text-xs text-slate-500 mb-1">{data.productCategory}</p>
+          <p className="text-md">{data.productName}</p>
         </div>
         <div className="flex items-center gap-[2px]">
           <span className="text-md font-bold">
