@@ -39,7 +39,7 @@ export const useProducts = ({ keyword, category, sort }: IUseProducts) => {
 
   const products = useMemo(() => {
     if (querySnap) {
-      return querySnap.pages.flatMap((page) =>
+      return querySnap.pages.flatMap((page: any) =>
         page!.docs.map((doc: any) => ({ id: doc.id, ...doc.data() }))
       );
     }
