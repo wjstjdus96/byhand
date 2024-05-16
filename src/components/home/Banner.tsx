@@ -8,7 +8,6 @@ const Banner = () => {
     <div className="flex gap-5 mt-24 mx-20 justify-between">
       <div className="relative">
         <picture>
-          <link rel="preload" href={banner1wp} as="image" type="image/webp" />
           <source srcSet={banner1wp} type="image/webp" />
           <source srcSet={banner1} type="image/png" />
           <img
@@ -26,7 +25,6 @@ const Banner = () => {
       </div>
       <div className="relative">
         <picture>
-          <link rel="preload" href={banner2wp} as="image" />
           <source srcSet={banner2wp} type="image/webp" />
           <source srcSet={banner2} type="image/png" />
           <img
