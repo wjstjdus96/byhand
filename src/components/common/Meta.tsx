@@ -2,15 +2,23 @@ import { Helmet } from "react-helmet-async";
 import { IProductResData } from "../../types/product";
 
 interface IMeta {
-  page: "home" | "products" | "detail";
+  page?: "home" | "products" | "detail";
   product?: IProductResData;
 }
 
 const Meta = ({ page, product }: IMeta) => {
+  if (!page) {
+    return (
+      <Helmet>
+        <title>BYHAND</title>
+      </Helmet>
+    );
+  }
+
   const title = {
-    home: "바이핸드-홈",
-    products: "바이핸드-전체상품",
-    detail: `바이핸드-상품정보`,
+    home: "BYHAND | 홈",
+    products: "BYHAND | 전체상품",
+    detail: "BYHAND | 상품정보",
   }[page];
   const description = {
     home: "핸드메이드 상품 이커머스 플랫폼 바이핸드입니다",

@@ -62,7 +62,11 @@ const Header = () => {
           <>
             <li className="menu-item">
               <CartContainer>
-                <div className="relative">
+                <div
+                  className="relative"
+                  role="button"
+                  aria-label="장바구니로 이동"
+                >
                   <MdShoppingCart size={28} />
                   <span className="absolute bottom-[-5px] right-[-8px] w-5 h-5 flex items-center justify-center text-xs rounded-full bg-[#312fd0] text-white">
                     {getCartQuantity()}

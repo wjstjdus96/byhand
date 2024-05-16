@@ -8,7 +8,6 @@ import { Separator } from "../components/ui/separator";
 import { useProductDetail } from "../hooks/productDetails.tsx/useProductDetail";
 import Layout from "../layout/Layout";
 import { convertPriceUnit } from "../utils/convertPriceUnit";
-import Meta from "../components/common/Meta";
 
 function ProductDetail() {
   const { productId, sellerId } = useParams();
@@ -25,8 +24,7 @@ function ProductDetail() {
   }
 
   return (
-    <Layout>
-      <Meta page="detail" product={data} />
+    <Layout page="detail" product={data}>
       <div className="py-24 px-52 min-h-[75vh]">
         {data && (
           <>

@@ -4,3 +4,4 @@ Disallow: /signup
 Disallow: /admin
 Disallow: /mypage
 Disallow: /payment
+Sitemap:https://byhand-wjstjdus96s-projects.vercel.app/sitemap.xml
