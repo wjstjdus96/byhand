@@ -5,7 +5,11 @@ const Banner = () => {
   return (
     <div className="flex gap-5 mt-24 mx-20 justify-between">
       <div className="relative">
-        <img src={banner1} className="rounded-lg h-full w-full object-cover" />
+        <img
+          src={banner1}
+          className="rounded-lg h-full w-full object-cover"
+          alt="배너이미지1"
+        />
         <span className="absolute bottom-20 left-10 text-2xl font-bold ">
           작지만 큰 존재감, 키링의 세계
         </span>
@@ -14,7 +18,11 @@ const Banner = () => {
         </span>
       </div>
       <div className="relative">
-        <img src={banner2} className="rounded-lg h-full w-full object-cover" />
+        <img
+          src={banner2}
+          className="rounded-lg h-full w-full object-cover"
+          alt="배너이미지2"
+        />
 
         <span className="absolute bottom-20 left-10 text-2xl font-bold">
           편리하고 실용적인 작품집

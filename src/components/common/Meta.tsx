@@ -2,28 +2,33 @@ import { Helmet } from "react-helmet-async";
 import { IProductResData } from "../../types/product";
 
 interface IMeta {
-  page: "home" | "products" | "detail" | "etc";
+  page?: "home" | "products" | "detail";
   product?: IProductResData;
 }
 
 const Meta = ({ page, product }: IMeta) => {
+  if (!page) {
+    return (
+      <Helmet>
+        <title>BYHAND</title>
+      </Helmet>
+    );
+  }
+
   const title = {
     home: "BYHAND | 홈",
     products: "BYHAND | 전체상품",
     detail: "BYHAND | 상품정보",
-    etc: "BYHAND",
   }[page];
   const description = {
     home: "핸드메이드 상품 이커머스 플랫폼 바이핸드입니다",
     products: "상품을 찾아보세요",
     detail: `${product?.productName}`,
-    etc: "BYHAND",
   }[page];
   const url = {
     home: "https://byhand-wjstjdus96s-projects.vercel.app/",
     products: "https://byhand-wjstjdus96s-projects.vercel.app/products",
     detail: `https://byhand-wjstjdus96s-projects.vercel.app/products/${product?.id}`,
-    etc: "BYHAND",
   }[page];
 
   return (
