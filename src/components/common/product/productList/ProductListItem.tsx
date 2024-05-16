@@ -65,7 +65,7 @@ const CheckBox = () => {
   return (
     <Checkbox
       data-testid="checkbox"
-      onCheckedChange={(checked) => {
+      onCheckedChange={(checked: any) => {
         checkHandler(
           checked as boolean,
           selectedCnt
