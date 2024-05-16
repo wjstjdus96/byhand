@@ -1,15 +1,22 @@
 import banner1 from "../../assets/banner1.png";
+import banner1wp from "../../assets/banner1_wp.webp";
 import banner2 from "../../assets/banner2.png";
+import banner2wp from "../../assets/banner2_wp.webp";
 
 const Banner = () => {
   return (
     <div className="flex gap-5 mt-24 mx-20 justify-between">
       <div className="relative">
-        <img
-          src={banner1}
-          className="rounded-lg h-full w-full object-cover"
-          alt="배너이미지1"
-        />
+        <picture>
+          <link rel="preload" href={banner1wp} as="image" type="image/webp" />
+          <source srcSet={banner1wp} type="image/webp" />
+          <source srcSet={banner1} type="image/png" />
+          <img
+            src={banner1}
+            className="rounded-lg h-full w-full object-cover"
+            alt="배너이미지1"
+          />
+        </picture>
         <span className="absolute bottom-20 left-10 text-2xl font-bold ">
           작지만 큰 존재감, 키링의 세계
         </span>
@@ -18,12 +25,16 @@ const Banner = () => {
         </span>
       </div>
       <div className="relative">
-        <img
-          src={banner2}
-          className="rounded-lg h-full w-full object-cover"
-          alt="배너이미지2"
-        />
-
+        <picture>
+          <link rel="preload" href={banner2wp} as="image" />
+          <source srcSet={banner2wp} type="image/webp" />
+          <source srcSet={banner2} type="image/png" />
+          <img
+            src={banner2}
+            className="rounded-lg h-full w-full object-cover"
+            alt="배너이미지2"
+          />
+        </picture>
         <span className="absolute bottom-20 left-10 text-2xl font-bold">
           편리하고 실용적인 작품집
         </span>
