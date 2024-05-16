@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Loading from "../components/common/Loading";
 import AddressInfoSection from "../components/payment/addressInfoSection/AddressInfoSection";
