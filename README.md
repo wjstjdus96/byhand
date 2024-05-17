@@ -8,6 +8,8 @@
 
 2024.04 ~ 2024.05 (4주)
 
+<br/>
+
 ## 🌍 배포
 
 [BYHAND 배포링크](https://byhand-wjstjdus96s-projects.vercel.app/)
@@ -18,24 +20,21 @@
 | ---------------------------------------- | --------------------------------------- |
 | ID : seller@test.com <br/>PW : 123qweQWE | ID : buyer@test.com <br/>PW : 123qweQWE |
 
+<br/>
+
 ## 🔧 기술스택
 
-<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white">
- <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white">
-<img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white">
-<img src="https://img.shields.io/badge/Tailwindcss-06B6D4?style=flat&logo=tailwindcss&logoColor=white">
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white"> <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white"> <img src="https://img.shields.io/badge/Tailwindcss-06B6D4?style=flat&logo=tailwindcss&logoColor=white">
 
-<br/>
 <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=firebase&logoColor=white">
 
-<br/>
 <img src="https://img.shields.io/badge/Zustand-1E4CC9?style=flat&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/React Query-FF4154?style=flat&logo=reactquery&logoColor=white"> <img src="https://img.shields.io/badge/React Hook Form-EC5990?style=flat&logo=reacthookform&logoColor=white">
 
-<br/>
-<img src="https://img.shields.io/badge/Jest-C21325?style=flat&logo=jest&logoColor=white">
-<img src="https://img.shields.io/badge/Testing Library-E33332?style=flat&logo=testinglibrary&logoColor=white">
-<br/>
+<img src="https://img.shields.io/badge/Jest-C21325?style=flat&logo=jest&logoColor=white"> <img src="https://img.shields.io/badge/Testing Library-E33332?style=flat&logo=testinglibrary&logoColor=white"> 
+
 <img src="https://img.shields.io/badge/Vercel-000000?style=flat&logo=netlify&logoColor=white">
+
+<br/>
 
 ## 🗂 폴더구조
 
@@ -46,8 +45,34 @@ _Write here!_
 
 </details>
 
-## 📌 주요기능
+<br/>
 
+## 📌 주요기능
+#### <details><summary>로그인 / 회원가입</summary> <br/> <p>로그인-로그아웃-회원가입</p> <img src="https://github.com/wjstjdus96/byhand/assets/77755620/ab71d753-74bc-468e-84a0-2d6e157a83ca" width="600" /></details>
+- 폼 유효성 검증
+- 로그인 후 전역상태로 회원정보 관리
+#### <details><summary>전체 상품 조회</summary> _Write here!_</details>
+- 카테고리, 검색어, 정렬옵션에 따른 조회 결과 필터링 기능
+- 무한스크롤을 활용한 페이지네이션
+#### <details><summary>상품 상세 조회</summary>_Write here!_</details>
+- 상품 수량 선택 -> 장바구니 추가 혹은 상품 주문
+- 이미지 캐러셀을 통한 다량의 상품 이미지 자동 전환
+#### <details><summary>장바구니</summary> _Write here!_</details>
+- 장바구니 상품 수량 수정 기능
+- 상품 전체/부분선택 -> 부분적인 주문 및 삭제 기능
+- 선택한 상품 금액 및 개수 계산
+#### <details><summary>[구매자] 선택 상품 주문</summary> _Write here!_</details>
+- 카카오 우편번호 api를 활용한 배송 정보 입력 기능
+- 포트원 SDK를 활용한 결제 기능
+#### <details><summary>[구매자] 주문 내역 조회 및 주문 취소</summary> _Write here!_</details>
+- 날짜별 주문 내역 조회 기능
+- 상품별 주문 취소 기능
+#### <details><summary>[판매자] 판매상품관리</summary> _Write here!_</details>
+- 판매 상품 조회, 등록, 수정, 삭제 기능
+- 등록 시 상품 이미지 개수 5개 제한
+
+
+<br/>
 
 ## 📚 Docs
 
@@ -58,10 +83,10 @@ _Write here!_
 
 #### 트러블 슈팅
 
-input 이미지 다중 선택 시 초기화 이슈 해결 <br/>
+input 이미지 다중 선택 시 발생하는 초기화 이슈 해결 <br/>
 상세 상품 prefetch로 인한 중복적인 네트워크 요청 해결
 
 #### 성능 최적화
 
-번들 사이즈 축소 <br/>
+번들 사이즈 축소로 초기 로딩 속도 개선 <br/>
 렌더링 성능 최적화로 퍼포먼스 점수 향상
