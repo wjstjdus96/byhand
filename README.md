@@ -36,6 +36,8 @@
 
 <br/>
 
+## 아키텍쳐
+
 ## 🗂 폴더구조
 
 <details><summary>폴더 구조 펼쳐보기
@@ -48,19 +50,20 @@ _Write here!_
 <br/>
 
 ## 📌 주요기능
-#### <details><summary>로그인 / 회원가입</summary> <br/> <p>로그인-로그아웃-회원가입</p> <img src="https://github.com/wjstjdus96/byhand/assets/77755620/ab71d753-74bc-468e-84a0-2d6e157a83ca" width="600" /></details>
+#### <details><summary>로그인 / 회원가입</summary> <br/> <p>로그인</p> <img src="https://github.com/wjstjdus96/byhand/assets/77755620/f12d75ce-d43a-4d36-9179-8dcee4e89a9f" width="600" /> <br/> <br/> <p>회원가입</p> <img src="https://github.com/wjstjdus96/byhand/assets/77755620/6f1fd225-d95f-4ba6-9c1a-2fffdd57cdae" width="600" /> <br/></details>
 - 폼 유효성 검증
 - 로그인 후 전역상태로 회원정보 관리
-#### <details><summary>전체 상품 조회</summary> _Write here!_</details>
+#### <details><summary>전체 상품 조회</summary> <br/> <p>전체상품 - 결과 필터링</p> <img src="https://github.com/wjstjdus96/byhand/assets/77755620/e9c5366a-fcf0-4115-b274-e91dd7707802" width="600" /> <br/> <br/> <p>전체상품 - 무한스크롤</p> <img src="https://github.com/wjstjdus96/byhand/assets/77755620/a6697ac9-49fc-4461-96aa-1cb8d1b92e12" width="600" /> <br/></details>
 - 카테고리, 검색어, 정렬옵션에 따른 조회 결과 필터링 기능
 - 무한스크롤을 활용한 페이지네이션
-#### <details><summary>상품 상세 조회</summary>_Write here!_</details>
+#### <details><summary>상품 상세 조회</summary><br/> <p>상품 상세정보</p> <img src="https://github.com/wjstjdus96/byhand/assets/77755620/4e13159e-d267-43e9-b28e-f9bad1d0ddb4" width="600" /><br/></details>
 - 상품 수량 선택 -> 장바구니 추가 혹은 상품 주문
 - 이미지 캐러셀을 통한 다량의 상품 이미지 자동 전환
-#### <details><summary>장바구니</summary> _Write here!_</details>
+#### <details><summary>장바구니</summary><br/> <p>장바구니 - 상품선택,수량변경</p> <img src="https://github.com/wjstjdus96/byhand/assets/77755620/ab88a2c2-2a66-4d6b-89e1-00f239aa64b5" width="600" /> <br/> <br/> <p>장바구니 - 부분삭제,부분결제</p> <img src="https://github.com/wjstjdus96/byhand/assets/77755620/7b7b9161-5ca3-4717-be6d-74492e897a8f" width="600" /></details>
 - 장바구니 상품 수량 수정 기능
-- 상품 전체/부분선택 -> 부분적인 주문 및 삭제 기능
 - 선택한 상품 금액 및 개수 계산
+- 상품 전체/부분선택 -> 부분적인 주문 및 삭제 기능
+
 #### <details><summary>[구매자] 선택 상품 주문</summary> _Write here!_</details>
 - 카카오 우편번호 api를 활용한 배송 정보 입력 기능
 - 포트원 SDK를 활용한 결제 기능
