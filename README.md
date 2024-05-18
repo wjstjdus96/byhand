@@ -8,13 +8,11 @@
 
 2024.04 ~ 2024.05 (4주)
 
-<br/>
+#### 프로젝트 배포
+[🌍 BYHAND 배포링크 🌍](https://byhand-wjstjdus96s-projects.vercel.app/)
 
-## 🌍 배포
 
-[BYHAND 배포링크](https://byhand-wjstjdus96s-projects.vercel.app/)
-
-#### 테스트 계정
+###### 테스트 계정
 
 | 판매자                                   | 구매자                                  |
 | ---------------------------------------- | --------------------------------------- |
@@ -22,7 +20,7 @@
 
 <br/>
 
-## 🔧 기술스택
+## 🛠 기술스택
 
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white"> <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white"> <img src="https://img.shields.io/badge/Tailwindcss-06B6D4?style=flat&logo=tailwindcss&logoColor=white">
 
@@ -36,18 +34,15 @@
 
 <br/>
 
-## 아키텍쳐
+## 🏗 아키텍쳐
+
+
 
 ## 🗂 폴더구조
 
-<details><summary>폴더 구조 펼쳐보기
-</summary>
-
-_Write here!_
-
-</details>
-
-<br/>
+```
+폴더구조
+```
 
 ## 📌 주요기능
 #### <details><summary>로그인 / 회원가입</summary> <br/> <p>로그인</p> <img src="https://github.com/wjstjdus96/byhand/assets/77755620/f12d75ce-d43a-4d36-9179-8dcee4e89a9f" width="600" /> <br/> <br/> <p>회원가입</p> <img src="https://github.com/wjstjdus96/byhand/assets/77755620/6f1fd225-d95f-4ba6-9c1a-2fffdd57cdae" width="600" /> <br/></details>
