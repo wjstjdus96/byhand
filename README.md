@@ -34,17 +34,8 @@
 
 <br/>
 
-## 🏗 아키텍쳐
-
-
-
-## 🗂 폴더구조
-
-```
-폴더구조
-```
-
 ## 📌 주요기능
+##### 토글을 열면 시연영상을 확인하실 수 있습니다
 #### <details><summary>로그인 / 회원가입</summary> <br/> <p>로그인</p> <img src="https://github.com/wjstjdus96/byhand/assets/77755620/f12d75ce-d43a-4d36-9179-8dcee4e89a9f" width="600" /> <br/> <br/> <p>회원가입</p> <img src="https://github.com/wjstjdus96/byhand/assets/77755620/6f1fd225-d95f-4ba6-9c1a-2fffdd57cdae" width="600" /> <br/></details>
 - 폼 유효성 검증
 - 로그인 후 전역상태로 회원정보 관리
@@ -74,17 +65,66 @@
 
 ## 📚 Docs
 
-#### 기술적 의사결정
+### 성능 최적화
 
-선언적 에러처리를 활용한 에러 핸들링<br/>
-컴파운트 컴포넌트를 활용하여 공통 컴포넌트 재사용성 향상
+번들 사이즈 축소로 초기 로딩 속도 개선 <br/>
+렌더링 성능 최적화로 퍼포먼스 점수 향상
 
-#### 트러블 슈팅
+### 트러블 슈팅
 
 input 이미지 다중 선택 시 발생하는 초기화 이슈 해결 <br/>
 상세 상품 prefetch로 인한 중복적인 네트워크 요청 해결
 
-#### 성능 최적화
+### 기술적 의사결정
 
-번들 사이즈 축소로 초기 로딩 속도 개선 <br/>
-렌더링 성능 최적화로 퍼포먼스 점수 향상
+선언적 에러처리를 활용한 에러 핸들링<br/>
+컴파운트 컴포넌트를 활용하여 공통 컴포넌트 재사용성 향상
+
+<br/>
+
+## 🏗 아키텍쳐
+![아키텍쳐](https://github.com/wjstjdus96/byhand/assets/77755620/77a0d4d0-2a83-42a7-8bef-d647f3ca2e6f)
+<br/>
+
+## 🗂 폴더구조
+
+```
+┣ 📁__mocks__
+┣ 📁__test__
+┣ 📁public
+┣ 📁src
+  ┣ 📁api
+  ┣ 📁assets
+  ┣ 📁components
+      ┣ 📁admin
+      ┣ 📁auth
+      ┣ 📁cart
+      ┣ 📁common
+      ┣ 📁home
+      ┣ 📁myPage
+      ┣ 📁payment
+      ┣ 📁productDetail
+      ┣ 📁products
+      ┣ 📁ui
+  ┣ 📁consts
+  ┣ 📁hooks
+      ┣ 📁auth
+      ┣ 📁cart
+      ┣ 📁form
+      ┣ 📁home
+      ┣ 📁myPage
+      ┣ 📁payment
+      ┣ 📁productDetail
+      ┣ 📁products
+      ┣ 📁seller
+  ┣ 📁layout
+  ┣ 📁lib
+  ┣ 📁pages
+      ┣ 📁error
+  ┣ 📁router
+  ┣ 📁store
+  ┣ 📁styles
+  ┣ 📁types
+  ┣ 📁utils
+```
+
