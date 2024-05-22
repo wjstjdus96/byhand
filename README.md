@@ -1,4 +1,5 @@
 # BYHAND
+![바이핸드](https://github.com/wjstjdus96/byhand/assets/77755620/50bc1609-2987-4cd5-b32d-22c5581c8965)
 
 #### 프로젝트 소개
 
@@ -43,15 +44,15 @@ http://localhost:5173/
 
 ## 🛠 기술스택
 
-<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white"> <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white"> <img src="https://img.shields.io/badge/Tailwindcss-06B6D4?style=flat&logo=tailwindcss&logoColor=white">
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white"> <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white"> <img src="https://img.shields.io/badge/Tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
 
-<img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=firebase&logoColor=white">
+<img src="https://img.shields.io/badge/Zustand-1E4CC9?style=for-the-badge&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/React Query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white"> <img src="https://img.shields.io/badge/React Hook Form-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white">
 
-<img src="https://img.shields.io/badge/Zustand-1E4CC9?style=flat&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/React Query-FF4154?style=flat&logo=reactquery&logoColor=white"> <img src="https://img.shields.io/badge/React Hook Form-EC5990?style=flat&logo=reacthookform&logoColor=white">
+<img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
 
-<img src="https://img.shields.io/badge/Jest-C21325?style=flat&logo=jest&logoColor=white"> <img src="https://img.shields.io/badge/Testing Library-E33332?style=flat&logo=testinglibrary&logoColor=white"> 
+<img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white"> <img src="https://img.shields.io/badge/Testing Library-E33332?style=for-the-badge&logo=testinglibrary&logoColor=white"> 
 
-<img src="https://img.shields.io/badge/Vercel-000000?style=flat&logo=netlify&logoColor=white">
+<img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=netlify&logoColor=white">
 
 <br/>
 
