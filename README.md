@@ -85,22 +85,27 @@ http://localhost:5173/
 
 <br/>
 
-## 📚 Docs
+## 🔥 성능 최적화
+- [렌더링과 로딩최적화로 퍼포먼스 점수 30% 개선](https://comprogramming.tistory.com/118)   
+  - 가장 큰 컨텐츠 로딩 시간 최적화 + 렌더링 차단 요소 최적화
+  - LCP 3s -> 1s / TBT 190ms -> 0ms
 
-### 성능 최적화
+- [이미지 최적화로 이미지 크기 75% 축소](https://comprogramming.tistory.com/122)
+- [SEO 22% 개선](https://comprogramming.tistory.com/119)
+<br/>  
 
-번들 사이즈 축소로 초기 로딩 속도 개선    
-렌더링 성능 최적화로 퍼포먼스 점수 향상
+## 🔫 트러블 슈팅
+- [Grid 아이템 이미지 로딩 후 리플로우 이슈 해결](https://comprogramming.tistory.com/116)
+  
+- [상세 상품 prefetch로 인한 불필요한 네트워크 요청 해결](https://comprogramming.tistory.com/120)
 
-### 트러블 슈팅
+<br/>  
 
-input 이미지 다중 선택 시 발생하는 초기화 이슈 해결     
-상세 상품 prefetch로 인한 중복적인 네트워크 요청 해결
+## 💭 기술적 의사결정
 
-### 기술적 의사결정
+- [에러 바운더리를 사용한 선언적 에러 핸들링](https://comprogramming.tistory.com/121)   
 
-선언적 에러처리를 활용한 에러 핸들링    
-컴파운트 컴포넌트를 활용하여 공통 컴포넌트 재사용성 향상
+- [컴파운트 컴포넌트를 활용한 공통 컴포넌트 재사용성과 가독성 향상](https://comprogramming.tistory.com/117)
 
 <br/>
 
