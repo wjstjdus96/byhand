@@ -141,6 +141,7 @@ export const getProductsByProductsId = async (
 
   const productsArr = await Promise.all(productsPromise);
   const products = productsArr.flat();
+  console.log(products);
   return products;
 };
 
