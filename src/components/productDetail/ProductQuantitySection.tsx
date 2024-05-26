@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useAddCartItem } from "../../hooks/productDetails.tsx/useAddCartItem";
-import { useProductPrice } from "../../hooks/productDetails.tsx/useProductPrice";
+import { useAddCartItem } from "../../hooks/productDetail/useAddCartItem";
+import { useProductPrice } from "../../hooks/productDetail/useProductPrice";
 import { useQuantitySelection } from "../../hooks/useQuantitySelection";
 import { convertPriceUnit } from "../../utils/convertPriceUnit";
 import QuantityInput from "../common/form/QuantityInput";

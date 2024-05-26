@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { usePrefetchProduct } from "../../../../hooks/productDetails.tsx/usePrefetchProduct";
+import { usePrefetchProduct } from "../../../../hooks/productDetail/usePrefetchProduct";
 import { IProductResData } from "../../../../types/product";
 import { convertPriceUnit } from "../../../../utils/convertPriceUnit";
 

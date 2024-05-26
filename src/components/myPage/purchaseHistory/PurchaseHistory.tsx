@@ -1,4 +1,4 @@
-import { usePurchaseHistory } from "../../../hooks/myPage.ts/usePurchasHistory";
+import { usePurchaseHistory } from "../../../hooks/myPage/usePurchasHistory";
 import Loading from "../../common/Loading";
 import PurchaseHistoryItem from "./PurchaseHistoryItem";
 

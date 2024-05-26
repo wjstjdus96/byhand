@@ -73,6 +73,19 @@ export const usePayment = ({ addressInfo, paymentState }: IUsePayment) => {
         alert("결제 성공");
         navigate("/");
       } else {
+        if (paymentState.isCartItems) {
+          deleteCartItems(paymentState.orderedItems);
+          queryClient.invalidateQueries({ queryKey: ["cart"] }).then(() => {
+            deleteCartItems(paymentState.orderedItems);
+          });
+        }
+        await AddOrderToDB({
+          orderedItems: paymentState.orderedItems,
+          orderedTotalPrice: paymentState.totalPrice,
+        });
+        await reduceProductsQuantity({
+          orderedItems: paymentState.orderedItems,
+        });
         alert(`결제 실패: ${error_msg}`);
       }
     };

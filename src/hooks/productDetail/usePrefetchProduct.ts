@@ -1,5 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { getOneProduct } from "../../api/product";
+import { useState } from "react";
 
 interface IUsePrefetchProduct {
   productId: string;
@@ -7,7 +8,9 @@ interface IUsePrefetchProduct {
 
 export const usePrefetchProduct = ({ productId }: IUsePrefetchProduct) => {
   const queryClient = useQueryClient();
+  const [isPrefetched, setIsPrefetched] = useState(false);
   const handlePrefetchProduct = () => {
+    setIsPrefetched(true);
     return queryClient.prefetchQuery({
       queryKey: ["product", productId],
       queryFn: () => getOneProduct(productId),
@@ -17,7 +20,9 @@ export const usePrefetchProduct = ({ productId }: IUsePrefetchProduct) => {
   let prefetchTimer: ReturnType<typeof setTimeout> | null = null;
 
   const handleMouseEnter = () => {
-    prefetchTimer = setTimeout(handlePrefetchProduct, 400);
+    if (!isPrefetched) {
+      prefetchTimer = setTimeout(handlePrefetchProduct, 400);
+    }
   };
 
   const handleMouseLeave = () => {
