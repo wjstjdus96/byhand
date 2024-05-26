@@ -87,11 +87,10 @@ http://localhost:5173/
 
 ## 🔥 성능 최적화
 - [렌더링과 로딩최적화로 퍼포먼스 점수 30% 개선](https://comprogramming.tistory.com/118)   
-  - 가장 큰 컨텐츠 로딩 시간 최적화 + 렌더링 차단 요소 최적화
   - LCP 3s -> 1s / TBT 190ms -> 0ms
 
 - [이미지 최적화로 이미지 크기 75% 축소](https://comprogramming.tistory.com/122)
-- [SEO 22% 개선](https://comprogramming.tistory.com/119)
+- [SEO 점수 22% 개선](https://comprogramming.tistory.com/119)
 <br/>  
 
 ## 🔫 트러블 슈팅
